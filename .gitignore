@@ -31,8 +31,11 @@ zk-circuits/node_modules/
 .env.local
 .env.production
 .env.*.local
+backend/.env
+contracts/.env
 !.env.example
-!frontend/.env.local.example
+!frontend/.env.example
+!backend/.env.example
 prd.md
 product_research.md
 .github\copilot-instructions.md

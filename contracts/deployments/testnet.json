@@ -1,55 +1,63 @@
 {
   "network": "opBNB Testnet",
   "chainId": 5611,
+  "rpc": "https://opbnb-testnet-rpc.bnbchain.org",
+  "explorer": "https://opbnb-testnet.bscscan.com",
   "deployer": "0x97950A98980a2Fc61ea7eb043bb7666845f77071",
-  "deployedAt": "2026-02-27T11:09:00Z",
-  "blockExplorer": "https://opbnb-testnet.bscscan.com",
+  "deployedAt": "2026-02-27",
   "contracts": {
+    "VaultFactory": {
+      "address": "0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28",
+      "abi": "src/VaultFactory.sol",
+      "txHash": "0xe62c29acea683b5b015fe2529d5e58112d22c67e6c43c537c1cfd6706824e7b3",
+      "block": 133525110,
+      "verified": true,
+      "explorerUrl": "https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28"
+    },
+    "Vault": {
+      "address": "0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A",
+      "abi": "src/Vault.sol",
+      "txHash": "0xe62c29acea683b5b015fe2529d5e58112d22c67e6c43c537c1cfd6706824e7b3",
+      "block": 133525110,
+      "verified": true,
+      "note": "Implementation contract deployed internally by VaultFactory constructor",
+      "explorerUrl": "https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A"
+    },
     "ZKVerifier": {
       "address": "0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8",
+      "abi": "src/ZKVerifier.sol",
       "txHash": "0x8513c39d54076220dbaa461627d38b4bb958199b3bd186548c0cfd6cea2d20d8",
       "block": 133528203,
       "verified": false,
-      "note": "Real Groth16 verifier (replaced stub). Verification pending — opBNBScan API transient error.",
-      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8",
+      "note": "Real Groth16 verifier. Verification pending — opBNBScan API transient error.",
+      "explorerUrl": "https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8",
       "setZKVerifierTx": "0x6c3528fc79d37704a5dffcfa9bc764d5d1ac61a0b1d988b9c7d946f6b4d56a9c"
     },
+    "AgentRegistry": {
+      "address": "0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF",
+      "abi": "src/AgentRegistry.sol",
+      "txHash": "0x9d42bed652e79c2b9aea3853cde7c53d178d774610d197c3809b880a532e0d00",
+      "block": 133525110,
+      "verified": true,
+      "explorerUrl": "https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF"
+    },
+    "LTVOracle": {
+      "address": "0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4",
+      "abi": "src/LTVOracle.sol",
+      "txHash": "0xfbb535e605b7ec989a4fb8a411574cfc6389b88a363e563cdbfd1dd75e8c49c6",
+      "block": 133525110,
+      "verified": true,
+      "explorerUrl": "https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4"
+    }
+  },
+  "deprecated": {
     "ZKVerifier_Stub": {
       "address": "0x849Ca487D5DeD85c93fc3600338a419B100833a8",
       "txHash": "0x14478a9a03e7fc600ad7c59dcd9036abbe37f21ad54ad0befc0e4c4ac00277bb",
       "block": 133525107,
       "verified": true,
       "note": "DEPRECATED — stub that always returned true. Replaced by real Groth16 verifier.",
-      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0x849Ca487D5DeD85c93fc3600338a419B100833a8"
-    },
-    "VaultFactory": {
-      "address": "0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28",
-      "txHash": "0xe62c29acea683b5b015fe2529d5e58112d22c67e6c43c537c1cfd6706824e7b3",
-      "block": 133525110,
-      "verified": true,
-      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28"
-    },
-    "VaultImplementation": {
-      "address": "0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A",
-      "txHash": "0xe62c29acea683b5b015fe2529d5e58112d22c67e6c43c537c1cfd6706824e7b3",
-      "block": 133525110,
-      "note": "Deployed internally by VaultFactory constructor",
-      "verified": true,
-      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A"
-    },
-    "AgentRegistry": {
-      "address": "0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF",
-      "txHash": "0x9d42bed652e79c2b9aea3853cde7c53d178d774610d197c3809b880a532e0d00",
-      "block": 133525110,
-      "verified": true,
-      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF"
-    },
-    "LTVOracle": {
-      "address": "0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4",
-      "txHash": "0xfbb535e605b7ec989a4fb8a411574cfc6389b88a363e563cdbfd1dd75e8c49c6",
-      "block": 133525110,
-      "verified": true,
-      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4"
+      "explorerUrl": "https://opbnb-testnet.bscscan.com/address/0x849Ca487D5DeD85c93fc3600338a419B100833a8"
     }
   },
   "vaultClones": [
