@@ -1,12 +1,15 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { useAccount } from "wagmi";
 import { usePrivy } from "@privy-io/react-auth";
+import { useReadContract } from "wagmi";
 import { useUserVaults } from "@/hooks/useUserVaults";
 import { VaultCard } from "@/components/vault/VaultCard";
 import { api } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { VAULT_FACTORY_ABI, CONTRACT_ADDRESSES } from "@/lib/contracts";
 
 function SkeletonCard() {
   return (
@@ -77,7 +80,44 @@ export default function DashboardPage() {
   const { authenticated } = usePrivy();
 
   // Pass REAL wallet address — never hardcoded
-  const { vaults, isLoading } = useUserVaults(address);
+  const { vaults, isLoading, refetch } = useUserVaults(address);
+
+  // Also check on-chain if this wallet has a vault (fallback if backend is out of sync)
+  const { data: onChainVault } = useReadContract({
+    address: CONTRACT_ADDRESSES.VaultFactory,
+    abi: VAULT_FACTORY_ABI,
+    functionName: "getVault",
+    args: address ? [address] : undefined,
+    query: { enabled: !!address },
+  });
+
+  const onChainVaultAddress = onChainVault as `0x${string}` | undefined;
+  const hasOnChainVault =
+    !!onChainVaultAddress &&
+    onChainVaultAddress !== "0x0000000000000000000000000000000000000000";
+
+  // If on-chain vault exists but backend doesn't know, sync it
+  const syncAttempted = useRef(false);
+  useEffect(() => {
+    if (
+      hasOnChainVault &&
+      !isLoading &&
+      vaults.length === 0 &&
+      address &&
+      !syncAttempted.current
+    ) {
+      syncAttempted.current = true;
+      api
+        .createVault({
+          wallet_address: address,
+          chain_id: 5611,
+          vault_contract_address: onChainVaultAddress!,
+          total_deposited: "0",
+        })
+        .then(() => refetch?.())
+        .catch(() => {}); // non-fatal
+    }
+  }, [hasOnChainVault, isLoading, vaults.length, address, onChainVaultAddress, refetch]);
 
   if (!authenticated || !isConnected) {
     return (
@@ -119,19 +159,31 @@ export default function DashboardPage() {
               <SkeletonCard />
             </div>
           ) : vaults.length === 0 ? (
-            <div className="glass-card flex h-40 flex-col items-center justify-center gap-3">
-              <span className="text-2xl">➕</span>
-              <span className="font-mono text-sm text-vf-text-muted">No vaults yet</span>
-              <p className="text-xs text-vf-text-muted">
-                Create your first ZK-private vault to start borrowing
-              </p>
-              <Link
-                href="/vault/create"
-                className="rounded border border-vf-cyan px-4 py-2 font-mono text-xs text-vf-cyan transition-colors hover:bg-vf-cyan/10"
-              >
-                Create Vault →
-              </Link>
-            </div>
+            hasOnChainVault ? (
+              <div className="glass-card flex h-40 flex-col items-center justify-center gap-3">
+                <span className="h-6 w-6 animate-spin rounded-full border-2 border-cyan-400 border-t-transparent" />
+                <span className="font-mono text-sm text-vf-text-muted">
+                  Syncing vault from chain…
+                </span>
+                <p className="font-mono text-xs text-cyan-400/70">
+                  {onChainVaultAddress!.slice(0, 10)}…{onChainVaultAddress!.slice(-4)}
+                </p>
+              </div>
+            ) : (
+              <div className="glass-card flex h-40 flex-col items-center justify-center gap-3">
+                <span className="text-2xl">➕</span>
+                <span className="font-mono text-sm text-vf-text-muted">No vaults yet</span>
+                <p className="text-xs text-vf-text-muted">
+                  Create your first ZK-private vault to start borrowing
+                </p>
+                <Link
+                  href="/vault/create"
+                  className="rounded border border-vf-cyan px-4 py-2 font-mono text-xs text-vf-cyan transition-colors hover:bg-vf-cyan/10"
+                >
+                  Create Vault →
+                </Link>
+              </div>
+            )
           ) : (
             <div className="grid gap-4 sm:grid-cols-2">
               {vaults.map((v) => (

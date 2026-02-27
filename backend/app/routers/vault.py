@@ -91,15 +91,15 @@ async def create_vault(req: VaultCreateRequest, request: Request):
     """
     db = get_supabase()
 
-    # Ensure user exists
+    # Ensure user exists — use .execute() instead of .maybe_single() to avoid
+    # None response objects in certain supabase-py versions.
     user_resp = (
         db.table("users")
         .select("id")
         .eq("wallet_address", req.wallet_address)
-        .maybe_single()
         .execute()
     )
-    if not user_resp.data:
+    if not user_resp or not user_resp.data:
         # Auto-create user
         user_resp = (
             db.table("users")
@@ -108,7 +108,26 @@ async def create_vault(req: VaultCreateRequest, request: Request):
         )
         user_id = user_resp.data[0]["id"]
     else:
-        user_id = user_resp.data["id"]
+        user_id = user_resp.data[0]["id"]
+
+    # If a vault_contract_address is provided, check for existing vault to avoid duplicates
+    if req.vault_contract_address:
+        existing = (
+            db.table("vaults")
+            .select("id, wallet_address, chain_id, status, vault_contract_address")
+            .eq("wallet_address", req.wallet_address)
+            .eq("vault_contract_address", req.vault_contract_address.lower())
+            .execute()
+        )
+        if existing and existing.data:
+            row = existing.data[0]
+            return VaultCreateResponse(
+                id=row["id"],
+                wallet_address=row["wallet_address"],
+                chain_id=row["chain_id"],
+                status=row["status"],
+                vault_contract_address=row.get("vault_contract_address"),
+            )
 
     vault_id = str(uuid.uuid4())
     vault: dict = {

@@ -517,9 +517,27 @@ function StepConfirm({
   useEffect(() => {
     const err = deployError || approveError || depositError;
     if (err && status !== "error" && status !== "done") {
-      setStatus("error");
-      setErrorMsg(err.message?.split("\n")[0] || "Transaction rejected");
-      toast.error("Transaction failed");
+      const msg = err.message || "Unknown error";
+      const isUserRejection =
+        msg.includes("User rejected") ||
+        msg.includes("user rejected") ||
+        msg.includes("User denied") ||
+        msg.includes("ACTION_REJECTED") ||
+        msg.includes("cancelled");
+
+      if (isUserRejection) {
+        setStatus("idle");
+        setErrorMsg("");
+        toast.error("Transaction cancelled — you can try again when ready.");
+      } else if (msg.includes("VaultAlreadyExists")) {
+        setStatus("error");
+        setErrorMsg("You already have a vault. Go to Dashboard to manage it.");
+        toast.error("Vault already exists for this wallet");
+      } else {
+        setStatus("error");
+        setErrorMsg(msg.split("\n")[0]);
+        toast.error("Transaction failed");
+      }
     }
   }, [deployError, approveError, depositError, status]);
 
@@ -624,17 +642,28 @@ function StepConfirm({
       {/* Error state */}
       {status === "error" && (
         <div className="mb-4 rounded border border-red-500/30 bg-red-950/20 p-4">
-          <p className="text-sm font-medium text-red-400">Transaction failed</p>
+          <p className="text-sm font-medium text-red-400">
+            {errorMsg.includes("already have a vault") ? "Vault Already Exists" : "Transaction Failed"}
+          </p>
           <p className="mt-1 text-xs text-gray-400">{errorMsg}</p>
-          <button
-            onClick={() => {
-              setStatus("idle");
-              setErrorMsg("");
-            }}
-            className="mt-3 rounded border border-red-500/30 px-4 py-1.5 font-mono text-xs text-red-400 hover:bg-red-500/10"
-          >
-            Try Again
-          </button>
+          {errorMsg.includes("already have a vault") ? (
+            <button
+              onClick={() => router.push("/dashboard")}
+              className="mt-3 rounded border border-vf-cyan px-4 py-1.5 font-mono text-xs text-vf-cyan hover:bg-vf-cyan/10"
+            >
+              Go to Dashboard →
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                setStatus("idle");
+                setErrorMsg("");
+              }}
+              className="mt-3 rounded border border-red-500/30 px-4 py-1.5 font-mono text-xs text-red-400 hover:bg-red-500/10"
+            >
+              Try Again
+            </button>
+          )}
         </div>
       )}
 
