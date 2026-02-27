@@ -1,0 +1,25 @@
+# VaultForge — On-Chain Deployments
+# Network: opBNB Testnet (Chain ID 5611)
+# Explorer: https://opbnb-testnet.bscscan.com
+# Deployer: 0x97950A98980a2Fc61ea7eb043bb7666845f77071
+# Date: 2026-02-27
+
+# ── Core Contracts ────────────────────────────────────────────────────
+
+VaultFactory          0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28  https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28
+Vault (Implementation) 0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A  https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A
+ZKVerifier            0x849Ca487D5DeD85c93fc3600338a419B100833a8  https://opbnb-testnet.bscscan.com/address/0x849Ca487D5DeD85c93fc3600338a419B100833a8
+AgentRegistry         0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF  https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF
+LTVOracle             0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4  https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4
+
+# ── Vault Clones (deployed via VaultFactory) ─────────────────────────
+
+Clone #1              0x5085a28e0FBe47336E72b9285ed0B0c29d790c    Owner: 0x97950A98980a2Fc61ea7eb043bb7666845f77071
+Clone #2              0xdcb417b2a27a8fa9                          Owner: 0x0000000000000000000000000000000000000001
+Clone #3              0xd6830c549bd0                              Owner: 0x0000000000000000000000000000000000000002
+
+# ── Deployment Stats ─────────────────────────────────────────────────
+# Total gas: 3,688,663
+# Total cost: ~$0.000004 USD (opBNB L2 pricing)
+# Vault clone gas: 207,659 per clone (~$0.0000002 USD)
+# Transactions: 7+ on-chain, totalVaults() == 3
