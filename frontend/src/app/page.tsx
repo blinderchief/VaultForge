@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { WalletButton } from "@/components/wallet/WalletButton";
-import { api } from "@/lib/api";
 import Link from "next/link";
 
 /* ── SVG Icons ────────────────────────────────────────────────────── */
@@ -114,34 +112,6 @@ function IconExternalLink() {
   );
 }
 
-/* ── Animated counter ─────────────────────────────────────────────── */
-function AnimatedStat({
-  value,
-  label,
-  suffix = "",
-  prefix = "",
-  loading = false,
-}: {
-  value: string;
-  label: string;
-  suffix?: string;
-  prefix?: string;
-  loading?: boolean;
-}) {
-  return (
-    <div className="text-center">
-      <span
-        className={`block font-mono text-3xl font-bold text-vf-cyan sm:text-4xl ${
-          loading ? "animate-pulse" : ""
-        }`}
-      >
-        {loading ? "—" : `${prefix}${value}${suffix}`}
-      </span>
-      <span className="mt-2 block text-sm text-vf-text-muted">{label}</span>
-    </div>
-  );
-}
-
 /* ── Feature card ─────────────────────────────────────────────────── */
 function FeatureCard({
   icon,
@@ -234,15 +204,8 @@ function FAQItem({
    PAGE
    ══════════════════════════════════════════════════════════════════════ */
 export default function Home() {
-  const { data: metrics, isLoading } = useQuery({
-    queryKey: ["metrics"],
-    queryFn: api.metrics,
-    staleTime: 60_000,
-    retry: 1,
-  });
-
   return (
-    <div className="min-h-screen bg-vf-base">
+    <div className="min-h-screen overflow-x-hidden bg-vf-base">
       {/* ── Grid background ──────────────────────────────────────── */}
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.03]"
         style={{
@@ -253,7 +216,7 @@ export default function Home() {
       />
 
       {/* ══ HERO ═════════════════════════════════════════════════════ */}
-      <section className="relative z-10 flex flex-col items-center px-6 pt-28 pb-20 text-center sm:pt-36 sm:pb-28">
+      <section className="relative z-10 flex flex-col items-center px-4 pt-20 pb-16 text-center sm:px-6 sm:pt-28 sm:pb-20">
         {/* Radial glow */}
         <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-vf-cyan/[0.04] blur-[140px]" />
 
@@ -264,7 +227,7 @@ export default function Home() {
           </span>
         </div>
 
-        <h1 className="relative mb-6 max-w-3xl font-[family-name:var(--font-syne)] text-4xl font-extrabold leading-[1.1] tracking-tight text-vf-text sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 className="relative mb-6 max-w-2xl font-[family-name:var(--font-syne)] text-3xl font-bold leading-[1.15] tracking-tight text-vf-text sm:text-4xl md:text-5xl">
           Borrow against your assets.{" "}
           <span className="bg-gradient-to-r from-vf-cyan to-[#7B61FF] bg-clip-text text-transparent">
             Prove everything. Reveal nothing.
@@ -276,7 +239,7 @@ export default function Home() {
           Deposit, prove, and borrow — your balances stay hidden on-chain.
         </p>
 
-        <div className="relative mb-16 flex flex-wrap items-center justify-center gap-4">
+        <div className="relative flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/vault/create"
             className="group inline-flex items-center gap-2 rounded-lg px-8 py-3.5 font-mono text-sm font-bold transition-all hover:shadow-[0_0_30px_rgba(0,245,255,0.25)]"
@@ -294,32 +257,6 @@ export default function Home() {
             <IconGitHub />
             View Source
           </a>
-        </div>
-
-        {/* ── Hero stats ─────────────────────────────────────────── */}
-        <div className="relative mx-auto grid w-full max-w-2xl grid-cols-2 gap-6 sm:grid-cols-4">
-          <AnimatedStat
-            prefix="$"
-            value={metrics ? metrics.tvl.toLocaleString() : "0"}
-            label="Total Value Locked"
-            loading={isLoading}
-          />
-          <AnimatedStat
-            value={metrics ? metrics.active_vaults.toString() : "0"}
-            label="Active Vaults"
-            loading={isLoading}
-          />
-          <AnimatedStat
-            value={metrics ? metrics.avg_ltv.toFixed(1) : "0"}
-            suffix="%"
-            label="Avg LTV Ratio"
-            loading={isLoading}
-          />
-          <AnimatedStat
-            value={metrics ? (metrics.active_vaults * 3).toString() : "0"}
-            label="ZK Proofs Generated"
-            loading={isLoading}
-          />
         </div>
       </section>
 
