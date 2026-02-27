@@ -467,13 +467,28 @@ function StepConfirm({
     }
   }, [depositHash, status]);
 
-  /* ── When deposit confirmed → generate ZK proof → done ────────── */
+  /* ── When deposit confirmed → register in backend → generate ZK proof → done ── */
   useEffect(() => {
     if (!depositSuccess || status === "done" || status === "saving") return;
 
     setStatus("saving");
 
     (async () => {
+      // Register the vault in the backend (Supabase) so it appears on dashboard
+      if (address && vaultAddress) {
+        try {
+          await api.createVault({
+            wallet_address: address,
+            chain_id: 5611,
+            vault_contract_address: vaultAddress,
+            total_deposited: amountWei.toString(),
+          });
+        } catch (err) {
+          console.error("Failed to register vault in backend:", err);
+          // Non-fatal: vault exists on-chain even if backend sync fails
+        }
+      }
+
       // Generate real ZK proof to demonstrate circuit works
       try {
         setZkStatus("generating");

@@ -1,7 +1,8 @@
-"""Agent router — internal-only endpoint for autonomous agent actions."""
+"""Agent router — create agent actions (internal) and list actions (public)."""
 
 from __future__ import annotations
 
+import re
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
@@ -11,6 +12,8 @@ from app.core.database import get_supabase
 from app.core.security import limiter, require_api_key
 
 router = APIRouter(prefix="/agent", tags=["agent"])
+
+_ETH_ADDR = re.compile(r"^0x[a-fA-F0-9]{40}$")
 
 
 class AgentActionRequest(BaseModel):
@@ -73,4 +76,52 @@ async def create_agent_action(
         vault_id=data.get("vault_id"),
         action_type=data["action_type"],
         status=data["status"],
+    )
+
+
+class AgentActionRow(BaseModel):
+    id: str
+    agent_id: str
+    vault_id: str | None = None
+    action_type: str
+    status: str
+    created_at: str
+
+
+class AgentActionsListResponse(BaseModel):
+    wallet_address: str
+    actions: list[AgentActionRow]
+
+
+@router.get("/actions/{wallet_address}", response_model=AgentActionsListResponse)
+@limiter.limit("30/minute")
+async def list_agent_actions(wallet_address: str, request: Request):
+    """Return recent agent actions for a wallet (public, no API key)."""
+    if not _ETH_ADDR.match(wallet_address):
+        raise HTTPException(status_code=400, detail="Invalid wallet address")
+
+    db = get_supabase()
+    resp = (
+        db.table("agent_actions")
+        .select("*")
+        .eq("wallet_address", wallet_address.lower())
+        .order("created_at", desc=True)
+        .limit(20)
+        .execute()
+    )
+
+    actions = [
+        AgentActionRow(
+            id=a["id"],
+            agent_id=a["agent_id"],
+            vault_id=a.get("vault_id"),
+            action_type=a["action_type"],
+            status=a["status"],
+            created_at=a["created_at"],
+        )
+        for a in (resp.data or [])
+    ]
+
+    return AgentActionsListResponse(
+        wallet_address=wallet_address.lower(), actions=actions
     )

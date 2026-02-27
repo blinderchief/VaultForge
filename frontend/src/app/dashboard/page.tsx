@@ -4,6 +4,8 @@ import { useAccount } from "wagmi";
 import { usePrivy } from "@privy-io/react-auth";
 import { useUserVaults } from "@/hooks/useUserVaults";
 import { VaultCard } from "@/components/vault/VaultCard";
+import { api } from "@/lib/api";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
 function SkeletonCard() {
@@ -26,12 +28,16 @@ function SkeletonCard() {
   );
 }
 
-function AgentFeed() {
-  const actions = [
-    { id: "1", action_type: "rebalance", status: "completed", created_at: "2026-02-26T10:30:00Z" },
-    { id: "2", action_type: "optimize_ltv", status: "proposed", created_at: "2026-02-26T10:25:00Z" },
-    { id: "3", action_type: "risk_alert", status: "completed", created_at: "2026-02-26T10:20:00Z" },
-  ];
+function AgentFeed({ walletAddress }: { walletAddress?: string }) {
+  const { data, isLoading } = useQuery({
+    queryKey: ["agent-actions", walletAddress],
+    queryFn: () => api.agentActions(walletAddress!),
+    enabled: !!walletAddress,
+    staleTime: 30_000,
+    retry: 1,
+  });
+
+  const actions = data?.actions ?? [];
 
   return (
     <div className="glass-card p-5">
@@ -39,19 +45,28 @@ function AgentFeed() {
         Agent Feed
       </h2>
       <div className="space-y-3">
-        {actions.map((a) => (
-          <div key={a.id} className="flex items-center justify-between border-b border-vf-border pb-2 last:border-0">
-            <div className="flex items-center gap-2">
-              <span className="inline-block h-2 w-2 rounded-full" style={{
-                background: a.status === "completed" ? "var(--vf-green)" : "var(--vf-amber)",
-              }} />
-              <span className="font-mono text-xs text-vf-text">{a.action_type}</span>
-            </div>
-            <span className="font-mono text-xs text-vf-text-muted">
-              {new Date(a.created_at).toLocaleTimeString()}
-            </span>
+        {isLoading ? (
+          <div className="animate-pulse space-y-2">
+            <div className="h-6 w-full rounded bg-vf-surface-2" />
+            <div className="h-6 w-full rounded bg-vf-surface-2" />
           </div>
-        ))}
+        ) : actions.length === 0 ? (
+          <p className="text-xs text-vf-text-muted">No agent actions yet</p>
+        ) : (
+          actions.map((a) => (
+            <div key={a.id} className="flex items-center justify-between border-b border-vf-border pb-2 last:border-0">
+              <div className="flex items-center gap-2">
+                <span className="inline-block h-2 w-2 rounded-full" style={{
+                  background: a.status === "completed" ? "var(--vf-green)" : "var(--vf-amber)",
+                }} />
+                <span className="font-mono text-xs text-vf-text">{a.action_type}</span>
+              </div>
+              <span className="font-mono text-xs text-vf-text-muted">
+                {new Date(a.created_at).toLocaleTimeString()}
+              </span>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
@@ -128,7 +143,7 @@ export default function DashboardPage() {
 
         {/* Agent feed sidebar */}
         <div>
-          <AgentFeed />
+          <AgentFeed walletAddress={address} />
         </div>
       </div>
     </div>

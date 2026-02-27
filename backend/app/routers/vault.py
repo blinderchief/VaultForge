@@ -1,9 +1,10 @@
-"""Vault router — create vaults and check health."""
+"""Vault router — create vaults, list by wallet, and check health."""
 
 from __future__ import annotations
 
 import re
 import uuid
+from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Request, status
 from pydantic import BaseModel, Field, field_validator
@@ -19,6 +20,12 @@ _ETH_ADDR = re.compile(r"^0x[a-fA-F0-9]{40}$")
 class VaultCreateRequest(BaseModel):
     wallet_address: str = Field(..., description="Owner wallet address (0x...)")
     chain_id: int = Field(default=5611, description="Chain ID (default opBNB testnet)")
+    vault_contract_address: Optional[str] = Field(
+        default=None, description="On-chain vault contract address"
+    )
+    total_deposited: Optional[str] = Field(
+        default=None, description="Initial deposit amount in wei"
+    )
 
     @field_validator("wallet_address")
     @classmethod
@@ -27,12 +34,37 @@ class VaultCreateRequest(BaseModel):
             raise ValueError("Invalid Ethereum address")
         return v.lower()
 
+    @field_validator("vault_contract_address")
+    @classmethod
+    def validate_vault_address(cls, v: Optional[str]) -> Optional[str]:
+        if v is not None and not _ETH_ADDR.match(v):
+            raise ValueError("Invalid vault contract address")
+        return v.lower() if v else v
+
 
 class VaultCreateResponse(BaseModel):
     id: str
     wallet_address: str
     chain_id: int
     status: str
+    vault_contract_address: Optional[str] = None
+
+
+class VaultRow(BaseModel):
+    id: str
+    wallet_address: str
+    vault_contract_address: Optional[str] = None
+    chain_id: int
+    status: str
+    total_deposited: str
+    total_borrowed: str
+    current_ltv_bps: int
+    created_at: str
+
+
+class VaultListResponse(BaseModel):
+    wallet_address: str
+    vaults: list[VaultRow]
 
 
 class VaultHealthResponse(BaseModel):
@@ -51,7 +83,12 @@ class VaultHealthResponse(BaseModel):
 )
 @limiter.limit("10/minute")
 async def create_vault(req: VaultCreateRequest, request: Request):
-    """Create a new vault record."""
+    """Create a new vault record.
+
+    When ``vault_contract_address`` is provided the vault is stored as
+    ``active`` (already deployed on-chain).  Otherwise it starts as
+    ``pending``.
+    """
     db = get_supabase()
 
     # Ensure user exists
@@ -74,16 +111,19 @@ async def create_vault(req: VaultCreateRequest, request: Request):
         user_id = user_resp.data["id"]
 
     vault_id = str(uuid.uuid4())
-    vault = {
+    vault: dict = {
         "id": vault_id,
         "user_id": user_id,
         "wallet_address": req.wallet_address,
         "chain_id": req.chain_id,
-        "status": "pending",
-        "total_deposited": "0",
+        "status": "active" if req.vault_contract_address else "pending",
+        "total_deposited": req.total_deposited or "0",
         "total_borrowed": "0",
         "current_ltv_bps": 0,
     }
+    if req.vault_contract_address:
+        vault["vault_contract_address"] = req.vault_contract_address
+
     resp = db.table("vaults").insert(vault).execute()
     if not resp.data:
         raise HTTPException(status_code=500, detail="Failed to create vault")
@@ -94,7 +134,42 @@ async def create_vault(req: VaultCreateRequest, request: Request):
         wallet_address=row["wallet_address"],
         chain_id=row["chain_id"],
         status=row["status"],
+        vault_contract_address=row.get("vault_contract_address"),
     )
+
+
+@router.get("/by-wallet/{wallet_address}", response_model=VaultListResponse)
+@limiter.limit("30/minute")
+async def list_vaults_by_wallet(wallet_address: str, request: Request):
+    """Return all vaults for a given wallet address."""
+    if not _ETH_ADDR.match(wallet_address):
+        raise HTTPException(status_code=400, detail="Invalid wallet address")
+
+    db = get_supabase()
+    resp = (
+        db.table("vaults")
+        .select("*")
+        .eq("wallet_address", wallet_address.lower())
+        .order("created_at", desc=True)
+        .execute()
+    )
+
+    vaults = [
+        VaultRow(
+            id=v["id"],
+            wallet_address=v["wallet_address"],
+            vault_contract_address=v.get("vault_contract_address"),
+            chain_id=v["chain_id"],
+            status=v["status"],
+            total_deposited=str(v.get("total_deposited", "0")),
+            total_borrowed=str(v.get("total_borrowed", "0")),
+            current_ltv_bps=int(v.get("current_ltv_bps", 0)),
+            created_at=v["created_at"],
+        )
+        for v in (resp.data or [])
+    ]
+
+    return VaultListResponse(wallet_address=wallet_address.lower(), vaults=vaults)
 
 
 @router.get("/{vault_id}/health", response_model=VaultHealthResponse)

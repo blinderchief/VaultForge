@@ -51,7 +51,6 @@ backend_logs.md
 Thumbs.db
 *.swp
 *.swo
-
 # ── Supabase ─────────────────────────────
 .supabase/
 

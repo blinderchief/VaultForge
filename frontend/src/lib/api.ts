@@ -65,6 +65,52 @@ export interface VaultHealthResponse {
   health_factor: number
 }
 
+export interface VaultRow {
+  id: string
+  wallet_address: string
+  vault_contract_address: string | null
+  chain_id: number
+  status: string
+  total_deposited: string
+  total_borrowed: string
+  current_ltv_bps: number
+  created_at: string
+}
+
+export interface VaultListResponse {
+  wallet_address: string
+  vaults: VaultRow[]
+}
+
+export interface VaultCreateRequest {
+  wallet_address: string
+  chain_id?: number
+  vault_contract_address?: string
+  total_deposited?: string
+}
+
+export interface VaultCreateResponse {
+  id: string
+  wallet_address: string
+  chain_id: number
+  status: string
+  vault_contract_address?: string
+}
+
+export interface AgentActionRow {
+  id: string
+  agent_id: string
+  vault_id: string | null
+  action_type: string
+  status: string
+  created_at: string
+}
+
+export interface AgentActionsListResponse {
+  wallet_address: string
+  actions: AgentActionRow[]
+}
+
 export interface Position {
   symbol: string
   name: string
@@ -95,8 +141,20 @@ export const api = {
       body: JSON.stringify({ vault_id: vaultId, assets }),
     }),
 
+  createVault: (data: VaultCreateRequest) =>
+    apiFetch<VaultCreateResponse>('/vault/create', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  vaultsByWallet: (walletAddress: string) =>
+    apiFetch<VaultListResponse>(`/vault/by-wallet/${walletAddress}`),
+
   vaultHealth: (vaultId: string) =>
     apiFetch<VaultHealthResponse>(`/vault/${vaultId}/health`),
+
+  agentActions: (walletAddress: string) =>
+    apiFetch<AgentActionsListResponse>(`/agent/actions/${walletAddress}`),
 
   positions: (walletAddress: string) =>
     apiFetch<PositionsResponse>(`/positions/${walletAddress}`),
