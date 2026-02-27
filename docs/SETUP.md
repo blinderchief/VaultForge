@@ -12,8 +12,8 @@ This starts the entire stack: Postgres, Redis, Backend, and Frontend.
 ### Step 1 — Clone the repository
 
 ```bash
-git clone https://github.com/vaultforge/vaultforge.git
-cd vaultforge
+git clone https://github.com/blinderchief/VaultForge.git
+cd VaultForge
 ```
 
 ### Step 2 — Create your environment file
@@ -36,7 +36,7 @@ CORS_ORIGINS=http://localhost:3000
 # ── Deployed contract addresses (already populated) ─────────────────
 # These are pre-filled with our testnet deployment:
 NEXT_PUBLIC_VAULT_FACTORY_ADDRESS=0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28
-NEXT_PUBLIC_ZK_VERIFIER_ADDRESS=0x849Ca487D5DeD85c93fc3600338a419B100833a8
+NEXT_PUBLIC_ZK_VERIFIER_ADDRESS=0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8
 NEXT_PUBLIC_AGENT_REGISTRY_ADDRESS=0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF
 NEXT_PUBLIC_LTV_ORACLE_ADDRESS=0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4
 
@@ -102,8 +102,8 @@ Use this if you prefer running services individually or if Docker isn't availabl
 ### Step 1 — Clone and configure
 
 ```bash
-git clone https://github.com/vaultforge/vaultforge.git
-cd vaultforge
+git clone https://github.com/blinderchief/VaultForge.git
+cd VaultForge
 cp .env.example .env
 # Edit .env with your values (see Option A, Step 2)
 ```
@@ -114,7 +114,7 @@ cp .env.example .env
 cd contracts
 forge install          # Install OpenZeppelin, forge-std
 forge build            # Compile all contracts
-forge test -vvv        # Run 38 tests (should all pass)
+forge test -vvv        # Run 53 tests (should all pass)
 cd ..
 ```
 
@@ -206,7 +206,7 @@ After setup, verify each component:
 ```bash
 # 1. Contracts compile and tests pass
 cd contracts && forge test
-# Expected: 38 passing tests
+# Expected: 53 passing tests
 
 # 2. Backend starts and responds
 curl http://localhost:8000/health
@@ -231,7 +231,7 @@ VaultForge is already deployed on **opBNB Testnet** (Chain ID 5611). You can int
 |---|---|---|
 | **VaultFactory** | `0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28) |
 | **Vault (impl)** | `0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A) |
-| **ZKVerifier** | `0x849Ca487D5DeD85c93fc3600338a419B100833a8` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x849Ca487D5DeD85c93fc3600338a419B100833a8) |
+| **ZKVerifier** | `0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8) |
 | **AgentRegistry** | `0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF) |
 | **LTVOracle** | `0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4) |
 
@@ -259,7 +259,7 @@ Full deployment data: [`contracts/deployments/testnet.json`](../contracts/deploy
 vaultforge/
 ├── contracts/              # Solidity 0.8.28 — Foundry
 │   ├── src/                #   5 production contracts
-│   ├── test/               #   38 tests (unit + integration)
+│   ├── test/               #   53 tests (unit + integration + ZK verifier)
 │   ├── script/             #   Deploy.s.sol, verify-contracts.sh
 │   └── deployments/        #   testnet.json (deployed addresses)
 ├── backend/                # FastAPI + Python 3.12

@@ -129,7 +129,7 @@ $FORGE is a **utility token** with three concrete use cases — not a governance
 |---|---|---|
 | Deploy 5 contracts to opBNB testnet | ✅ Complete | [VaultFactory on opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28) |
 | 3 Groth16 ZK circuits proven | ✅ Complete | CollateralThreshold, LTVComputation, ReputationScore |
-| 38 Foundry tests passing | ✅ Complete | `forge test -vvv` — all green |
+| 53 Foundry tests passing | ✅ Complete | `forge test -vvv` — all green |
 | AI agent demo (LTV optimization) | ✅ Complete | AgentRegistry + LTVOracle with challenge window |
 | 3 vault clones deployed | ✅ Complete | on-chain `totalVaults() == 3` |
 

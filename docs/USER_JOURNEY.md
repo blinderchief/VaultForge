@@ -11,7 +11,7 @@ journey
     title Alex uses VaultForge to borrow against crypto without selling or doxxing
 
     section Phase 1 — Connect & Create
-      Open vaultforge.vercel.app                       : 5: Alex
+      Open vaultforge-nu.vercel.app                       : 5: Alex
       Connect wallet via Privy (social or EOA)         : 5: Alex
       Privy creates embedded AA wallet (gasless)       : 4: System
       VaultFactory deploys personal Vault (EIP-1167)   : 4: System

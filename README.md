@@ -5,8 +5,7 @@
 
 **[Live Demo](https://vaultforge-nu.vercel.app)** |
 **[opBNBScan Contracts](https://opbnb-testnet.bscscan.com)** |
-**[Demo Video](https://youtube.com/)** |
-**[Pitch Deck](./docs/pitch-deck.pdf)**
+**[Documentation](./docs/PROJECT.md)**
 
 > Built for **BNB Chain × YZi Labs Hackathon** — Smart Collateral Track
 
@@ -204,7 +203,7 @@ All contracts deployed and verified on opBNB testnet. Source code viewable on op
 |---|---|---|---|
 | **VaultFactory** | `0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28` | [View](https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28) | ✅ |
 | **Vault (Implementation)** | `0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A` | [View](https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A) | ✅ |
-| **ZKVerifier** | `0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8` | [View](https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8) | ✅ |
+| **ZKVerifier** | `0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8` | [View](https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8) | ⏳ Pending |
 | **AgentRegistry** | `0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF` | [View](https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF) | ✅ |
 | **LTVOracle** | `0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4` | [View](https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4) | ✅ |
 

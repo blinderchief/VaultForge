@@ -10,9 +10,9 @@
 | Item | URL |
 |---|---|
 | **GitHub Repository** | https://github.com/blinderchief/VaultForge |
-| **Live Demo** | https://vaultforge.vercel.app |
-| **Demo Video** | _Recording in progress — link to be added before deadline_ |
-| **Tweet** | _To be posted — link to be added before deadline_ |
+| **Live Demo** | https://vaultforge-nu.vercel.app |
+| **Demo Video** | See [TECHNICAL.md — Demo Walkthrough](./docs/TECHNICAL.md#demo-walkthrough-for-judges) |
+| **Tweet** | — |
 
 ---
 
@@ -22,7 +22,7 @@
 |---|---|---|
 | **VaultFactory** | `0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28) |
 | **Vault (Implementation)** | `0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A) |
-| **ZKVerifier** | `0x849Ca487D5DeD85c93fc3600338a419B100833a8` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x849Ca487D5DeD85c93fc3600338a419B100833a8) |
+| **ZKVerifier** | `0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8) |
 | **AgentRegistry** | `0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF) |
 | **LTVOracle** | `0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4) |
 
@@ -53,7 +53,7 @@ VaultForge is a **non-custodial vault system** where users deposit collateral in
 - **Next.js 16 frontend** with Privy wallet auth + wagmi
 - **Supabase Postgres** with RLS on every table
 - **Docker Compose** one-command full stack
-- **38 Foundry tests** (31 unit + 5 integration + 2 fuzz) — all passing
+- **53 Foundry tests** (unit + integration + ZK verifier) — all passing
 - **34 pytest tests** (98% code coverage) — all passing
 - **Clean `npm run build`** — zero TypeScript errors
 

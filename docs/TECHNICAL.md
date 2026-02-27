@@ -91,7 +91,7 @@ Services start in order: **Postgres** (`:5432`) → **Redis** (`:6379`) → **Ba
 # 1. Smart Contracts
 cd contracts
 forge build            # Compile Solidity
-forge test -vvv        # Run 38 tests (31 unit + 5 integration + 2 fuzz)
+forge test -vvv        # Run 53 tests (unit + integration + ZK verifier)
 
 # 2. Backend
 cd ../backend
@@ -134,7 +134,7 @@ Full variable list with descriptions: [`.env.example`](../.env.example)
 |---|---|---|
 | VaultFactory | `0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28) |
 | Vault (Impl) | `0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A) |
-| ZKVerifier | `0x849Ca487D5DeD85c93fc3600338a419B100833a8` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x849Ca487D5DeD85c93fc3600338a419B100833a8) |
+| ZKVerifier | `0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8) |
 | AgentRegistry | `0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF) |
 | LTVOracle | `0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4) |
 
@@ -229,7 +229,7 @@ Three Groth16 circuits built with Circom 2.2.3:
 All tests passing as of 2026-02-27:
 
 ```
-# Smart Contracts — 38 tests
+# Smart Contracts — 53 tests
 $ cd contracts && forge test
 ├── VaultTest: 31 passed (unit tests — deploy, deposit, borrow, repay, withdraw, seize, ZK verify)
 ├── IntegrationTest: 5 passed (full lifecycle: factory→vault→deposit→borrow→repay→withdraw)
@@ -256,7 +256,7 @@ $ cd frontend && npm run build
 
 ### Step-by-Step
 
-1. **Open the App** — Navigate to https://vaultforge.vercel.app (or `http://localhost:3000` locally)
+1. **Open the App** — Navigate to https://vaultforge-nu.vercel.app (or `http://localhost:3000` locally)
 
 2. **Connect Wallet** — Click "Connect" → Privy modal → choose MetaMask or social login. Ensure you're on opBNB testnet (Chain ID 5611).
 
@@ -296,7 +296,7 @@ git clone https://github.com/blinderchief/VaultForge.git
 cd VaultForge
 
 # Contracts
-cd contracts && forge test --gas-report   # Expect: 38/38 passing
+cd contracts && forge test --gas-report   # Expect: 53/53 passing
 
 # Backend
 cd ../backend && uv sync && uv run pytest --cov=app -q   # Expect: 34/34, 98% cov

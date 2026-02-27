@@ -70,7 +70,7 @@ VaultForge is a **non-custodial ZK-private intelligent collateral vault system**
 | **Oracle dependency** | LTV optimization relies on off-chain price feeds | Chainlink integration planned; challenge window provides safety net |
 | **Testnet only** | All contracts on opBNB testnet, not mainnet | Audit (CertiK/Halborn) required before mainnet deploy |
 | **Solo developer** | Built by 1 person in hackathon timeframe | Core architecture is modular; team expansion planned for Phase 2 |
-| **No formal audit** | Smart contracts not yet audited | 38 Foundry tests + fuzzing provide baseline confidence; audit budgeted for Q2 2026 |
+| **No formal audit** | Smart contracts not yet audited | 53 Foundry tests + fuzzing provide baseline confidence; audit budgeted for Q2 2026 |
 
 ---
 
@@ -78,7 +78,7 @@ VaultForge is a **non-custodial ZK-private intelligent collateral vault system**
 
 | Phase | Timeline | Milestones |
 |---|---|---|
-| **Phase 1 — Hack MVP** | Feb 2026 ✅ | 5 contracts on opBNB testnet, 3 ZK circuits, AI agent demo, 72 tests passing, full-stack deployed |
+| **Phase 1 — Hack MVP** | Feb 2026 ✅ | 5 contracts on opBNB testnet, 3 ZK circuits, AI agent demo, 87 tests passing, full-stack deployed |
 | **Phase 2 — Mainnet** | Q2 2026 | CertiK/Halborn audit, mainnet deploy, Venus/PancakeSwap integration, 1,000 active users |
 | **Phase 3 — Scale** | Q4 2026 | Ethereum + Arbitrum + Polygon support, institutional vaults, $100M TVL target |
 | **Phase 4 — DAO** | Q2 2027 | $FORGE token fair launch, community governance, 10+ chains, protocol sustainability |
