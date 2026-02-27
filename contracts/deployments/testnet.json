@@ -48,6 +48,14 @@
       "block": 133525110,
       "verified": true,
       "explorerUrl": "https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4"
+    },
+    "TestUSDC": {
+      "address": "0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE",
+      "abi": "MockERC20 (ERC20 with public mint)",
+      "symbol": "tUSDC",
+      "decimals": 18,
+      "note": "Test token for E2E testing. Anyone can call mint(address,uint256).",
+      "explorerUrl": "https://opbnb-testnet.bscscan.com/address/0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE"
     }
   },
   "deprecated": {

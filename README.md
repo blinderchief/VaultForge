@@ -206,6 +206,7 @@ All contracts deployed and verified on opBNB testnet. Source code viewable on op
 | **ZKVerifier** | `0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8` | [View](https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8) | ⏳ Pending |
 | **AgentRegistry** | `0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF` | [View](https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF) | ✅ |
 | **LTVOracle** | `0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4` | [View](https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4) | ✅ |
+| **TestUSDC (tUSDC)** | `0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE` | [View](https://opbnb-testnet.bscscan.com/address/0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE) | — |
 
 > **Deployer:** [`0x97950A98980a2Fc61ea7eb043bb7666845f77071`](https://opbnb-testnet.bscscan.com/address/0x97950A98980a2Fc61ea7eb043bb7666845f77071) — 7+ on-chain transactions
 > **Deployment cost:** 3,688,663 gas total ≈ **$0.000004 USD** (opBNB L2 pricing)
@@ -218,6 +219,24 @@ All contracts deployed and verified on opBNB testnet. Source code viewable on op
 | #1 | `0x9795...7071` | `0x5085...790c` | [`0x9764...0000`](https://opbnb-testnet.bscscan.com/tx/0x97649e2ab1fdde3f5e84173728d11459e6279eface9a53870a70a437066a0000) |
 | #2 | `0x0000...0001` | `0xdcb4...8fa9` | [`0x6cf2...4473`](https://opbnb-testnet.bscscan.com/tx/0x6cf2bcbd1022880d638c54783ef412967bbc5a853fe5ea84b41dfc7220934473) |
 | #3 | `0x0000...0002` | `0xd683...9bd0` | [`0x01f9...3284`](https://opbnb-testnet.bscscan.com/tx/0x01f97eb2afcc8e004cb15c25a73f4d27c1ee0bcd9cdfac3d1d879ab648563284) |
+
+### Test Token (tUSDC)
+
+**TestUSDC** (`tUSDC`) is an open-mint ERC-20 deployed for E2E testing. Anyone can mint tokens:
+
+```bash
+# Mint 10,000 tUSDC to any wallet
+cast send 0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE \
+  "mint(address,uint256)" <WALLET_ADDRESS> 10000000000000000000000 \
+  --rpc-url https://opbnb-testnet-rpc.bnbchain.org --private-key <KEY>
+```
+
+| Property | Value |
+|---|---|
+| **Address** | `0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE` |
+| **Symbol** | tUSDC |
+| **Decimals** | 18 |
+| **Mint** | Open — `mint(address to, uint256 amount)` |
 
 ---
 

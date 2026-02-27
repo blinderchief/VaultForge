@@ -36,7 +36,7 @@ class Settings(BaseSettings):
 
     # ── Backend API ──────────────────────────────────────────────────
     backend_url: str = "http://localhost:8000"
-    cors_origins: str = "http://localhost:3000"
+    cors_origins: str = "https://vaultforge-nu.vercel.app,http://localhost:3000"
     api_key: str = ""  # internal agent API key
 
     # ── ZK ───────────────────────────────────────────────────────────
