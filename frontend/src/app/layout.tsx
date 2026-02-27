@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import { Syne } from "next/font/google";
 import "./globals.css";
+import Providers from "@/components/Providers";
+import Navbar from "@/components/Navbar";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -29,7 +31,10 @@ export default function RootLayout({
       <body
         className={`${syne.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Providers>
+          <Navbar />
+          <main className="pt-14">{children}</main>
+        </Providers>
       </body>
     </html>
   );

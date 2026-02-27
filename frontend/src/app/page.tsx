@@ -1,3 +1,7 @@
+"use client";
+
+import ConnectButton from "@/components/ConnectButton";
+
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-vf-base p-6">
@@ -7,6 +11,7 @@ export default function Home() {
       <p className="mb-8 max-w-md text-center font-mono text-sm text-vf-text-muted">
         Non-custodial ZK-private intelligent collateral vaults on opBNB/BSC
       </p>
+      <ConnectButton className="mb-6" />
       <div className="flex gap-4">
         <a
           href="/dashboard"

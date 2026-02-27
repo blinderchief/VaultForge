@@ -36,6 +36,7 @@ zk-circuits/node_modules/
 prd.md
 product_research.md
 .github\copilot-instructions.md
+backend_logs.md
 # ── Secrets / Keys ──────────────────────
 *.key
 *.pem
