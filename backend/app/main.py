@@ -40,9 +40,9 @@ app.include_router(positions.router)
 @app.get("/health")
 async def health() -> dict[str, str]:
     """Return API health status."""
-    from datetime import datetime, timezone
+    from datetime import UTC, datetime
 
-    return {"status": "ok", "timestamp": datetime.now(timezone.utc).isoformat()}
+    return {"status": "ok", "timestamp": datetime.now(UTC).isoformat()}
 
 
 @app.get("/metrics")
