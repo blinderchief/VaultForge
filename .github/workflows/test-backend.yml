@@ -1,0 +1,38 @@
+name: Test Backend
+
+on:
+  push:
+    branches: [main]
+    paths: [backend/**]
+  pull_request:
+    branches: [main]
+    paths: [backend/**]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v4
+
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        working-directory: backend
+        run: uv sync --all-extras
+
+      - name: Lint
+        working-directory: backend
+        run: uv run ruff check .
+
+      - name: Run tests
+        working-directory: backend
+        run: uv run pytest -v
+        env:
+          OPBNB_TESTNET_RPC_URL: ${{ secrets.OPBNB_TESTNET_RPC_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          PRIVY_APP_SECRET: ${{ secrets.PRIVY_APP_SECRET }}

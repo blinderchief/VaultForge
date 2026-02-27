@@ -1,0 +1,11 @@
+{
+    "repayment_history": "9500",
+    "collateral_ratio": "15000",
+    "account_age": "365",
+    "tx_count": "120",
+    "w_repay": "4000",
+    "w_collateral": "3000",
+    "w_age": "2000",
+    "w_tx": "1000",
+    "min_score": "5000"
+}

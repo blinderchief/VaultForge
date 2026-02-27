@@ -1,0 +1,23 @@
+# ╔══════════════════════════════════════════════════════════════════════╗
+# ║  VaultForge — Docker Compose Override (local dev)                  ║
+# ║  Automatically merged with docker-compose.yml on `docker-compose up`║
+# ║  Adds volume mounts for hot reload on frontend + backend.          ║
+# ╚══════════════════════════════════════════════════════════════════════╝
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    volumes:
+      - ./backend/app:/app/app:ro
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: ["npm", "run", "dev"]
+    volumes:
+      - ./frontend/src:/app/src:ro
+      - ./frontend/public:/app/public:ro

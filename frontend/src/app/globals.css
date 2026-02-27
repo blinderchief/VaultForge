@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/* ── VaultForge Design Tokens ──────────────────────────────────────── */
+:root {
+  --vf-base: #0A0A0F;
+  --vf-surface: #12121A;
+  --vf-surface-2: #1A1A25;
+  --vf-cyan: #00F5FF;
+  --vf-cyan-dim: #00F5FF66;
+  --vf-amber: #F59E0B;
+  --vf-green: #10B981;
+  --vf-red: #EF4444;
+  --vf-border: rgba(255, 255, 255, 0.08);
+  --vf-text: #E4E4E7;
+  --vf-text-muted: #71717A;
+
+  --background: var(--vf-base);
+  --foreground: var(--vf-text);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-vf-base: var(--vf-base);
+  --color-vf-surface: var(--vf-surface);
+  --color-vf-surface-2: var(--vf-surface-2);
+  --color-vf-cyan: var(--vf-cyan);
+  --color-vf-cyan-dim: var(--vf-cyan-dim);
+  --color-vf-amber: var(--vf-amber);
+  --color-vf-green: var(--vf-green);
+  --color-vf-red: var(--vf-red);
+  --color-vf-border: var(--vf-border);
+  --color-vf-text: var(--vf-text);
+  --color-vf-text-muted: var(--vf-text-muted);
+  --font-sans: var(--font-syne);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--vf-base);
+  color: var(--vf-text);
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* ── Glassmorphic card ─────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(18, 18, 26, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--vf-border);
+  border-radius: 8px;
+}
+
+.glass-card-hover {
+  background: rgba(18, 18, 26, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--vf-border);
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+}
+.glass-card-hover:hover {
+  border-color: var(--vf-cyan-dim);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--vf-surface-2); border-radius: 3px; }
+
+/* ── Glow pulse animation ──────────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 4px var(--vf-cyan-dim)); }
+  50% { filter: drop-shadow(0 0 12px var(--vf-cyan)); }
+}
+.animate-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}

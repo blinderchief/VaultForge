@@ -1,0 +1,68 @@
+{
+  "network": "opBNB Testnet",
+  "chainId": 5611,
+  "deployer": "0x97950A98980a2Fc61ea7eb043bb7666845f77071",
+  "deployedAt": "2026-02-27T11:09:00Z",
+  "blockExplorer": "https://opbnb-testnet.bscscan.com",
+  "contracts": {
+    "ZKVerifier": {
+      "address": "0x849Ca487D5DeD85c93fc3600338a419B100833a8",
+      "txHash": "0x14478a9a03e7fc600ad7c59dcd9036abbe37f21ad54ad0befc0e4c4ac00277bb",
+      "block": 133525107,
+      "verified": true,
+      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0x849Ca487D5DeD85c93fc3600338a419B100833a8"
+    },
+    "VaultFactory": {
+      "address": "0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28",
+      "txHash": "0xe62c29acea683b5b015fe2529d5e58112d22c67e6c43c537c1cfd6706824e7b3",
+      "block": 133525110,
+      "verified": true,
+      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28"
+    },
+    "VaultImplementation": {
+      "address": "0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A",
+      "txHash": "0xe62c29acea683b5b015fe2529d5e58112d22c67e6c43c537c1cfd6706824e7b3",
+      "block": 133525110,
+      "note": "Deployed internally by VaultFactory constructor",
+      "verified": true,
+      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A"
+    },
+    "AgentRegistry": {
+      "address": "0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF",
+      "txHash": "0x9d42bed652e79c2b9aea3853cde7c53d178d774610d197c3809b880a532e0d00",
+      "block": 133525110,
+      "verified": true,
+      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF"
+    },
+    "LTVOracle": {
+      "address": "0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4",
+      "txHash": "0xfbb535e605b7ec989a4fb8a411574cfc6389b88a363e563cdbfd1dd75e8c49c6",
+      "block": 133525110,
+      "verified": true,
+      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4"
+    }
+  },
+  "vaultClones": [
+    {
+      "owner": "0x97950A98980a2Fc61ea7eb043bb7666845f77071",
+      "vault": "0x5085a28e00b19f34c149ac8b9780a6508078790c",
+      "txHash": "0x97649e2ab1fdde3f5e84173728d11459e6279eface9a53870a70a437066a0000"
+    },
+    {
+      "owner": "0x0000000000000000000000000000000000000001",
+      "vault": "0xdcb417b2b39b749167cc9a04ebeb019948308fa9",
+      "txHash": "0x6cf2bcbd1022880d638c54783ef412967bbc5a853fe5ea84b41dfc7220934473"
+    },
+    {
+      "owner": "0x0000000000000000000000000000000000000002",
+      "vault": "0xd6830c54acce916496e88db58781be903cc89bd0",
+      "txHash": "0x01f97eb2afcc8e004cb15c25a73f4d27c1ee0bcd9cdfac3d1d879ab648563284"
+    }
+  ],
+  "gasStats": {
+    "totalDeploymentGas": 3688663,
+    "totalDeploymentCostBNB": "0.000000000003688663",
+    "vaultCloneGas": 207659,
+    "note": "opBNB L2 gas price ~0.000000001 gwei — sub-cent per tx"
+  }
+}

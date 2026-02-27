@@ -1,0 +1,22 @@
+{
+  "name": "vaultforge-zk-circuits",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Circom 2.x ZK circuits for VaultForge — Groth16 proofs for private vault value and LTV verification",
+  "scripts": {
+    "compile": "bash compile.sh",
+    "compile:all": "bash compile.sh all",
+    "compile:collateral": "bash compile.sh CollateralThreshold",
+    "compile:reputation": "bash compile.sh ReputationScore",
+    "compile:ltv": "bash compile.sh LTVComputation",
+    "build:prover": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "circomlib": "^2.0.5",
+    "snarkjs": "^0.7.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/node": "^20.0.0"
+  }
+}

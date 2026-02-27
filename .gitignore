@@ -1,0 +1,56 @@
+# ── Dependencies ─────────────────────────
+node_modules/
+.pnp.*
+.yarn/
+
+# ── Build outputs ────────────────────────
+.next/
+out/
+frontend/.next/
+frontend/out/
+backend/__pycache__/
+backend/**/__pycache__/
+__pycache__/
+backend/.venv/
+*.pyc
+*.pyo
+
+# ── Foundry ──────────────────────────────
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+
+# ── ZK Circuits ──────────────────────────
+zk-circuits/build/
+zk-circuits/ptau/
+zk-circuits/keys/
+zk-circuits/node_modules/
+
+# ── Environment ──────────────────────────
+.env
+.env.local
+.env.production
+.env.*.local
+!.env.example
+!frontend/.env.local.example
+prd.md
+product_research.md
+.github\copilot-instructions.md
+# ── Secrets / Keys ──────────────────────
+*.key
+*.pem
+
+# ── IDE / OS ─────────────────────────────
+.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ── Supabase ─────────────────────────────
+.supabase/
+
+# ── Misc ─────────────────────────────────
+*.log
+coverage/
