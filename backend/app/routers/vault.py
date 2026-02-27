@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import re
 import uuid
-from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Request, status
 from pydantic import BaseModel, Field, field_validator
@@ -20,10 +19,10 @@ _ETH_ADDR = re.compile(r"^0x[a-fA-F0-9]{40}$")
 class VaultCreateRequest(BaseModel):
     wallet_address: str = Field(..., description="Owner wallet address (0x...)")
     chain_id: int = Field(default=5611, description="Chain ID (default opBNB testnet)")
-    vault_contract_address: Optional[str] = Field(
+    vault_contract_address: str | None = Field(
         default=None, description="On-chain vault contract address"
     )
-    total_deposited: Optional[str] = Field(
+    total_deposited: str | None = Field(
         default=None, description="Initial deposit amount in wei"
     )
 
@@ -36,7 +35,7 @@ class VaultCreateRequest(BaseModel):
 
     @field_validator("vault_contract_address")
     @classmethod
-    def validate_vault_address(cls, v: Optional[str]) -> Optional[str]:
+    def validate_vault_address(cls, v: str | None) -> str | None:
         if v is not None and not _ETH_ADDR.match(v):
             raise ValueError("Invalid vault contract address")
         return v.lower() if v else v
@@ -47,13 +46,13 @@ class VaultCreateResponse(BaseModel):
     wallet_address: str
     chain_id: int
     status: str
-    vault_contract_address: Optional[str] = None
+    vault_contract_address: str | None = None
 
 
 class VaultRow(BaseModel):
     id: str
     wallet_address: str
-    vault_contract_address: Optional[str] = None
+    vault_contract_address: str | None = None
     chain_id: int
     status: str
     total_deposited: str
