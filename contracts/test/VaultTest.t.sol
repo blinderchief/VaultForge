@@ -21,20 +21,35 @@ contract VaultTest is Test {
     address public bob = makeAddr("bob");
     address public admin = makeAddr("admin");
 
-    // ── ZK proof dummy values (verifier stub always returns true) ───
-    uint256[2] pA = [uint256(1), uint256(2)];
-    uint256[2][2] pB = [[uint256(3), uint256(4)], [uint256(5), uint256(6)]];
-    uint256[2] pC = [uint256(7), uint256(8)];
+    // ── Real Groth16 proof from snarkjs (CollateralThreshold circuit) ──
+    // Proof from zk-circuits/build/CollateralThreshold/proof.json
+    // B-point coordinates swapped per snarkjs → Solidity convention
+    uint256[2] pA = [
+        uint256(7501418155070697957886445575060222213855214501275462131512066891886260797522),
+        uint256(20307960349622408087724662811457557377081981738727894655014255382300019349183)
+    ];
+    uint256[2][2] pB = [
+        [
+            uint256(10090863171021850233060917308111442514293021448090904360733241435633950134456),
+            uint256(20514319163820469606716028119004784496615796526046539688792089896488849842644)
+        ],
+        [
+            uint256(20328077676924037459990755442354571662269605852107790438311474812910010595491),
+            uint256(282098938794764696965769496268380771436106555603842946113396473292615518483)
+        ]
+    ];
+    uint256[2] pC = [
+        uint256(15188614206463563129152732570408292639008973769821094020924759466080418510005),
+        uint256(3210483392407363850290683052617417594252216771062307497254862380087632713208)
+    ];
 
+    // Public signals from zk-circuits/build/CollateralThreshold/public.json
+    // [commitment, sufficient, threshold]
     function _pubSignals() internal pure returns (uint256[] memory) {
-        uint256[] memory sigs = new uint256[](1);
-        sigs[0] = 100e18; // threshold
-        return sigs;
-    }
-
-    function _differentPubSignals() internal pure returns (uint256[] memory) {
-        uint256[] memory sigs = new uint256[](1);
-        sigs[0] = 200e18;
+        uint256[] memory sigs = new uint256[](3);
+        sigs[0] = 10701395941502774979696515461883671971228744800004823607239438080880607796877; // commitment
+        sigs[1] = 1; // sufficient
+        sigs[2] = 100000000000000000000; // threshold (100e18)
         return sigs;
     }
 
@@ -384,10 +399,24 @@ contract VaultTest is Test {
     //  ZK VERIFIER TESTS
     // ════════════════════════════════════════════════════════════════
 
-    function test_verifier_stub_returnsTrue() public view {
+    function test_verifier_realGroth16_returnsTrue() public view {
         uint256[] memory sigs = _pubSignals();
         bool valid = verifier.verifyProof(pA, pB, pC, sigs);
-        assertTrue(valid);
+        assertTrue(valid, "Real Groth16 proof should verify");
+    }
+
+    function test_verifier_rejectsInvalidProof() public view {
+        uint256[2] memory fakeA = [uint256(1), uint256(2)];
+        uint256[] memory sigs = _pubSignals();
+        bool valid = verifier.verifyProof(fakeA, pB, pC, sigs);
+        assertFalse(valid, "Invalid proof should be rejected");
+    }
+
+    function test_verifier_rejectsWrongSignalCount() public view {
+        uint256[] memory sigs = new uint256[](1);
+        sigs[0] = 42;
+        bool valid = verifier.verifyProof(pA, pB, pC, sigs);
+        assertFalse(valid, "Wrong signal count should be rejected");
     }
 
     function test_verifier_replayPrevention() public {

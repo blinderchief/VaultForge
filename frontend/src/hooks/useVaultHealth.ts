@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { getSupabase } from "@/lib/supabase";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 export interface VaultHealth {
   id: string;
@@ -21,26 +21,16 @@ export function useVaultHealth(walletAddress: string | undefined) {
   const [vaults, setVaults] = useState<VaultHealth[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Check Supabase availability once (safe during render — no side effects)
-  const supabaseAvailable = useMemo(() => {
-    try {
-      getSupabase();
-      return true;
-    } catch {
-      return false;
-    }
-  }, []);
-
   useEffect(() => {
-    if (!walletAddress || !supabaseAvailable) {
+    if (!walletAddress) {
+      setLoading(false);
       return;
     }
 
     const addr = walletAddress.toLowerCase();
-    const sb = getSupabase();
 
     // Initial fetch
-    sb
+    supabase
       .from("vaults")
       .select("id, status, total_deposited, total_borrowed, current_ltv_bps, wallet_address, vault_contract_address")
       .eq("wallet_address", addr)
@@ -50,7 +40,7 @@ export function useVaultHealth(walletAddress: string | undefined) {
       });
 
     // Realtime subscription
-    const channel = sb
+    const channel = supabase
       .channel(`vaults:${addr}`)
       .on(
         "postgres_changes",
@@ -76,11 +66,11 @@ export function useVaultHealth(walletAddress: string | undefined) {
       .subscribe();
 
     return () => {
-      sb.removeChannel(channel);
+      supabase.removeChannel(channel);
     };
-  }, [walletAddress, supabaseAvailable]);
+  }, [walletAddress]);
 
-  if (!walletAddress || !supabaseAvailable) {
+  if (!walletAddress) {
     return { vaults: [], loading: false };
   }
 

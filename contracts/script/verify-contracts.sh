@@ -8,7 +8,7 @@ set -euo pipefail
 CHAIN_ID=5611
 
 contracts=(
-  "0x849Ca487D5DeD85c93fc3600338a419B100833a8 src/ZKVerifier.sol:ZKVerifier"
+  "0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8 src/ZKVerifier.sol:ZKVerifier"
   "0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28 src/VaultFactory.sol:VaultFactory"
   "0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF src/AgentRegistry.sol:AgentRegistry"
   "0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4 src/LTVOracle.sol:LTVOracle"

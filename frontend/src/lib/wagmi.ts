@@ -1,35 +1,27 @@
-import { http, createConfig } from "wagmi";
-import { defineChain } from "viem";
+import { createConfig, http } from 'wagmi'
+import { defineChain } from 'viem'
 
 export const opBNBTestnet = defineChain({
   id: 5611,
-  name: "opBNB Testnet",
-  nativeCurrency: { name: "tBNB", symbol: "tBNB", decimals: 18 },
+  name: 'opBNB Testnet',
+  nativeCurrency: { name: 'tBNB', symbol: 'tBNB', decimals: 18 },
   rpcUrls: {
-    default: { http: ["https://opbnb-testnet-rpc.bnbchain.org"] },
+    default: { http: ['https://opbnb-testnet-rpc.bnbchain.org'] },
+    public: { http: ['https://opbnb-testnet-rpc.bnbchain.org'] },
   },
   blockExplorers: {
-    default: { name: "opBNBScan", url: "https://testnet.opbnbscan.com" },
+    default: {
+      name: 'opBNBScan',
+      url: 'https://testnet.opbnbscan.com',
+      apiUrl: 'https://api-testnet.opbnbscan.com/api',
+    },
   },
   testnet: true,
-});
-
-export const bscMainnet = defineChain({
-  id: 56,
-  name: "BNB Smart Chain",
-  nativeCurrency: { name: "BNB", symbol: "BNB", decimals: 18 },
-  rpcUrls: {
-    default: { http: ["https://bsc-dataseed.bnbchain.org"] },
-  },
-  blockExplorers: {
-    default: { name: "BscScan", url: "https://bscscan.com" },
-  },
-});
+})
 
 export const wagmiConfig = createConfig({
-  chains: [opBNBTestnet, bscMainnet],
+  chains: [opBNBTestnet],
   transports: {
-    [opBNBTestnet.id]: http(),
-    [bscMainnet.id]: http(),
+    [opBNBTestnet.id]: http('https://opbnb-testnet-rpc.bnbchain.org'),
   },
-});
+})

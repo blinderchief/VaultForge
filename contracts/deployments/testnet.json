@@ -6,10 +6,20 @@
   "blockExplorer": "https://opbnb-testnet.bscscan.com",
   "contracts": {
     "ZKVerifier": {
+      "address": "0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8",
+      "txHash": "0x8513c39d54076220dbaa461627d38b4bb958199b3bd186548c0cfd6cea2d20d8",
+      "block": 133528203,
+      "verified": false,
+      "note": "Real Groth16 verifier (replaced stub). Verification pending — opBNBScan API transient error.",
+      "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8",
+      "setZKVerifierTx": "0x6c3528fc79d37704a5dffcfa9bc764d5d1ac61a0b1d988b9c7d946f6b4d56a9c"
+    },
+    "ZKVerifier_Stub": {
       "address": "0x849Ca487D5DeD85c93fc3600338a419B100833a8",
       "txHash": "0x14478a9a03e7fc600ad7c59dcd9036abbe37f21ad54ad0befc0e4c4ac00277bb",
       "block": 133525107,
       "verified": true,
+      "note": "DEPRECATED — stub that always returned true. Replaced by real Groth16 verifier.",
       "opbnbscanUrl": "https://opbnb-testnet.bscscan.com/address/0x849Ca487D5DeD85c93fc3600338a419B100833a8"
     },
     "VaultFactory": {

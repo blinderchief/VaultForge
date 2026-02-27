@@ -37,17 +37,18 @@ class OptimizeResponse(BaseModel):
 @limiter.limit("20/minute")
 async def run_optimization(req: OptimizeRequest, request: Request):
     """Run CVaR-based LTV optimisation for a vault."""
-    # Validate vault exists
-    db = get_supabase()
-    vault = (
-        db.table("vaults")
-        .select("id")
-        .eq("id", req.vault_id)
-        .maybe_single()
-        .execute()
-    )
-    if not vault.data:
-        raise HTTPException(status_code=404, detail="Vault not found")
+    # Validate vault exists (skip for preview mode)
+    if req.vault_id != "preview":
+        db = get_supabase()
+        vault = (
+            db.table("vaults")
+            .select("id")
+            .eq("id", req.vault_id)
+            .maybe_single()
+            .execute()
+        )
+        if not vault.data:
+            raise HTTPException(status_code=404, detail="Vault not found")
 
     assets = [
         Asset(

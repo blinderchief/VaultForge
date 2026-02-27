@@ -5,6 +5,9 @@ import "./globals.css";
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
 
+// Privy/wallet hooks require browser context — skip prerendering
+export const dynamic = "force-dynamic";
+
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
@@ -33,7 +36,7 @@ export default function RootLayout({
       >
         <Providers>
           <Navbar />
-          <main className="pt-14">{children}</main>
+          <main>{children}</main>
         </Providers>
       </body>
     </html>

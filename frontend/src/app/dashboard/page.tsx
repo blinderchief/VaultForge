@@ -1,80 +1,33 @@
 "use client";
 
-import VaultHealthGauge from "@/components/vault/VaultHealthGauge";
-import ZKProofBadge from "@/components/ui/ZKProofBadge";
-import { useVaultHealth, type VaultHealth } from "@/hooks/useVaultHealth";
-import { useState } from "react";
+import { useAccount } from "wagmi";
+import { usePrivy } from "@privy-io/react-auth";
+import { useUserVaults } from "@/hooks/useUserVaults";
+import { VaultCard } from "@/components/vault/VaultCard";
+import Link from "next/link";
 
-// Placeholder wallet — in production this comes from Privy
-const DEMO_WALLET = "0x0000000000000000000000000000000000000001";
-
-function ltvToHealthScore(ltvBps: number): number {
-  // 0 bps → 100 score, 9000 bps → 0 score
-  return Math.max(0, Math.round(100 - (ltvBps / 9000) * 100));
-}
-
-function VaultCard({ vault }: { vault: VaultHealth }) {
-  const score = ltvToHealthScore(vault.current_ltv_bps);
-  const deposited = BigInt(vault.total_deposited || "0");
-  const borrowed = BigInt(vault.total_borrowed || "0");
-
+function SkeletonCard() {
   return (
-    <div className="glass-card-hover p-5">
+    <div className="glass-card animate-pulse p-5">
       <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <div className="mb-1 flex items-center gap-2">
-            <span className="font-[family-name:var(--font-syne)] text-sm font-bold text-vf-text">
-              Vault
-            </span>
-            <span className="font-mono text-xs text-vf-text-muted">
-              {vault.id.slice(0, 8)}…
-            </span>
-            <ZKProofBadge status={vault.status === "active" ? "verified" : "pending"} />
-          </div>
-
-          <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
-            <div>
-              <span className="text-vf-text-muted">Deposited</span>
-              <p className="font-mono text-sm text-vf-text">
-                {deposited.toLocaleString()} wei
-              </p>
-            </div>
-            <div>
-              <span className="text-vf-text-muted">Borrowed</span>
-              <p className="font-mono text-sm text-vf-text">
-                {borrowed.toLocaleString()} wei
-              </p>
-            </div>
-            <div>
-              <span className="text-vf-text-muted">LTV</span>
-              <p className="font-mono text-sm text-vf-text">
-                {(vault.current_ltv_bps / 100).toFixed(1)}%
-              </p>
-            </div>
-            <div>
-              <span className="text-vf-text-muted">Status</span>
-              <p className="font-mono text-sm capitalize text-vf-text">
-                {vault.status}
-              </p>
-            </div>
+        <div className="flex-1 space-y-3">
+          <div className="h-4 w-24 rounded bg-vf-surface-2" />
+          <div className="h-3 w-40 rounded bg-vf-surface-2" />
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <div className="h-8 rounded bg-vf-surface-2" />
+            <div className="h-8 rounded bg-vf-surface-2" />
+            <div className="h-8 rounded bg-vf-surface-2" />
+            <div className="h-8 rounded bg-vf-surface-2" />
           </div>
         </div>
-        <VaultHealthGauge score={score} size={100} />
+        <div className="h-[100px] w-[100px] rounded-full bg-vf-surface-2" />
       </div>
     </div>
   );
 }
 
-interface AgentAction {
-  id: string;
-  action_type: string;
-  status: string;
-  created_at: string;
-}
-
 function AgentFeed() {
-  // Static demo data — would come from Supabase Realtime in production
-  const actions: AgentAction[] = [
+  const actions = [
     { id: "1", action_type: "rebalance", status: "completed", created_at: "2026-02-26T10:30:00Z" },
     { id: "2", action_type: "optimize_ltv", status: "proposed", created_at: "2026-02-26T10:25:00Z" },
     { id: "3", action_type: "risk_alert", status: "completed", created_at: "2026-02-26T10:20:00Z" },
@@ -105,8 +58,27 @@ function AgentFeed() {
 }
 
 export default function DashboardPage() {
-  const [wallet] = useState(DEMO_WALLET);
-  const { vaults, loading } = useVaultHealth(wallet);
+  const { address, isConnected } = useAccount();
+  const { authenticated } = usePrivy();
+
+  // Pass REAL wallet address — never hardcoded
+  const { vaults, isLoading } = useUserVaults(address);
+
+  if (!authenticated || !isConnected) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-vf-base p-6">
+        <div className="glass-card flex flex-col items-center gap-4 p-8 text-center">
+          <span className="text-4xl">🔐</span>
+          <h2 className="font-[family-name:var(--font-syne)] text-lg font-bold text-vf-text">
+            Connect your wallet
+          </h2>
+          <p className="text-sm text-vf-text-muted">
+            Connect to see your vaults and start borrowing
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-vf-base p-6">
@@ -115,7 +87,7 @@ export default function DashboardPage() {
           Dashboard
         </h1>
         <p className="mt-1 font-mono text-xs text-vf-text-muted">
-          {wallet.slice(0, 6)}…{wallet.slice(-4)}
+          {address!.slice(0, 6)}…{address!.slice(-4)}
         </p>
       </header>
 
@@ -125,21 +97,25 @@ export default function DashboardPage() {
           <h2 className="mb-4 font-[family-name:var(--font-syne)] text-base font-bold text-vf-text">
             Your Vaults
           </h2>
-          {loading ? (
-            <div className="glass-card flex h-40 items-center justify-center">
-              <span className="font-mono text-sm text-vf-text-muted animate-pulse">
-                Loading…
-              </span>
+
+          {isLoading ? (
+            <div className="grid gap-4 sm:grid-cols-2">
+              <SkeletonCard />
+              <SkeletonCard />
             </div>
           ) : vaults.length === 0 ? (
             <div className="glass-card flex h-40 flex-col items-center justify-center gap-3">
+              <span className="text-2xl">➕</span>
               <span className="font-mono text-sm text-vf-text-muted">No vaults yet</span>
-              <a
+              <p className="text-xs text-vf-text-muted">
+                Create your first ZK-private vault to start borrowing
+              </p>
+              <Link
                 href="/vault/create"
                 className="rounded border border-vf-cyan px-4 py-2 font-mono text-xs text-vf-cyan transition-colors hover:bg-vf-cyan/10"
               >
-                Create Vault
-              </a>
+                Create Vault →
+              </Link>
             </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2">
