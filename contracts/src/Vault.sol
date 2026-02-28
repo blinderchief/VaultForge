@@ -98,7 +98,7 @@ contract Vault is Initializable, ReentrancyGuard {
         uint256[] calldata pubSignals
     ) external onlyOwner notDefaulted nonReentrant {
         if (amount == 0) revert ZeroAmount();
-        if (collateral[token] < amount) revert InsufficientCollateral();
+        if (collateral[token] < debt[token] + amount) revert InsufficientCollateral();
 
         // Hash the proof for replay prevention
         bytes32 proofHash = keccak256(abi.encodePacked(pA, pB, pC, pubSignals));

@@ -108,17 +108,27 @@ export function VaultCard({ vault }: { vault: VaultRow }) {
                 </p>
               </div>
               <div>
-                <span className="text-vf-text-muted">LTV</span>
-                <p className="font-mono text-sm text-vf-text">
-                  {displayLTV.toFixed(1)}%
+                <span className="text-vf-text-muted">Available</span>
+                <p className="truncate font-mono text-sm text-cyan-400">
+                  {formatTokenAmount(deposited > borrowed ? deposited - borrowed : BigInt(0))} tUSDC
                 </p>
               </div>
               <div>
-                <span className="text-vf-text-muted">Status</span>
-                <p className="font-mono text-sm capitalize text-vf-text">
-                  {defaulted ? 'defaulted' : vault.status}
+                <span className="text-vf-text-muted">LTV</span>
+                <p className={`font-mono text-sm ${displayLTV > 75 ? 'text-yellow-400' : displayLTV > 90 ? 'text-red-400' : 'text-vf-text'}`}>
+                  {displayLTV.toFixed(1)}%
                 </p>
               </div>
+            </div>
+
+            <div className="mt-1 text-xs text-vf-text-muted">
+              {defaulted ? (
+                <span className="text-red-400">Vault defaulted</span>
+              ) : vault.status === 'active' ? (
+                <span className="capitalize text-green-400/70">Active</span>
+              ) : (
+                <span className="capitalize">{vault.status}</span>
+              )}
             </div>
 
             <div className="mt-4 flex gap-2">
