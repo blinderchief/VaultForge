@@ -4,7 +4,7 @@ import { useState } from "react";
 import { WalletButton } from "@/components/wallet/WalletButton";
 import Link from "next/link";
 
-/* â”€â”€ SVG Icons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── SVG Icons ────────────────────────────────────────────────────── */
 function IconShield() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -112,7 +112,7 @@ function IconExternalLink() {
   );
 }
 
-/* â”€â”€ Feature card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Feature card ─────────────────────────────────────────────────── */
 function FeatureCard({
   icon,
   title,
@@ -135,7 +135,7 @@ function FeatureCard({
   );
 }
 
-/* â”€â”€ Step card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Step card ────────────────────────────────────────────────────── */
 function StepCard({
   step,
   title,
@@ -163,7 +163,7 @@ function StepCard({
   );
 }
 
-/* â”€â”€ FAQ item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── FAQ item ─────────────────────────────────────────────────────── */
 function FAQItem({
   question,
   answer,
@@ -200,13 +200,13 @@ function FAQItem({
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════
    PAGE
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ══════════════════════════════════════════════════════════════════════ */
 export default function Home() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-vf-base">
-      {/* â”€â”€ Grid background â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Grid background ──────────────────────────────────────── */}
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.03]"
         style={{
           backgroundImage:
@@ -215,7 +215,7 @@ export default function Home() {
         }}
       />
 
-      {/* â•â• HERO â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      {/* ══ HERO ═════════════════════════════════════════════════════ */}
       <section className="relative z-10 flex flex-col items-center px-4 pt-20 pb-16 text-center sm:px-6 sm:pt-28 sm:pb-20">
         {/* Radial glow */}
         <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-vf-cyan/[0.04] blur-[140px]" />
@@ -236,7 +236,7 @@ export default function Home() {
 
         <p className="relative mb-10 max-w-xl text-base leading-relaxed text-vf-text-muted sm:text-lg">
           Non-custodial collateral vaults with zero-knowledge privacy.
-          Deposit, prove, and borrow â€” your balances stay hidden on-chain.
+          Deposit, prove, and borrow — your balances stay hidden on-chain.
         </p>
 
         <div className="relative flex flex-wrap items-center justify-center gap-4">
@@ -260,10 +260,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* â”€â”€ Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Divider ──────────────────────────────────────────────── */}
       <div className="relative z-10 mx-auto h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-vf-border to-transparent" />
 
-      {/* â•â• FEATURES â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      {/* ══ FEATURES ═════════════════════════════════════════════════ */}
       <section className="relative z-10 mx-auto max-w-5xl px-6 py-24">
         <p className="mb-3 text-center font-mono text-xs tracking-[0.2em] text-vf-cyan uppercase">
           Core Features
@@ -279,7 +279,7 @@ export default function Home() {
           <FeatureCard
             icon={<IconLock />}
             title="Zero-Knowledge Privacy"
-            description="Prove your collateral ratio without revealing balances. Groth16 proofs generated in-browser â€” your data never leaves your device."
+            description="Prove your collateral ratio without revealing balances. Groth16 proofs generated in-browser — your data never leaves your device."
           />
           <FeatureCard
             icon={<IconVault />}
@@ -294,7 +294,7 @@ export default function Home() {
           <FeatureCard
             icon={<IconShield />}
             title="Partial Seizure Only"
-            description="Smart contracts enforce partial liquidation â€” never full seizure. Your collateral has immutable on-chain protection."
+            description="Smart contracts enforce partial liquidation — never full seizure. Your collateral has immutable on-chain protection."
           />
           <FeatureCard
             icon={<IconClock />}
@@ -309,10 +309,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* â”€â”€ Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Divider ──────────────────────────────────────────────── */}
       <div className="relative z-10 mx-auto h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-vf-border to-transparent" />
 
-      {/* â•â• HOW IT WORKS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      {/* ══ HOW IT WORKS ═════════════════════════════════════════════ */}
       <section className="relative z-10 mx-auto max-w-4xl px-6 py-24">
         <p className="mb-3 text-center font-mono text-xs tracking-[0.2em] text-vf-cyan uppercase">
           How It Works
@@ -328,13 +328,13 @@ export default function Home() {
           <StepCard
             step={1}
             title="Create & Deposit"
-            description="Deploy your personal vault contract and deposit BNB or ERC-20 tokens. Funds stay in your vault â€” fully non-custodial."
+            description="Deploy your personal vault contract and deposit BNB or ERC-20 tokens. Funds stay in your vault — fully non-custodial."
             icon={<IconVault />}
           />
           <StepCard
             step={2}
             title="Generate ZK Proof"
-            description="Your browser generates a Groth16 proof that your collateral exceeds the borrow threshold â€” without revealing your balance."
+            description="Your browser generates a Groth16 proof that your collateral exceeds the borrow threshold — without revealing your balance."
             icon={<IconLock />}
           />
           <StepCard
@@ -346,10 +346,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* â”€â”€ Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Divider ──────────────────────────────────────────────── */}
       <div className="relative z-10 mx-auto h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-vf-border to-transparent" />
 
-      {/* â•â• ARCHITECTURE & TRUST â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      {/* ══ ARCHITECTURE & TRUST ═════════════════════════════════════ */}
       <section className="relative z-10 mx-auto max-w-5xl px-6 py-24">
         <p className="mb-3 text-center font-mono text-xs tracking-[0.2em] text-vf-cyan uppercase">
           Architecture
@@ -364,8 +364,8 @@ export default function Home() {
         {/* Stats grid */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { label: "Smart Contracts", value: "5", sub: "Solidity 0.8.28 Â· Foundry", icon: <IconCode /> },
-            { label: "ZK Circuits", value: "3", sub: "Circom 2.x Â· Groth16", icon: <IconLock /> },
+            { label: "Smart Contracts", value: "5", sub: "Solidity 0.8.28 · Foundry", icon: <IconCode /> },
+            { label: "ZK Circuits", value: "3", sub: "Circom 2.x · Groth16", icon: <IconLock /> },
             { label: "Forge Tests", value: "53", sub: "100% passing", icon: <IconCheck /> },
             { label: "Backend Tests", value: "41", sub: "pytest · FastAPI", icon: <IconDatabase /> },
           ].map((item) => (
@@ -422,10 +422,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* â”€â”€ Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Divider ──────────────────────────────────────────────── */}
       <div className="relative z-10 mx-auto h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-vf-border to-transparent" />
 
-      {/* â•â• TECH STACK â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      {/* ══ TECH STACK ═══════════════════════════════════════════════ */}
       <section className="relative z-10 mx-auto max-w-3xl px-6 py-24">
         <p className="mb-3 text-center font-mono text-xs tracking-[0.2em] text-vf-cyan uppercase">
           Tech Stack
@@ -458,10 +458,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* â”€â”€ Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Divider ──────────────────────────────────────────────── */}
       <div className="relative z-10 mx-auto h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-vf-border to-transparent" />
 
-      {/* â•â• FAQ â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      {/* ══ FAQ ══════════════════════════════════════════════════════ */}
       <section className="relative z-10 mx-auto max-w-2xl px-6 py-24">
         <p className="mb-3 text-center font-mono text-xs tracking-[0.2em] text-vf-cyan uppercase">
           FAQ
@@ -473,19 +473,19 @@ export default function Home() {
         <div>
           <FAQItem
             question="What is VaultForge?"
-            answer="VaultForge is a non-custodial, ZK-private collateral vault protocol on opBNB. Users deposit assets into personal smart-contract vaults, generate zero-knowledge proofs to verify their collateral ratio, and borrow against those assets â€” all without revealing their actual balance on-chain."
+            answer="VaultForge is a non-custodial, ZK-private collateral vault protocol on opBNB. Users deposit assets into personal smart-contract vaults, generate zero-knowledge proofs to verify their collateral ratio, and borrow against those assets — all without revealing their actual balance on-chain."
           />
           <FAQItem
             question="How does zero-knowledge privacy work?"
-            answer="When you want to borrow, your browser generates a Groth16 proof using Circom circuits. This proof mathematically demonstrates that your collateral exceeds the required threshold, without disclosing the actual amount. The on-chain verifier contract confirms the proof â€” no trusted third party required."
+            answer="When you want to borrow, your browser generates a Groth16 proof using Circom circuits. This proof mathematically demonstrates that your collateral exceeds the required threshold, without disclosing the actual amount. The on-chain verifier contract confirms the proof — no trusted third party required."
           />
           <FAQItem
             question="Is VaultForge custodial?"
-            answer="No. Each user deploys their own vault smart contract via the VaultFactory. Your assets live in your personal vault â€” not in a shared pool. Only you can deposit, borrow, repay, and withdraw. The protocol never holds your funds."
+            answer="No. Each user deploys their own vault smart contract via the VaultFactory. Your assets live in your personal vault — not in a shared pool. Only you can deposit, borrow, repay, and withdraw. The protocol never holds your funds."
           />
           <FAQItem
             question="What happens if my LTV gets too high?"
-            answer="VaultForge's AI agents monitor LTV ratios in real-time and can trigger partial liquidations if collateral drops below safe thresholds. Critically, the smart contracts enforce partial seizure only â€” your entire collateral can never be fully liquidated in a single event."
+            answer="VaultForge's AI agents monitor LTV ratios in real-time and can trigger partial liquidations if collateral drops below safe thresholds. Critically, the smart contracts enforce partial seizure only — your entire collateral can never be fully liquidated in a single event."
           />
           <FAQItem
             question="Which networks does VaultForge support?"
@@ -498,10 +498,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* â”€â”€ Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Divider ──────────────────────────────────────────────── */}
       <div className="relative z-10 mx-auto h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-vf-border to-transparent" />
 
-      {/* â•â• CTA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      {/* ══ CTA ══════════════════════════════════════════════════════ */}
       <section className="relative z-10 flex flex-col items-center px-6 py-28 text-center">
         <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-[400px] w-[700px] rounded-full bg-vf-cyan/[0.04] blur-[120px]" />
 
@@ -524,7 +524,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* â•â• FOOTER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      {/* ══ FOOTER ═══════════════════════════════════════════════════ */}
       <footer className="relative z-10 border-t border-vf-border bg-vf-surface/40 px-6 py-12">
         <div className="mx-auto flex max-w-5xl flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           {/* Brand */}
