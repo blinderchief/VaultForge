@@ -13,7 +13,7 @@ function Slide({
   return (
     <section
       id={id}
-      className="relative z-10 mx-auto max-w-5xl px-6 py-20 sm:py-28"
+      className="relative z-10 mx-auto max-w-5xl px-6 py-12 sm:py-16"
     >
       {children}
     </section>
@@ -37,8 +37,8 @@ function StatCard({
   sub?: string;
 }) {
   return (
-    <div className="glass-card flex flex-col items-center gap-1 p-5 text-center">
-      <span className="font-mono text-2xl font-bold text-vf-cyan sm:text-3xl">
+    <div className="glass-card flex flex-col items-center gap-1 p-4 text-center">
+      <span className="font-mono text-xl font-bold text-vf-cyan sm:text-2xl">
         {value}
       </span>
       <span className="text-sm font-semibold text-vf-text">{label}</span>
@@ -107,7 +107,7 @@ function ContractRow({
    ══════════════════════════════════════════════════════════════════ */
 export default function PresentationDeck() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-vf-base">
+    <div className="min-h-screen overflow-x-hidden bg-vf-base scroll-smooth">
       {/* Grid background */}
       <div
         className="pointer-events-none fixed inset-0 z-0 opacity-[0.03]"
@@ -119,8 +119,8 @@ export default function PresentationDeck() {
       />
 
       {/* ═══ SLIDE 1 — TITLE ═══════════════════════════════════════ */}
-      <section className="relative z-10 flex min-h-[80vh] flex-col items-center justify-center px-6 text-center">
-        <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-vf-cyan/[0.05] blur-[140px]" />
+      <section className="relative z-10 flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
+        <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[400px] w-[700px] rounded-full bg-vf-cyan/[0.05] blur-[120px]" />
 
         <div className="relative mb-4 inline-flex items-center gap-2 rounded-full border border-vf-cyan/20 bg-vf-surface/80 px-4 py-1.5 backdrop-blur">
           <span className="h-2 w-2 rounded-full bg-vf-green animate-pulse" />
@@ -129,7 +129,7 @@ export default function PresentationDeck() {
           </span>
         </div>
 
-        <h1 className="relative mb-4 max-w-3xl font-[family-name:var(--font-syne)] text-4xl font-bold leading-[1.1] tracking-tight text-vf-text sm:text-5xl md:text-6xl">
+        <h1 className="relative mb-3 max-w-3xl font-[family-name:var(--font-syne)] text-3xl font-bold leading-[1.1] tracking-tight text-vf-text sm:text-4xl md:text-5xl">
           Vault
           <span className="bg-gradient-to-r from-vf-cyan to-[#7B61FF] bg-clip-text text-transparent">
             Forge
@@ -140,7 +140,7 @@ export default function PresentationDeck() {
           Non-custodial ZK-private intelligent collateral vaults on opBNB
         </p>
 
-        <p className="relative mb-10 max-w-xl text-sm leading-relaxed text-vf-text-muted">
+        <p className="relative mb-6 max-w-xl text-sm leading-relaxed text-vf-text-muted">
           Deposit assets into personal vaults. Prove collateral with zero-knowledge proofs.
           Borrow privately while AI agents optimize your risk — all on BNB Chain&apos;s fastest L2.
         </p>
@@ -175,7 +175,7 @@ export default function PresentationDeck() {
         <h2 className="mb-4 text-center font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
           DeFi lending is broken
         </h2>
-        <p className="mx-auto mb-12 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
+        <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
           Trillions in crypto assets sit idle because existing lending protocols are overcollateralized, fully public, and lack intelligent risk management.
         </p>
 
@@ -232,7 +232,7 @@ export default function PresentationDeck() {
         <h2 className="mb-4 text-center font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
           Privacy + Intelligence + Safety
         </h2>
-        <p className="mx-auto mb-12 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
+        <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
           VaultForge combines zero-knowledge proofs, AI agents, and partial-only liquidation to create the next generation of collateral infrastructure on BNB Chain.
         </p>
 
@@ -302,7 +302,7 @@ export default function PresentationDeck() {
         <h2 className="mb-4 text-center font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
           Real numbers. Real demand.
         </h2>
-        <p className="mx-auto mb-12 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
+        <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
           DeFi lending is a $51B+ market growing rapidly — and BNB Chain is one of its biggest ecosystems. All data sourced from DeFiLlama and CoinGecko (June 2025).
         </p>
 
@@ -352,7 +352,7 @@ export default function PresentationDeck() {
           />
         </div>
 
-        <div className="mt-8 glass-card p-6">
+        <div className="mt-6 glass-card p-6">
           <h3 className="mb-3 font-[family-name:var(--font-syne)] text-lg font-semibold text-vf-text">
             Why this matters for VaultForge
           </h3>
@@ -403,7 +403,7 @@ export default function PresentationDeck() {
           The full flow — from wallet connection to on-chain borrowing — in under a minute.
         </p>
 
-        <div className="grid gap-8 sm:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-3">
           {[
             {
               step: 1,
@@ -439,8 +439,8 @@ export default function PresentationDeck() {
         </div>
 
         {/* Architecture diagram */}
-        <div className="mt-12 glass-card overflow-hidden p-6 sm:p-8">
-          <h3 className="mb-6 text-center font-[family-name:var(--font-syne)] text-lg font-semibold text-vf-text">
+        <div className="mt-8 glass-card overflow-hidden p-5 sm:p-6">
+          <h3 className="mb-4 text-center font-[family-name:var(--font-syne)] text-lg font-semibold text-vf-text">
             Architecture Overview
           </h3>
           <div className="flex flex-col items-center gap-3 font-mono text-xs sm:text-sm">
@@ -510,7 +510,7 @@ export default function PresentationDeck() {
         <h2 className="mb-4 text-center font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
           VaultForge vs. the status quo
         </h2>
-        <p className="mx-auto mb-12 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
+        <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
           Existing lending protocols are public, static, and overcollateralized. VaultForge introduces privacy, intelligence, and safety that no competitor offers.
         </p>
 
@@ -596,7 +596,7 @@ export default function PresentationDeck() {
         <h2 className="mb-4 text-center font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
           How we capture value
         </h2>
-        <p className="mx-auto mb-12 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
+        <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
           Three revenue streams aligned with user and protocol success — no extractive fees, only value-add services.
         </p>
 
@@ -642,7 +642,7 @@ export default function PresentationDeck() {
           </div>
         </div>
 
-        <div className="mt-8 glass-card p-6">
+        <div className="mt-6 glass-card p-6">
           <h3 className="mb-4 font-[family-name:var(--font-syne)] text-lg font-semibold text-vf-text">
             $FORGE Token (100M Fixed Supply)
           </h3>
@@ -674,7 +674,7 @@ export default function PresentationDeck() {
         <h2 className="mb-4 text-center font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
           Production-grade, fully working
         </h2>
-        <p className="mx-auto mb-12 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
+        <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-vf-text-muted">
           Not a mockup or whitepaper — every component is built, tested, deployed, and verified on-chain.
         </p>
 
@@ -693,7 +693,7 @@ export default function PresentationDeck() {
         </div>
 
         {/* Tech stack */}
-        <div className="mt-8">
+        <div className="mt-6">
           <h3 className="mb-4 text-center font-[family-name:var(--font-syne)] text-lg font-semibold text-vf-text">
             Tech Stack
           </h3>
@@ -733,7 +733,7 @@ export default function PresentationDeck() {
         <h2 className="mb-4 text-center font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
           Deployed & verified on opBNB Testnet
         </h2>
-        <p className="mx-auto mb-12 max-w-xl text-center text-sm leading-relaxed text-vf-text-muted">
+        <p className="mx-auto mb-8 max-w-xl text-center text-sm leading-relaxed text-vf-text-muted">
           All contracts are live and verifiable. Click any address to view on opBNBScan.
         </p>
 
@@ -796,7 +796,7 @@ export default function PresentationDeck() {
         <h2 className="mb-4 text-center font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
           What&apos;s next
         </h2>
-        <p className="mx-auto mb-12 max-w-xl text-center text-sm leading-relaxed text-vf-text-muted">
+        <p className="mx-auto mb-8 max-w-xl text-center text-sm leading-relaxed text-vf-text-muted">
           VaultForge is a working MVP today. Here&apos;s the path to mainnet and beyond.
         </p>
 
@@ -895,12 +895,12 @@ export default function PresentationDeck() {
         <p className="mb-3 text-center font-mono text-xs tracking-[0.2em] text-vf-cyan uppercase">
           Team
         </p>
-        <h2 className="mb-12 text-center font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
+        <h2 className="mb-8 text-center font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
           Built by
         </h2>
 
         <div className="mx-auto max-w-sm">
-          <div className="glass-card flex flex-col items-center gap-4 p-8 text-center">
+          <div className="glass-card flex flex-col items-center gap-3 p-6 text-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-vf-cyan/10 font-[family-name:var(--font-syne)] text-2xl font-bold text-vf-cyan">
               SK
             </div>
@@ -927,7 +927,7 @@ export default function PresentationDeck() {
       <Divider />
 
       {/* ═══ FINAL CTA ═══════════════════════════════════════════ */}
-      <section className="relative z-10 flex flex-col items-center px-6 py-24 text-center">
+      <section className="relative z-10 flex flex-col items-center px-6 py-16 text-center">
         <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-[400px] w-[700px] rounded-full bg-vf-cyan/[0.04] blur-[120px]" />
 
         <h2 className="relative mb-5 max-w-lg font-[family-name:var(--font-syne)] text-3xl font-bold text-vf-text sm:text-4xl">
@@ -956,7 +956,7 @@ export default function PresentationDeck() {
           </a>
         </div>
 
-        <p className="relative mt-12 font-mono text-xs text-vf-text-muted">
+        <p className="relative mt-8 font-mono text-xs text-vf-text-muted">
           Built for BNB Chain × YZi Labs Hack Bengaluru 2026 — Smart Collateral Track
         </p>
       </section>
