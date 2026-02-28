@@ -1,7 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
+import { useReadContract } from 'wagmi'
+import { formatUnits } from 'viem'
 import { useIsDefaulted } from '@/hooks/useVault'
+import { VAULT_ABI } from '@/lib/contracts'
 import VaultHealthGauge from './VaultHealthGauge'
 import ZKProofBadge from '@/components/ui/ZKProofBadge'
 import { BorrowModal } from './BorrowModal'
@@ -9,10 +12,19 @@ import { RepayModal } from './RepayModal'
 import type { VaultRow } from '@/hooks/useUserVaults'
 
 const EXPLORER = 'https://opbnb-testnet.bscscan.com'
+// TestUSDC on opBNB testnet — the primary collateral/borrow token
+const TUSDC_ADDRESS = '0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE' as `0x${string}`
 
 function ltvBpsToHealthScore(bps: number): number {
-  // 0 bps → 100 score, 9000 bps → 0 score
   return Math.max(0, Math.round(100 - (bps / 9000) * 100))
+}
+
+function formatTokenAmount(wei: bigint): string {
+  const formatted = formatUnits(wei, 18)
+  const num = parseFloat(formatted)
+  if (num === 0) return '0'
+  if (num < 0.01) return '<0.01'
+  return num.toLocaleString(undefined, { maximumFractionDigits: 2 })
 }
 
 export function VaultCard({ vault }: { vault: VaultRow }) {
@@ -21,19 +33,46 @@ export function VaultCard({ vault }: { vault: VaultRow }) {
 
   const vaultAddr = vault.vault_contract_address as `0x${string}` | undefined
 
-  // Read on-chain defaulted state
+  // Read on-chain state directly
   const { data: defaulted } = useIsDefaulted(vaultAddr ?? undefined)
 
-  const displayLTV = vault.current_ltv_bps / 100
-  const healthScore = ltvBpsToHealthScore(vault.current_ltv_bps)
-  const deposited = BigInt(vault.total_deposited || '0')
-  const borrowed = BigInt(vault.total_borrowed || '0')
+  const { data: onChainCollateral, refetch: refetchCollateral } = useReadContract({
+    address: vaultAddr,
+    abi: VAULT_ABI,
+    functionName: 'collateral',
+    args: [TUSDC_ADDRESS],
+    query: { enabled: !!vaultAddr },
+  })
+
+  const { data: onChainDebt, refetch: refetchDebt } = useReadContract({
+    address: vaultAddr,
+    abi: VAULT_ABI,
+    functionName: 'debt',
+    args: [TUSDC_ADDRESS],
+    query: { enabled: !!vaultAddr },
+  })
+
+  const deposited = (onChainCollateral as bigint) ?? BigInt(0)
+  const borrowed = (onChainDebt as bigint) ?? BigInt(0)
+
+  // Compute LTV from on-chain data
+  const ltvBps = deposited > BigInt(0)
+    ? Number((borrowed * BigInt(10000)) / deposited)
+    : 0
+  const displayLTV = ltvBps / 100
+  const healthScore = ltvBpsToHealthScore(ltvBps)
+
+  // Refetch on-chain data after a tx succeeds
+  const handleTxSuccess = useCallback(() => {
+    refetchCollateral()
+    refetchDebt()
+  }, [refetchCollateral, refetchDebt])
 
   return (
     <>
       <div className="glass-card-hover p-5">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
             <div className="mb-1 flex items-center gap-2">
               <span className="font-[family-name:var(--font-syne)] text-sm font-bold text-vf-text">
                 Vault
@@ -55,17 +94,17 @@ export function VaultCard({ vault }: { vault: VaultRow }) {
               </a>
             )}
 
-            <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
+            <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
               <div>
                 <span className="text-vf-text-muted">Deposited</span>
-                <p className="font-mono text-sm text-vf-text">
-                  {deposited.toLocaleString()} wei
+                <p className="truncate font-mono text-sm text-vf-text" title={`${deposited} wei`}>
+                  {formatTokenAmount(deposited)} tUSDC
                 </p>
               </div>
               <div>
                 <span className="text-vf-text-muted">Borrowed</span>
-                <p className="font-mono text-sm text-vf-text">
-                  {borrowed.toLocaleString()} wei
+                <p className="truncate font-mono text-sm text-vf-text" title={`${borrowed} wei`}>
+                  {formatTokenAmount(borrowed)} tUSDC
                 </p>
               </div>
               <div>
@@ -109,11 +148,13 @@ export function VaultCard({ vault }: { vault: VaultRow }) {
             vaultAddress={vaultAddr}
             isOpen={borrowOpen}
             onClose={() => setBorrowOpen(false)}
+            onSuccess={handleTxSuccess}
           />
           <RepayModal
             vaultAddress={vaultAddr}
             isOpen={repayOpen}
             onClose={() => setRepayOpen(false)}
+            onSuccess={handleTxSuccess}
           />
         </>
       )}

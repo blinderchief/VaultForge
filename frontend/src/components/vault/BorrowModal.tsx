@@ -16,9 +16,10 @@ interface Props {
   vaultAddress: `0x${string}`
   isOpen: boolean
   onClose: () => void
+  onSuccess?: () => void
 }
 
-export function BorrowModal({ vaultAddress, isOpen, onClose }: Props) {
+export function BorrowModal({ vaultAddress, isOpen, onClose, onSuccess }: Props) {
   const [step, setStep] = useState<Step>('input')
   const [token, setToken] = useState('')
   const [amount, setAmount] = useState('')
@@ -45,8 +46,9 @@ export function BorrowModal({ vaultAddress, isOpen, onClose }: Props) {
     if (isSuccess && step === 'confirming') {
       setStep('done')
       toast.success('Borrow confirmed on-chain')
+      onSuccess?.()
     }
-  }, [isSuccess, step])
+  }, [isSuccess, step, onSuccess])
 
   useEffect(() => {
     if (error && step !== 'input' && step !== 'done') {
