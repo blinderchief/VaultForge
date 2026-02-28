@@ -61,11 +61,11 @@ This guide covers **everything**: architecture, user flows, every component, eve
 
 | Contract | Address |
 |----------|---------|
-| VaultFactory | `0xEd871ed2D9281B175B42597b50748B9Ee8e951F7` |
-| Vault Implementation | `0x671419bb5a8CeF7547f661212030F998B7992ACE` |
-| ZKVerifier | `0x05bcAB91C51104853f796F5D7bd57EF8077E904D` |
-| AgentRegistry | `0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0` |
-| LTVOracle | `0x16165ad7A069Ada84F97a6311c9A62c700AC43d8` |
+| VaultFactory | `0xb881fAf4e552780f65Ae8FC1053AD46134b71173` |
+| Vault Implementation | `0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0` |
+| ZKVerifier | `0x2925896cABAd4c6B7c505495948F79b3e9308C54` |
+| AgentRegistry | `0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b` |
+| LTVOracle | `0x953386f1309b2BdA061d895aBddB17b9Db706744` |
 | Deployer Wallet | `0x97950A98980a2Fc61ea7eb043bb7666845f77071` |
 
 ---
@@ -492,7 +492,7 @@ Tests cover:
 - Replay prevention, access control
 - Integration tests (full flows)
 
-#### Backend Tests (34 tests)
+#### Backend Tests (41 tests)
 ```bash
 cd backend
 uv run python -m pytest tests/ -v
@@ -652,7 +652,7 @@ For a ZK-proof-intensive application, low gas is critical because proof verifica
 ### "How many tests?"
 
 - **53** Foundry tests (smart contracts)
-- **34** pytest tests (backend)
+- **41** pytest tests (backend)
 - Frontend: TypeScript strict mode + build-time validation
 
 ### "Can you show the ZK proof on-chain?"

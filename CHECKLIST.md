@@ -15,7 +15,7 @@
 | 7 | ZK proof nonce binding (per-vault nonce) | **DONE** | `vaultNonce` mapping; incremented on each borrow; `InvalidNonce` error |
 | 8 | Partial seizure invariant (max 50% collateral) | **DONE** | `seize()` caps at `collateral * 0.5` regardless of debt |
 | 9 | 48h timelock on admin functions | **DEFERRED â†’ Mainnet** | Requires OpenZeppelin TimelockController. Not needed for testnet demo â€” admin is deployer. Will add pre-mainnet audit |
-| 10 | Replace ZKVerifier stub with real Groth16 verifier | **DONE** | Real Groth16 verifier deployed at `0x05bcAB91C51104853f796F5D7bd57EF8077E904D` with on-chain bn128 pairing check, nonce replay prevention, and 3 circuit type support |
+| 10 | Replace ZKVerifier stub with real Groth16 verifier | **DONE** | Real Groth16 verifier deployed at `0x2925896cABAd4c6B7c505495948F79b3e9308C54` with on-chain bn128 pairing check, nonce replay prevention, and 3 circuit type support |
 | 11 | Formal audit by third-party firm | **DEFERRED â†’ Mainnet** | CertiK/Halborn audit scheduled for Q2 2026 pre-mainnet. Current code has ReentrancyGuard, partial seizure caps, ZK replay prevention |
 | 12 | Foundry fuzz tests (bounded + stateful) | **DONE** | 53 passing tests (unit + integration + ZK verifier). Full invariant test suite planned pre-audit |
 
@@ -47,7 +47,7 @@
 | 24 | Supabase service key NOT in any frontend file | **DONE** | Grep confirmed â€” only `NEXT_PUBLIC_SUPABASE_ANON_KEY` used |
 | 25 | No private keys or mnemonics in frontend code | **DONE** | Grep confirmed clean |
 | 26 | No sensitive data in localStorage | **DONE** | Privy handles wallet security server-side |
-| 27 | `next build` passes with zero TypeScript errors | **DONE** | All 4 routes compile successfully |
+| 27 | `next build` passes with zero TypeScript errors | **DONE** | All 5 routes compile successfully |
 | 28 | CSP headers (Content-Security-Policy) | **DEFERRED â†’ Mainnet** | Add strict CSP in next.config.ts before production deploy. Testnet demo runs on localhost |
 | 29 | Privy embedded wallet + Account Abstraction wired | **DONE** | Config in lib/privy.ts |
 
@@ -93,4 +93,4 @@
 - **DEFERRED â†’ Mainnet**: 12 items (timelock, real Groth16 verifier, audit, fuzz tests, trusted setup, Privy JWT, CSP headers, DB backup, monitoring, error tracking, e2e browser tests)
 - **TODO**: 0 items
 
-> All deferred items are post-hackathon mainnet requirements. The testnet MVP is feature-complete with 53 passing contract tests, 34 passing backend tests, and a clean frontend build.
+> All deferred items are post-hackathon mainnet requirements. The testnet MVP is feature-complete with 53 passing contract tests, 41 passing backend tests, and a clean frontend build.

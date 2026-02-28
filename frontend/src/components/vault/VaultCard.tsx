@@ -9,6 +9,7 @@ import VaultHealthGauge from './VaultHealthGauge'
 import ZKProofBadge from '@/components/ui/ZKProofBadge'
 import { BorrowModal } from './BorrowModal'
 import { RepayModal } from './RepayModal'
+import { DepositModal } from './DepositModal'
 import type { VaultRow } from '@/hooks/useUserVaults'
 
 const EXPLORER = 'https://opbnb-testnet.bscscan.com'
@@ -30,6 +31,7 @@ function formatTokenAmount(wei: bigint): string {
 export function VaultCard({ vault }: { vault: VaultRow }) {
   const [borrowOpen, setBorrowOpen] = useState(false)
   const [repayOpen, setRepayOpen] = useState(false)
+  const [depositOpen, setDepositOpen] = useState(false)
 
   const vaultAddr = vault.vault_contract_address as `0x${string}` | undefined
 
@@ -131,7 +133,14 @@ export function VaultCard({ vault }: { vault: VaultRow }) {
               )}
             </div>
 
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button
+                onClick={() => setDepositOpen(true)}
+                disabled={!vaultAddr || !!defaulted}
+                className="rounded border border-green-500/70 px-4 py-1.5 font-mono text-xs text-green-400 transition-colors hover:bg-green-500/10 disabled:cursor-not-allowed disabled:opacity-30"
+              >
+                Deposit
+              </button>
               <button
                 onClick={() => setBorrowOpen(true)}
                 disabled={!vaultAddr || !!defaulted}
@@ -154,6 +163,12 @@ export function VaultCard({ vault }: { vault: VaultRow }) {
 
       {vaultAddr && (
         <>
+          <DepositModal
+            vaultAddress={vaultAddr}
+            isOpen={depositOpen}
+            onClose={() => setDepositOpen(false)}
+            onSuccess={handleTxSuccess}
+          />
           <BorrowModal
             vaultAddress={vaultAddr}
             isOpen={borrowOpen}

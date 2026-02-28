@@ -157,7 +157,7 @@ All 4 services start automatically: **Postgres** (`:5432`) â†’ **Redis** (`
 cd contracts && forge build && forge test   # 53 tests
 
 # Backend
-cd backend && uv sync && uv run pytest      # 34 tests
+cd backend && uv sync && uv run pytest      # 41 tests
 uv run uvicorn app.main:app --reload --port 8000
 
 # Frontend
@@ -179,11 +179,11 @@ Copy `.env.example` â†’ `.env` and fill in your values. **Never commit `.en
 | `BSC_TESTNET_RPC_URL` | BSC Testnet RPC for cross-chain reads | `https://data-seed-prebsc-1-s1.bnbchain.org:8545` |
 | `DEPLOYER_PRIVATE_KEY` | Deployer wallet key (Foundry scripts) | `0xabc...` (never share) |
 | `ETHERSCAN_API_KEY` | opBNBScan / BSCScan verification key | `YN4PT4...` |
-| `NEXT_PUBLIC_VAULT_FACTORY_ADDRESS` | Deployed VaultFactory address | `0xEd871ed2D9281B175B42597b50748B9Ee8e951F7` |
-| `NEXT_PUBLIC_VAULT_IMPL_ADDRESS` | Vault implementation address | `0x671419bb5a8CeF7547f661212030F998B7992ACE` |
-| `NEXT_PUBLIC_ZK_VERIFIER_ADDRESS` | Deployed ZKVerifier address | `0x05bcAB91C51104853f796F5D7bd57EF8077E904D` |
-| `NEXT_PUBLIC_AGENT_REGISTRY_ADDRESS` | Deployed AgentRegistry address | `0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0` |
-| `NEXT_PUBLIC_LTV_ORACLE_ADDRESS` | Deployed LTVOracle address | `0x16165ad7A069Ada84F97a6311c9A62c700AC43d8` |
+| `NEXT_PUBLIC_VAULT_FACTORY_ADDRESS` | Deployed VaultFactory address | `0xb881fAf4e552780f65Ae8FC1053AD46134b71173` |
+| `NEXT_PUBLIC_VAULT_IMPL_ADDRESS` | Vault implementation address | `0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0` |
+| `NEXT_PUBLIC_ZK_VERIFIER_ADDRESS` | Deployed ZKVerifier address | `0x2925896cABAd4c6B7c505495948F79b3e9308C54` |
+| `NEXT_PUBLIC_AGENT_REGISTRY_ADDRESS` | Deployed AgentRegistry address | `0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b` |
+| `NEXT_PUBLIC_LTV_ORACLE_ADDRESS` | Deployed LTVOracle address | `0x953386f1309b2BdA061d895aBddB17b9Db706744` |
 | `NEXT_PUBLIC_PRIVY_APP_ID` | Privy App ID for wallet auth | `cmm4pm...` |
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL | `https://xxx.supabase.co` |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public anon key (RLS enforced) | `eyJhbG...` |
@@ -201,11 +201,11 @@ All contracts deployed and verified on opBNB testnet. Source code viewable on op
 
 | Contract | Address | opBNBScan | Verified |
 |---|---|---|---|
-| **VaultFactory** | `0xEd871ed2D9281B175B42597b50748B9Ee8e951F7` | [View](https://opbnb-testnet.bscscan.com/address/0xEd871ed2D9281B175B42597b50748B9Ee8e951F7) | âœ… |
-| **Vault (Implementation)** | `0x671419bb5a8CeF7547f661212030F998B7992ACE` | [View](https://opbnb-testnet.bscscan.com/address/0x671419bb5a8CeF7547f661212030F998B7992ACE) | âœ… |
-| **ZKVerifier** | `0x05bcAB91C51104853f796F5D7bd57EF8077E904D` | [View](https://opbnb-testnet.bscscan.com/address/0x05bcAB91C51104853f796F5D7bd57EF8077E904D) | â³ Pending |
-| **AgentRegistry** | `0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0` | [View](https://opbnb-testnet.bscscan.com/address/0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0) | âœ… |
-| **LTVOracle** | `0x16165ad7A069Ada84F97a6311c9A62c700AC43d8` | [View](https://opbnb-testnet.bscscan.com/address/0x16165ad7A069Ada84F97a6311c9A62c700AC43d8) | âœ… |
+| **VaultFactory** | `0xb881fAf4e552780f65Ae8FC1053AD46134b71173` | [View](https://opbnb-testnet.bscscan.com/address/0xb881fAf4e552780f65Ae8FC1053AD46134b71173) | âœ… |
+| **Vault (Implementation)** | `0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0` | [View](https://opbnb-testnet.bscscan.com/address/0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0) | âœ… |
+| **ZKVerifier** | `0x2925896cABAd4c6B7c505495948F79b3e9308C54` | [View](https://opbnb-testnet.bscscan.com/address/0x2925896cABAd4c6B7c505495948F79b3e9308C54) | â³ Pending |
+| **AgentRegistry** | `0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b` | [View](https://opbnb-testnet.bscscan.com/address/0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b) | âœ… |
+| **LTVOracle** | `0x953386f1309b2BdA061d895aBddB17b9Db706744` | [View](https://opbnb-testnet.bscscan.com/address/0x953386f1309b2BdA061d895aBddB17b9Db706744) | âœ… |
 | **TestUSDC (tUSDC)** | `0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE` | [View](https://opbnb-testnet.bscscan.com/address/0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE) | â€” |
 
 > **Deployer:** [`0x97950A98980a2Fc61ea7eb043bb7666845f77071`](https://opbnb-testnet.bscscan.com/address/0x97950A98980a2Fc61ea7eb043bb7666845f77071) â€” 7+ on-chain transactions
@@ -248,9 +248,9 @@ VaultForge is built natively for the BNB ecosystem â€” not ported from Ethe
 |---|---|---|
 | **opBNB L2** | All contracts deployed on opBNB testnet (chain 5611) | [Deployment tx](https://opbnb-testnet.bscscan.com/tx/0xe62c29acea683b5b015fe2529d5e58112d22c67e6c43c537c1cfd6706824e7b3) |
 | **EIP-1167 Minimal Proxies** | VaultFactory deploys gas-efficient vault clones | Clone cost: 207,659 gas â‰ˆ **$0.0000002 USD** |
-| **BNB AI Agent Framework** | AgentRegistry.sol â€” agents stake tBNB, execute vault actions, earn fees, get slashed | [Contract](https://opbnb-testnet.bscscan.com/address/0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0) |
-| **ZK Privacy (Groth16)** | ZKVerifier.sol â€” real on-chain proof verification with nonce replay prevention | [Contract](https://opbnb-testnet.bscscan.com/address/0x05bcAB91C51104853f796F5D7bd57EF8077E904D) |
-| **Optimistic Oracle** | LTVOracle.sol â€” off-chain optimizer submits LTV with 1h challenge window | [Contract](https://opbnb-testnet.bscscan.com/address/0x16165ad7A069Ada84F97a6311c9A62c700AC43d8) |
+| **BNB AI Agent Framework** | AgentRegistry.sol â€” agents stake tBNB, execute vault actions, earn fees, get slashed | [Contract](https://opbnb-testnet.bscscan.com/address/0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b) |
+| **ZK Privacy (Groth16)** | ZKVerifier.sol â€” real on-chain proof verification with nonce replay prevention | [Contract](https://opbnb-testnet.bscscan.com/address/0x2925896cABAd4c6B7c505495948F79b3e9308C54) |
+| **Optimistic Oracle** | LTVOracle.sol â€” off-chain optimizer submits LTV with 1h challenge window | [Contract](https://opbnb-testnet.bscscan.com/address/0x953386f1309b2BdA061d895aBddB17b9Db706744) |
 | **opBNB Gas Efficiency** | Sub-cent operations: deploy vault $0.0000002, full contract suite $0.000004 | Gas price: 0.000000001 gwei |
 | **Supabase (off-chain)** | Real-time vault health monitoring, RLS-enforced user data | [Backend API](./backend/) |
 
@@ -384,10 +384,10 @@ VaultForge/
 â”‚   â””â”€â”€ ptau/             Powers of Tau ceremony file
 â”œâ”€â”€ backend/              FastAPI + Python 3.12 â€” UV package manager
 â”‚   â”œâ”€â”€ app/              API routes, SciPy optimizer, Supabase models
-â”‚   â””â”€â”€ tests/            34 pytest tests
+â”‚   â””â”€â”€ tests/            41 pytest tests
 â”œâ”€â”€ frontend/             Next.js 16 + React 19 â€” App Router
 â”‚   â”œâ”€â”€ src/app/          Pages: landing, dashboard, vault creation wizard
-â”‚   â”œâ”€â”€ src/components/   BorrowModal, RepayModal, VaultCard, Navbar, Providers
+â”‚   â”œâ”€â”€ src/components/   DepositModal, BorrowModal, RepayModal, VaultCard, Navbar
 â”‚   â”œâ”€â”€ src/hooks/        useVault, useVaultFactory, useUserVaults
 â”‚   â”œâ”€â”€ src/lib/          api.ts, contracts.ts, zk.ts, wagmi.ts, supabase.ts
 â”‚   â””â”€â”€ public/zk/        WASM + zkey artifacts for browser-side Groth16 proving
@@ -407,7 +407,7 @@ VaultForge/
 | Layer | Framework | Tests | Command |
 |---|---|---|---|
 | **Smart Contracts** | Foundry (forge test) | 53 passing | `cd contracts && forge test -vvv` |
-| **Backend API** | pytest + pytest-cov | 34 passing | `cd backend && uv run pytest --cov` |
+| **Backend API** | pytest + pytest-cov | 41 passing | `cd backend && uv run pytest --cov` |
 | **Frontend Build** | TypeScript + Next.js | 0 errors | `cd frontend && npm run build` |
 | **ZK Circuits** | Circom + snarkjs | 3 circuits proven | `cd zk-circuits && bash scripts/compile.sh` |
 | **Integration (Solidity)** | Foundry e2e | Full lifecycle tests | Deployâ†’depositâ†’borrowâ†’repayâ†’withdraw |

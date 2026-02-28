@@ -17,6 +17,7 @@ export default function Navbar() {
       <div className="navbar-links hidden md:flex">
         <Link href="/dashboard">Dashboard</Link>
         <Link href="/vault/create">Create Vault</Link>
+        <Link href="/presentation-deck">Pitch</Link>
       </div>
 
       <div className="hidden md:block">
@@ -42,6 +43,9 @@ export default function Navbar() {
           </Link>
           <Link href="/vault/create" onClick={() => setMenuOpen(false)} className="text-sm text-vf-text-muted transition-colors hover:text-vf-text">
             Create Vault
+          </Link>
+          <Link href="/presentation-deck" onClick={() => setMenuOpen(false)} className="text-sm text-vf-text-muted transition-colors hover:text-vf-text">
+            Pitch
           </Link>
           <div className="pt-2">
             <WalletButton />

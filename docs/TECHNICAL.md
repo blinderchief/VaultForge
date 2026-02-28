@@ -96,7 +96,7 @@ forge test -vvv        # Run 53 tests (unit + integration + ZK verifier)
 # 2. Backend
 cd ../backend
 uv sync                # Install Python dependencies
-uv run pytest --cov    # Run 34 tests (98% coverage)
+uv run pytest --cov    # Run 41 tests
 uv run uvicorn app.main:app --reload --port 8000
 
 # 3. Frontend
@@ -132,11 +132,11 @@ Full variable list with descriptions: [`.env.example`](../.env.example)
 
 | Contract | Address | Explorer |
 |---|---|---|
-| VaultFactory | `0xEd871ed2D9281B175B42597b50748B9Ee8e951F7` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xEd871ed2D9281B175B42597b50748B9Ee8e951F7) |
-| Vault (Impl) | `0x671419bb5a8CeF7547f661212030F998B7992ACE` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x671419bb5a8CeF7547f661212030F998B7992ACE) |
-| ZKVerifier | `0x05bcAB91C51104853f796F5D7bd57EF8077E904D` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x05bcAB91C51104853f796F5D7bd57EF8077E904D) |
-| AgentRegistry | `0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0) |
-| LTVOracle | `0x16165ad7A069Ada84F97a6311c9A62c700AC43d8` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x16165ad7A069Ada84F97a6311c9A62c700AC43d8) |
+| VaultFactory | `0xb881fAf4e552780f65Ae8FC1053AD46134b71173` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xb881fAf4e552780f65Ae8FC1053AD46134b71173) |
+| Vault (Impl) | `0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0) |
+| ZKVerifier | `0x2925896cABAd4c6B7c505495948F79b3e9308C54` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x2925896cABAd4c6B7c505495948F79b3e9308C54) |
+| AgentRegistry | `0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b) |
+| LTVOracle | `0x953386f1309b2BdA061d895aBddB17b9Db706744` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x953386f1309b2BdA061d895aBddB17b9Db706744) |
 
 **Deployer:** [`0x97950A98980a2Fc61ea7eb043bb7666845f77071`](https://opbnb-testnet.bscscan.com/address/0x97950A98980a2Fc61ea7eb043bb7666845f77071)
 **On-chain:** 7+ transactions, 3 vault clones deployed, `totalVaults() == 3`
@@ -235,15 +235,15 @@ $ cd contracts && forge test
 â”œâ”€â”€ IntegrationTest: 5 passed (full lifecycle: factoryâ†’vaultâ†’depositâ†’borrowâ†’repayâ†’withdraw)
 â””â”€â”€ CounterTest: 2 passed (fuzz tests)
 
-# Backend â€” 34 tests, 98% coverage
+# Backend – 41 tests
 $ cd backend && uv run pytest --cov=app -q
-34 passed in 17.00s
+41 passed
 TOTAL: 363 statements, 7 missed, 98% coverage
 
 # Frontend â€” zero TypeScript errors
 $ cd frontend && npm run build
 âœ“ Compiled successfully in 12.9s (Next.js 16.1.6 Turbopack)
-4 routes: /, /_not-found, /dashboard, /vault/create
+4 routes: /, /_not-found, /dashboard, /vault/create, /presentation-deck
 ```
 
 ---
@@ -299,7 +299,7 @@ cd VaultForge
 cd contracts && forge test --gas-report   # Expect: 53/53 passing
 
 # Backend
-cd ../backend && uv sync && uv run pytest --cov=app -q   # Expect: 34/34, 98% cov
+cd ../backend && uv sync && uv run pytest --cov=app -q   # Expect: 41/41 passing
 
 # Frontend
 cd ../frontend && npm ci && npm run build   # Expect: 0 errors, 4 routes

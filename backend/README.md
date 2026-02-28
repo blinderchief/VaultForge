@@ -25,8 +25,8 @@ Create `backend/.env` with:
 SUPABASE_URL=             # Get from supabase.com â†’ Settings â†’ API
 SUPABASE_SERVICE_KEY=     # Service role key (NOT anon key) â€” bypasses RLS
 OPBNB_RPC_URL=https://opbnb-testnet-rpc.bnbchain.org
-VAULT_FACTORY_ADDRESS=0xEd871ed2D9281B175B42597b50748B9Ee8e951F7
-ZK_VERIFIER_ADDRESS=0x05bcAB91C51104853f796F5D7bd57EF8077E904D
+VAULT_FACTORY_ADDRESS=0xb881fAf4e552780f65Ae8FC1053AD46134b71173
+ZK_VERIFIER_ADDRESS=0x2925896cABAd4c6B7c505495948F79b3e9308C54
 AGENT_PRIVATE_KEY=        # Generate: cast wallet new
 ZERION_API_KEY=           # Get from developers.zerion.io
 INTERNAL_API_KEY=         # Generate: openssl rand -hex 32
@@ -163,7 +163,7 @@ Fetches portfolio positions from Zerion API. Requires `X-API-Key` header. Rate l
 ## Running Tests
 
 ```bash
-uv run pytest -v          # 34 tests
+uv run pytest -v          # 41 tests
 uv run pytest --cov       # With coverage report
 ```
 

@@ -35,10 +35,10 @@ CORS_ORIGINS=http://localhost:3000
 
 # â”€â”€ Deployed contract addresses (already populated) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # These are pre-filled with our testnet deployment:
-NEXT_PUBLIC_VAULT_FACTORY_ADDRESS=0xEd871ed2D9281B175B42597b50748B9Ee8e951F7
-NEXT_PUBLIC_ZK_VERIFIER_ADDRESS=0x05bcAB91C51104853f796F5D7bd57EF8077E904D
-NEXT_PUBLIC_AGENT_REGISTRY_ADDRESS=0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0
-NEXT_PUBLIC_LTV_ORACLE_ADDRESS=0x16165ad7A069Ada84F97a6311c9A62c700AC43d8
+NEXT_PUBLIC_VAULT_FACTORY_ADDRESS=0xb881fAf4e552780f65Ae8FC1053AD46134b71173
+NEXT_PUBLIC_ZK_VERIFIER_ADDRESS=0x2925896cABAd4c6B7c505495948F79b3e9308C54
+NEXT_PUBLIC_AGENT_REGISTRY_ADDRESS=0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b
+NEXT_PUBLIC_LTV_ORACLE_ADDRESS=0x953386f1309b2BdA061d895aBddB17b9Db706744
 
 # â”€â”€ OPTIONAL (features degrade gracefully without these) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 NEXT_PUBLIC_PRIVY_APP_ID=           # Get from https://dashboard.privy.io
@@ -131,7 +131,7 @@ Test result: ok. 38 passed; 0 failed;
 ```bash
 cd backend
 uv sync                # Install all Python dependencies
-uv run pytest          # Run 34 tests (should all pass)
+uv run pytest          # Run 41 tests (should all pass)
 uv run uvicorn app.main:app --reload --port 8000
 # Backend now running at http://localhost:8000
 # Swagger docs at http://localhost:8000/docs
@@ -229,11 +229,11 @@ VaultForge is already deployed on **opBNB Testnet** (Chain ID 5611). You can int
 
 | Contract | Address | Explorer |
 |---|---|---|
-| **VaultFactory** | `0xEd871ed2D9281B175B42597b50748B9Ee8e951F7` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xEd871ed2D9281B175B42597b50748B9Ee8e951F7) |
-| **Vault (impl)** | `0x671419bb5a8CeF7547f661212030F998B7992ACE` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x671419bb5a8CeF7547f661212030F998B7992ACE) |
-| **ZKVerifier** | `0x05bcAB91C51104853f796F5D7bd57EF8077E904D` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x05bcAB91C51104853f796F5D7bd57EF8077E904D) |
-| **AgentRegistry** | `0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0) |
-| **LTVOracle** | `0x16165ad7A069Ada84F97a6311c9A62c700AC43d8` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x16165ad7A069Ada84F97a6311c9A62c700AC43d8) |
+| **VaultFactory** | `0xb881fAf4e552780f65Ae8FC1053AD46134b71173` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xb881fAf4e552780f65Ae8FC1053AD46134b71173) |
+| **Vault (impl)** | `0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0) |
+| **ZKVerifier** | `0x2925896cABAd4c6B7c505495948F79b3e9308C54` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x2925896cABAd4c6B7c505495948F79b3e9308C54) |
+| **AgentRegistry** | `0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b) |
+| **LTVOracle** | `0x953386f1309b2BdA061d895aBddB17b9Db706744` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x953386f1309b2BdA061d895aBddB17b9Db706744) |
 
 Full deployment data: [`contracts/deployments/testnet.json`](../contracts/deployments/testnet.json)
 
@@ -264,7 +264,7 @@ vaultforge/
 â”‚   â””â”€â”€ deployments/        #   testnet.json (deployed addresses)
 â”œâ”€â”€ backend/                # FastAPI + Python 3.12
 â”‚   â”œâ”€â”€ app/                #   API routes, optimizer, models
-â”‚   â”œâ”€â”€ tests/              #   34 pytest tests
+â”‚   â”œâ”€â”€ tests/              #   41 pytest tests
 â”‚   â”œâ”€â”€ Dockerfile          #   Production container
 â”‚   â””â”€â”€ pyproject.toml      #   UV dependencies
 â”œâ”€â”€ frontend/               # Next.js 16 + React 19

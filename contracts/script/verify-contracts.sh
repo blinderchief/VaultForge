@@ -8,10 +8,10 @@ set -euo pipefail
 CHAIN_ID=5611
 
 contracts=(
-  "0x05bcAB91C51104853f796F5D7bd57EF8077E904D src/ZKVerifier.sol:ZKVerifier"
-  "0xEd871ed2D9281B175B42597b50748B9Ee8e951F7 src/VaultFactory.sol:VaultFactory"
-  "0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0 src/AgentRegistry.sol:AgentRegistry"
-  "0x16165ad7A069Ada84F97a6311c9A62c700AC43d8 src/LTVOracle.sol:LTVOracle"
+  "0x2925896cABAd4c6B7c505495948F79b3e9308C54 src/ZKVerifier.sol:ZKVerifier"
+  "0xb881fAf4e552780f65Ae8FC1053AD46134b71173 src/VaultFactory.sol:VaultFactory"
+  "0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b src/AgentRegistry.sol:AgentRegistry"
+  "0x953386f1309b2BdA061d895aBddB17b9Db706744 src/LTVOracle.sol:LTVOracle"
 )
 
 for entry in "${contracts[@]}"; do

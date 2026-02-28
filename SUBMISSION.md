@@ -20,11 +20,11 @@
 
 | Contract | Address | opBNBScan |
 |---|---|---|
-| **VaultFactory** | `0xEd871ed2D9281B175B42597b50748B9Ee8e951F7` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0xEd871ed2D9281B175B42597b50748B9Ee8e951F7) |
-| **Vault (Implementation)** | `0x671419bb5a8CeF7547f661212030F998B7992ACE` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x671419bb5a8CeF7547f661212030F998B7992ACE) |
-| **ZKVerifier** | `0x05bcAB91C51104853f796F5D7bd57EF8077E904D` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x05bcAB91C51104853f796F5D7bd57EF8077E904D) |
-| **AgentRegistry** | `0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0) |
-| **LTVOracle** | `0x16165ad7A069Ada84F97a6311c9A62c700AC43d8` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x16165ad7A069Ada84F97a6311c9A62c700AC43d8) |
+| **VaultFactory** | `0xb881fAf4e552780f65Ae8FC1053AD46134b71173` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0xb881fAf4e552780f65Ae8FC1053AD46134b71173) |
+| **Vault (Implementation)** | `0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0) |
+| **ZKVerifier** | `0x2925896cABAd4c6B7c505495948F79b3e9308C54` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x2925896cABAd4c6B7c505495948F79b3e9308C54) |
+| **AgentRegistry** | `0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b) |
+| **LTVOracle** | `0x953386f1309b2BdA061d895aBddB17b9Db706744` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x953386f1309b2BdA061d895aBddB17b9Db706744) |
 
 **Deployer:** [`0x97950A98980a2Fc61ea7eb043bb7666845f77071`](https://opbnb-testnet.bscscan.com/address/0x97950A98980a2Fc61ea7eb043bb7666845f77071)
 **On-chain activity:** 7+ transactions, 3 vault clones deployed, `totalVaults() == 3`
@@ -54,7 +54,7 @@ VaultForge is a **non-custodial vault system** where users deposit collateral in
 - **Supabase Postgres** with RLS on every table
 - **Docker Compose** one-command full stack
 - **53 Foundry tests** (unit + integration + ZK verifier) â€” all passing
-- **34 pytest tests** (98% code coverage) â€” all passing
+- **41 pytest tests** (98% code coverage) â€” all passing
 - **Clean `npm run build`** â€” zero TypeScript errors
 
 ---

@@ -367,7 +367,7 @@ export default function Home() {
             { label: "Smart Contracts", value: "5", sub: "Solidity 0.8.28 Â· Foundry", icon: <IconCode /> },
             { label: "ZK Circuits", value: "3", sub: "Circom 2.x Â· Groth16", icon: <IconLock /> },
             { label: "Forge Tests", value: "53", sub: "100% passing", icon: <IconCheck /> },
-            { label: "Backend Tests", value: "34", sub: "pytest Â· FastAPI", icon: <IconDatabase /> },
+            { label: "Backend Tests", value: "41", sub: "pytest · FastAPI", icon: <IconDatabase /> },
           ].map((item) => (
             <div key={item.label} className="glass-card flex flex-col items-center gap-2 p-6 text-center">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-vf-cyan/10 text-vf-cyan">
@@ -574,7 +574,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href="https://opbnb-testnet.bscscan.com/address/0xEd871ed2D9281B175B42597b50748B9Ee8e951F7"
+                    href="https://opbnb-testnet.bscscan.com/address/0xb881fAf4e552780f65Ae8FC1053AD46134b71173"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 transition-colors hover:text-vf-text"
