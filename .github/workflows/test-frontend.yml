@@ -37,8 +37,14 @@ jobs:
         working-directory: frontend
         run: npm run build
         env:
-          NEXT_PUBLIC_PRIVY_APP_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_APP_ID }}
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-          NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+          NEXT_PUBLIC_PRIVY_APP_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_APP_ID || 'placeholder' }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co' }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key' }}
+          NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000' }}
           NEXT_PUBLIC_CHAIN_ID: "5611"
+          NEXT_PUBLIC_OPBNB_RPC: "https://opbnb-testnet-rpc.bnbchain.org"
+          NEXT_PUBLIC_VAULT_FACTORY_ADDRESS: "0xb881fAf4e552780f65Ae8FC1053AD46134b71173"
+          NEXT_PUBLIC_VAULT_IMPL_ADDRESS: "0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0"
+          NEXT_PUBLIC_ZK_VERIFIER_ADDRESS: "0x2925896cABAd4c6B7c505495948F79b3e9308C54"
+          NEXT_PUBLIC_AGENT_REGISTRY_ADDRESS: "0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b"
+          NEXT_PUBLIC_LTV_ORACLE_ADDRESS: "0x953386f1309b2BdA061d895aBddB17b9Db706744"

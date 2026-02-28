@@ -40,8 +40,10 @@ jobs:
           NEXT_PUBLIC_LTV_ORACLE_ADDRESS: "0x953386f1309b2BdA061d895aBddB17b9Db706744"
 
       - name: Deploy to Vercel
-        if: ${{ secrets.VERCEL_TOKEN != '' }}
+        if: env.HAS_VERCEL_TOKEN != ''
         uses: amondnet/vercel-action@v25
+        env:
+          HAS_VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}

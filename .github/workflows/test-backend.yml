@@ -33,6 +33,11 @@ jobs:
         run: uv run pytest -v
         env:
           OPBNB_TESTNET_RPC_URL: "https://opbnb-testnet-rpc.bnbchain.org"
-          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          PRIVY_APP_SECRET: ${{ secrets.PRIVY_APP_SECRET }}
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co' }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || 'placeholder-key' }}
+          PRIVY_APP_SECRET: ${{ secrets.PRIVY_APP_SECRET || 'placeholder-secret' }}
+          VAULT_FACTORY_ADDRESS: "0xb881fAf4e552780f65Ae8FC1053AD46134b71173"
+          ZK_VERIFIER_ADDRESS: "0x2925896cABAd4c6B7c505495948F79b3e9308C54"
+          AGENT_REGISTRY_ADDRESS: "0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b"
+          LTV_ORACLE_ADDRESS: "0x953386f1309b2BdA061d895aBddB17b9Db706744"
+          VAULT_IMPLEMENTATION_ADDRESS: "0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0"
