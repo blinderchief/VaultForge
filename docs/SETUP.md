@@ -1,22 +1,22 @@
-# VaultForge — Local Setup Guide
+# VaultForge â€” Local Setup Guide
 
 > **Time to run:** ~5 minutes with Docker, ~10 minutes without Docker.
 > **Prerequisites:** Git, Docker Desktop (recommended) OR Node.js 20+, Python 3.12+, Foundry.
 
 ---
 
-## Option A: Docker (Recommended — One Command)
+## Option A: Docker (Recommended â€” One Command)
 
 This starts the entire stack: Postgres, Redis, Backend, and Frontend.
 
-### Step 1 — Clone the repository
+### Step 1 â€” Clone the repository
 
 ```bash
 git clone https://github.com/blinderchief/VaultForge.git
 cd VaultForge
 ```
 
-### Step 2 — Create your environment file
+### Step 2 â€” Create your environment file
 
 ```bash
 cp .env.example .env
@@ -25,7 +25,7 @@ cp .env.example .env
 Open `.env` in any editor and fill in the required values:
 
 ```ini
-# ── REQUIRED for local dev ──────────────────────────────────────────
+# â”€â”€ REQUIRED for local dev â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # These are already set to working defaults in .env.example:
 OPBNB_TESTNET_RPC_URL=https://opbnb-testnet-rpc.bnbchain.org
 NEXT_PUBLIC_CHAIN_ID=5611
@@ -33,26 +33,26 @@ BACKEND_URL=http://localhost:8000
 NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
 CORS_ORIGINS=http://localhost:3000
 
-# ── Deployed contract addresses (already populated) ─────────────────
+# â”€â”€ Deployed contract addresses (already populated) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # These are pre-filled with our testnet deployment:
-NEXT_PUBLIC_VAULT_FACTORY_ADDRESS=0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28
-NEXT_PUBLIC_ZK_VERIFIER_ADDRESS=0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8
-NEXT_PUBLIC_AGENT_REGISTRY_ADDRESS=0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF
-NEXT_PUBLIC_LTV_ORACLE_ADDRESS=0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4
+NEXT_PUBLIC_VAULT_FACTORY_ADDRESS=0xEd871ed2D9281B175B42597b50748B9Ee8e951F7
+NEXT_PUBLIC_ZK_VERIFIER_ADDRESS=0x05bcAB91C51104853f796F5D7bd57EF8077E904D
+NEXT_PUBLIC_AGENT_REGISTRY_ADDRESS=0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0
+NEXT_PUBLIC_LTV_ORACLE_ADDRESS=0x16165ad7A069Ada84F97a6311c9A62c700AC43d8
 
-# ── OPTIONAL (features degrade gracefully without these) ────────────
+# â”€â”€ OPTIONAL (features degrade gracefully without these) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 NEXT_PUBLIC_PRIVY_APP_ID=           # Get from https://dashboard.privy.io
-PRIVY_APP_SECRET=                   # Privy dashboard → Settings → API Keys
+PRIVY_APP_SECRET=                   # Privy dashboard â†’ Settings â†’ API Keys
 NEXT_PUBLIC_SUPABASE_URL=           # Get from https://supabase.com/dashboard
-NEXT_PUBLIC_SUPABASE_ANON_KEY=      # Supabase → Settings → API
-SUPABASE_SERVICE_ROLE_KEY=          # Supabase → Settings → API (keep secret)
+NEXT_PUBLIC_SUPABASE_ANON_KEY=      # Supabase â†’ Settings â†’ API
+SUPABASE_SERVICE_ROLE_KEY=          # Supabase â†’ Settings â†’ API (keep secret)
 DEPLOYER_PRIVATE_KEY=               # Only needed for contract deployment
 ETHERSCAN_API_KEY=                  # Only needed for contract verification
 ```
 
-> **Note:** The app runs locally with just the RPC URL and contract addresses. Privy and Supabase are optional for local development — the UI will show connection prompts but the core vault logic works.
+> **Note:** The app runs locally with just the RPC URL and contract addresses. Privy and Supabase are optional for local development â€” the UI will show connection prompts but the core vault logic works.
 
-### Step 3 — Start everything
+### Step 3 â€” Start everything
 
 ```bash
 docker compose up --build
@@ -67,7 +67,7 @@ That's it. Docker Compose starts 4 services in order with health checks:
 | **Backend (FastAPI)** | 8000 | http://localhost:8000/docs | `GET /health` |
 | **Frontend (Next.js)** | 3000 | http://localhost:3000 | HTTP 200 check |
 
-### Step 4 — Open the app
+### Step 4 â€” Open the app
 
 - **Frontend:** http://localhost:3000
 - **Backend API docs (Swagger):** http://localhost:8000/docs
@@ -99,7 +99,7 @@ Use this if you prefer running services individually or if Docker isn't availabl
 | **Foundry** (Forge, Cast) | Latest | `curl -L https://foundry.paradigm.xyz \| bash && foundryup` |
 | **Git** | Any | https://git-scm.com |
 
-### Step 1 — Clone and configure
+### Step 1 â€” Clone and configure
 
 ```bash
 git clone https://github.com/blinderchief/VaultForge.git
@@ -108,7 +108,7 @@ cp .env.example .env
 # Edit .env with your values (see Option A, Step 2)
 ```
 
-### Step 2 — Smart Contracts (Foundry)
+### Step 2 â€” Smart Contracts (Foundry)
 
 ```bash
 cd contracts
@@ -126,7 +126,7 @@ Expected output:
 Test result: ok. 38 passed; 0 failed;
 ```
 
-### Step 3 — Backend (FastAPI + Python)
+### Step 3 â€” Backend (FastAPI + Python)
 
 ```bash
 cd backend
@@ -140,7 +140,7 @@ cd ..
 
 > **Note:** The backend expects Postgres at `SUPABASE_DB_URL`. For local dev without Supabase, the health endpoint and API docs still work. Set `SUPABASE_DB_URL=postgresql://postgres:vaultforge_local@localhost:5432/vaultforge` if running Postgres locally.
 
-### Step 4 — Frontend (Next.js)
+### Step 4 â€” Frontend (Next.js)
 
 ```bash
 cd frontend
@@ -156,7 +156,7 @@ npm run build          # Compiles TypeScript, generates static pages
 npm start              # Runs production server on :3000
 ```
 
-### Step 5 — ZK Circuits (Optional)
+### Step 5 â€” ZK Circuits (Optional)
 
 Only needed if you want to modify or recompile the Circom circuits:
 
@@ -187,7 +187,7 @@ VaultForge uses Supabase Postgres with Row-Level Security (RLS) on every table.
    ```
 3. Run migrations:
    ```bash
-   # Migrations are in db/migrations/ — apply them in order
+   # Migrations are in db/migrations/ â€” apply them in order
    psql $SUPABASE_DB_URL -f db/migrations/001_create_tables.sql
    # Or use the Supabase CLI:
    supabase db push
@@ -229,11 +229,11 @@ VaultForge is already deployed on **opBNB Testnet** (Chain ID 5611). You can int
 
 | Contract | Address | Explorer |
 |---|---|---|
-| **VaultFactory** | `0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28) |
-| **Vault (impl)** | `0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A) |
-| **ZKVerifier** | `0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8) |
-| **AgentRegistry** | `0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF) |
-| **LTVOracle** | `0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4) |
+| **VaultFactory** | `0xEd871ed2D9281B175B42597b50748B9Ee8e951F7` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xEd871ed2D9281B175B42597b50748B9Ee8e951F7) |
+| **Vault (impl)** | `0x671419bb5a8CeF7547f661212030F998B7992ACE` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x671419bb5a8CeF7547f661212030F998B7992ACE) |
+| **ZKVerifier** | `0x05bcAB91C51104853f796F5D7bd57EF8077E904D` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x05bcAB91C51104853f796F5D7bd57EF8077E904D) |
+| **AgentRegistry** | `0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0) |
+| **LTVOracle** | `0x16165ad7A069Ada84F97a6311c9A62c700AC43d8` | [opBNBScan](https://opbnb-testnet.bscscan.com/address/0x16165ad7A069Ada84F97a6311c9A62c700AC43d8) |
 
 Full deployment data: [`contracts/deployments/testnet.json`](../contracts/deployments/testnet.json)
 
@@ -257,33 +257,33 @@ Full deployment data: [`contracts/deployments/testnet.json`](../contracts/deploy
 
 ```
 vaultforge/
-├── contracts/              # Solidity 0.8.28 — Foundry
-│   ├── src/                #   5 production contracts
-│   ├── test/               #   53 tests (unit + integration + ZK verifier)
-│   ├── script/             #   Deploy.s.sol, verify-contracts.sh
-│   └── deployments/        #   testnet.json (deployed addresses)
-├── backend/                # FastAPI + Python 3.12
-│   ├── app/                #   API routes, optimizer, models
-│   ├── tests/              #   34 pytest tests
-│   ├── Dockerfile          #   Production container
-│   └── pyproject.toml      #   UV dependencies
-├── frontend/               # Next.js 16 + React 19
-│   ├── src/app/            #   Pages, components, providers
-│   ├── Dockerfile          #   Multi-stage production build
-│   └── package.json        #   npm dependencies
-├── zk-circuits/            # Circom 2.x — 3 Groth16 circuits
-│   ├── circuits/           #   .circom source files
-│   ├── build/              #   Compiled artifacts
-│   └── scripts/            #   compile.sh
-├── db/                     # Supabase migrations
-│   └── migrations/         #   SQL files with RLS policies
-├── docs/                   # Documentation
-│   ├── SETUP.md            #   ← You are here
-│   ├── ARCHITECTURE.md     #   System design & data flows
-│   ├── USER_JOURNEY.md     #   User personas & flows
-│   ├── BUSINESS_MODEL.md   #   Revenue, tokenomics, GTM
-│   └── DEPENDENCIES.md     #   Full dependency inventory
-├── docker-compose.yml      # One-command full stack
-├── .env.example            # All env vars documented
-└── README.md               # Project overview
+â”œâ”€â”€ contracts/              # Solidity 0.8.28 â€” Foundry
+â”‚   â”œâ”€â”€ src/                #   5 production contracts
+â”‚   â”œâ”€â”€ test/               #   53 tests (unit + integration + ZK verifier)
+â”‚   â”œâ”€â”€ script/             #   Deploy.s.sol, verify-contracts.sh
+â”‚   â””â”€â”€ deployments/        #   testnet.json (deployed addresses)
+â”œâ”€â”€ backend/                # FastAPI + Python 3.12
+â”‚   â”œâ”€â”€ app/                #   API routes, optimizer, models
+â”‚   â”œâ”€â”€ tests/              #   34 pytest tests
+â”‚   â”œâ”€â”€ Dockerfile          #   Production container
+â”‚   â””â”€â”€ pyproject.toml      #   UV dependencies
+â”œâ”€â”€ frontend/               # Next.js 16 + React 19
+â”‚   â”œâ”€â”€ src/app/            #   Pages, components, providers
+â”‚   â”œâ”€â”€ Dockerfile          #   Multi-stage production build
+â”‚   â””â”€â”€ package.json        #   npm dependencies
+â”œâ”€â”€ zk-circuits/            # Circom 2.x â€” 3 Groth16 circuits
+â”‚   â”œâ”€â”€ circuits/           #   .circom source files
+â”‚   â”œâ”€â”€ build/              #   Compiled artifacts
+â”‚   â””â”€â”€ scripts/            #   compile.sh
+â”œâ”€â”€ db/                     # Supabase migrations
+â”‚   â””â”€â”€ migrations/         #   SQL files with RLS policies
+â”œâ”€â”€ docs/                   # Documentation
+â”‚   â”œâ”€â”€ SETUP.md            #   â† You are here
+â”‚   â”œâ”€â”€ ARCHITECTURE.md     #   System design & data flows
+â”‚   â”œâ”€â”€ USER_JOURNEY.md     #   User personas & flows
+â”‚   â”œâ”€â”€ BUSINESS_MODEL.md   #   Revenue, tokenomics, GTM
+â”‚   â””â”€â”€ DEPENDENCIES.md     #   Full dependency inventory
+â”œâ”€â”€ docker-compose.yml      # One-command full stack
+â”œâ”€â”€ .env.example            # All env vars documented
+â””â”€â”€ README.md               # Project overview
 ```

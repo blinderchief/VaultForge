@@ -21,6 +21,10 @@ contract Deploy is Script {
         console.log("VaultFactory:", address(factory));
         console.log("VaultImpl:", factory.vaultImplementation());
 
+        // 2b. Authorize factory to register vault callers on ZKVerifier
+        zkVerifier.authorizeFactory(address(factory));
+        console.log("Factory authorized on ZKVerifier");
+
         // 3. AgentRegistry (no dependencies)
         AgentRegistry agentRegistry = new AgentRegistry();
         console.log("AgentRegistry:", address(agentRegistry));

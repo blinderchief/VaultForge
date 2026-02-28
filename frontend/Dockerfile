@@ -1,10 +1,10 @@
-# ── Stage 1: Dependencies ────────────────────────────────────────────
+# â”€â”€ Stage 1: Dependencies â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci
 
-# ── Stage 2: Builder ────────────────────────────────────────────────
+# â”€â”€ Stage 2: Builder â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -20,11 +20,11 @@ ARG NEXT_PUBLIC_SUPABASE_ANON_KEY=placeholder
 ARG NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
 ARG NEXT_PUBLIC_CHAIN_ID=5611
 ARG NEXT_PUBLIC_OPBNB_RPC=https://opbnb-testnet-rpc.bnbchain.org
-ARG NEXT_PUBLIC_VAULT_FACTORY_ADDRESS=0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28
-ARG NEXT_PUBLIC_VAULT_IMPL_ADDRESS=0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A
-ARG NEXT_PUBLIC_ZK_VERIFIER_ADDRESS=0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8
-ARG NEXT_PUBLIC_AGENT_REGISTRY_ADDRESS=0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF
-ARG NEXT_PUBLIC_LTV_ORACLE_ADDRESS=0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4
+ARG NEXT_PUBLIC_VAULT_FACTORY_ADDRESS=0xEd871ed2D9281B175B42597b50748B9Ee8e951F7
+ARG NEXT_PUBLIC_VAULT_IMPL_ADDRESS=0x671419bb5a8CeF7547f661212030F998B7992ACE
+ARG NEXT_PUBLIC_ZK_VERIFIER_ADDRESS=0x05bcAB91C51104853f796F5D7bd57EF8077E904D
+ARG NEXT_PUBLIC_AGENT_REGISTRY_ADDRESS=0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0
+ARG NEXT_PUBLIC_LTV_ORACLE_ADDRESS=0x16165ad7A069Ada84F97a6311c9A62c700AC43d8
 ENV NEXT_PUBLIC_PRIVY_APP_ID=$NEXT_PUBLIC_PRIVY_APP_ID
 ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
 ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -39,7 +39,7 @@ ENV NEXT_PUBLIC_LTV_ORACLE_ADDRESS=$NEXT_PUBLIC_LTV_ORACLE_ADDRESS
 
 RUN npm run build
 
-# ── Stage 3: Runner ─────────────────────────────────────────────────
+# â”€â”€ Stage 3: Runner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production

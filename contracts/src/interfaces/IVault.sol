@@ -13,6 +13,7 @@ interface IZKVerifier {
     function markProofUsed(bytes32 proofHash, uint256 expectedNonce) external;
     function getNonce(address vault) external view returns (uint256);
     function vaultNonce(address vault) external view returns (uint256);
+    function authorizeCaller(address caller) external;
 }
 
 interface IVault {

@@ -1,4 +1,4 @@
-# VaultForge — Extras
+# VaultForge â€” Extras
 
 > Demo video, presentation, and supplementary links.
 
@@ -8,7 +8,7 @@
 
 | Item | Link |
 |---|---|
-| **Full Demo Walkthrough** | See [TECHNICAL.md — Demo Walkthrough](./TECHNICAL.md#demo-walkthrough-for-judges) for step-by-step usage guide |
+| **Full Demo Walkthrough** | See [TECHNICAL.md â€” Demo Walkthrough](./TECHNICAL.md#demo-walkthrough-for-judges) for step-by-step usage guide |
 
 ---
 
@@ -34,11 +34,11 @@
 
 All contracts are deployed and verified on opBNB testnet. Judges can interact directly:
 
-- [VaultFactory on opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28)
-- [Vault Implementation on opBNBScan](https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A)
-- [ZKVerifier on opBNBScan](https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8)
-- [AgentRegistry on opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF)
-- [LTVOracle on opBNBScan](https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4)
+- [VaultFactory on opBNBScan](https://opbnb-testnet.bscscan.com/address/0xEd871ed2D9281B175B42597b50748B9Ee8e951F7)
+- [Vault Implementation on opBNBScan](https://opbnb-testnet.bscscan.com/address/0x671419bb5a8CeF7547f661212030F998B7992ACE)
+- [ZKVerifier on opBNBScan](https://opbnb-testnet.bscscan.com/address/0x05bcAB91C51104853f796F5D7bd57EF8077E904D)
+- [AgentRegistry on opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0)
+- [LTVOracle on opBNBScan](https://opbnb-testnet.bscscan.com/address/0x16165ad7A069Ada84F97a6311c9A62c700AC43d8)
 
 ---
 

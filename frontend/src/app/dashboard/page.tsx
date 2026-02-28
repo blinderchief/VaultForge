@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { useAccount } from "wagmi";
 import { usePrivy } from "@privy-io/react-auth";
 import { useReadContract } from "wagmi";
 import { useUserVaults } from "@/hooks/useUserVaults";
 import { VaultCard } from "@/components/vault/VaultCard";
 import { api } from "@/lib/api";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { VAULT_FACTORY_ABI, CONTRACT_ADDRESSES } from "@/lib/contracts";
 
@@ -32,21 +32,81 @@ function SkeletonCard() {
 }
 
 function AgentFeed({ walletAddress }: { walletAddress?: string }) {
+  const queryClient = useQueryClient();
+  const [running, setRunning] = useState(false);
+  const [runError, setRunError] = useState("");
+
   const { data, isLoading } = useQuery({
     queryKey: ["agent-actions", walletAddress],
     queryFn: () => api.agentActions(walletAddress!),
     enabled: !!walletAddress,
     staleTime: 30_000,
+    refetchInterval: 60_000,
     retry: 1,
   });
 
   const actions = data?.actions ?? [];
 
+  const handleRunAgent = useCallback(async () => {
+    setRunning(true);
+    setRunError("");
+    try {
+      await api.triggerAgentRun();
+      // Refresh the feed after a short delay for DB write
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ["agent-actions", walletAddress] });
+      }, 1500);
+    } catch (e: unknown) {
+      setRunError(e instanceof Error ? e.message : "Agent run failed");
+    } finally {
+      setRunning(false);
+    }
+  }, [walletAddress, queryClient]);
+
+  const ACTION_LABELS: Record<string, { icon: string; label: string }> = {
+    optimize_ltv: { icon: "⚡", label: "LTV Optimization" },
+    health_check: { icon: "💚", label: "Health Check" },
+    rebalance: { icon: "⚖️", label: "Rebalance" },
+    alert: { icon: "🚨", label: "Alert" },
+  };
+
+  const STATUS_COLORS: Record<string, string> = {
+    completed: "var(--vf-green, #22c55e)",
+    proposed: "var(--vf-cyan, #06b6d4)",
+    approved: "var(--vf-cyan, #06b6d4)",
+    executing: "var(--vf-amber, #f59e0b)",
+    failed: "#ef4444",
+    rejected: "#6b7280",
+  };
+
   return (
     <div className="glass-card p-5">
-      <h2 className="mb-4 font-[family-name:var(--font-syne)] text-base font-bold text-vf-text">
-        Agent Feed
-      </h2>
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="font-[family-name:var(--font-syne)] text-base font-bold text-vf-text">
+          Agent Feed
+        </h2>
+        <button
+          onClick={handleRunAgent}
+          disabled={running}
+          className="rounded border border-vf-cyan/40 px-3 py-1 font-mono text-xs text-vf-cyan transition-all hover:bg-vf-cyan/10 disabled:opacity-50"
+        >
+          {running ? (
+            <span className="flex items-center gap-1.5">
+              <span className="inline-block h-3 w-3 animate-spin rounded-full border border-vf-cyan border-t-transparent" />
+              Analysing…
+            </span>
+          ) : (
+            "Run Analysis"
+          )}
+        </button>
+      </div>
+
+      {runError && (
+        <div className="mb-3 rounded border border-red-500/30 bg-red-950/20 px-3 py-2 text-xs text-red-400">
+          {runError}
+        </div>
+      )}
+
       <div className="space-y-3">
         {isLoading ? (
           <div className="animate-pulse space-y-2">
@@ -54,21 +114,44 @@ function AgentFeed({ walletAddress }: { walletAddress?: string }) {
             <div className="h-6 w-full rounded bg-vf-surface-2" />
           </div>
         ) : actions.length === 0 ? (
-          <p className="text-xs text-vf-text-muted">No agent actions yet</p>
+          <div className="flex flex-col items-center gap-2 py-4 text-center">
+            <span className="text-2xl">🤖</span>
+            <p className="text-xs text-vf-text-muted">No agent actions yet</p>
+            <p className="text-xs text-vf-text-muted/60">
+              Click &quot;Run Analysis&quot; to trigger an AI-powered vault scan
+            </p>
+          </div>
         ) : (
-          actions.map((a) => (
-            <div key={a.id} className="flex items-center justify-between border-b border-vf-border pb-2 last:border-0">
-              <div className="flex items-center gap-2">
-                <span className="inline-block h-2 w-2 rounded-full" style={{
-                  background: a.status === "completed" ? "var(--vf-green)" : "var(--vf-amber)",
-                }} />
-                <span className="font-mono text-xs text-vf-text">{a.action_type}</span>
+          actions.map((a) => {
+            const meta = ACTION_LABELS[a.action_type] ?? { icon: "📋", label: a.action_type };
+            return (
+              <div
+                key={a.id}
+                className="rounded border border-vf-border/50 bg-vf-surface/30 px-3 py-2 transition-colors hover:border-vf-border"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="inline-block h-2 w-2 rounded-full"
+                      style={{ background: STATUS_COLORS[a.status] ?? "#6b7280" }}
+                    />
+                    <span className="text-sm">
+                      {meta.icon}
+                    </span>
+                    <span className="font-mono text-xs text-vf-text">{meta.label}</span>
+                  </div>
+                  <span className="font-mono text-[10px] text-vf-text-muted">
+                    {new Date(a.created_at).toLocaleTimeString()}
+                  </span>
+                </div>
+                <div className="mt-1 flex items-center justify-between">
+                  <span className="font-mono text-[10px] text-vf-text-muted/70 capitalize">
+                    {a.status}
+                  </span>
+                </div>
               </div>
-              <span className="font-mono text-xs text-vf-text-muted">
-                {new Date(a.created_at).toLocaleTimeString()}
-              </span>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>

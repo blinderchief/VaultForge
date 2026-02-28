@@ -127,6 +127,12 @@ export interface PositionsResponse {
 
 // ── API client ──────────────────────────────────────────────────────
 
+export interface AgentRunResponse {
+  vaults_scanned: number
+  actions_created: number
+  errors: string[]
+}
+
 export const api = {
   health: () => apiFetch<HealthResponse>('/health'),
 
@@ -155,6 +161,9 @@ export const api = {
 
   agentActions: (walletAddress: string) =>
     apiFetch<AgentActionsListResponse>(`/agent/actions/${walletAddress}`),
+
+  triggerAgentRun: () =>
+    apiFetch<AgentRunResponse>('/agent/run-public', { method: 'POST' }),
 
   positions: (walletAddress: string) =>
     apiFetch<PositionsResponse>(`/positions/${walletAddress}`),

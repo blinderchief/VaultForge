@@ -1,6 +1,6 @@
-# VaultForge — Hackathon Submission
+# VaultForge â€” Hackathon Submission
 
-> **BNB Chain × YZi Labs Hack Bengaluru 2026**
+> **BNB Chain Ã— YZi Labs Hack Bengaluru 2026**
 > **Track:** Smart Collateral
 
 ---
@@ -11,20 +11,20 @@
 |---|---|
 | **GitHub Repository** | https://github.com/blinderchief/VaultForge |
 | **Live Demo** | https://vaultforge-nu.vercel.app |
-| **Demo Video** | See [TECHNICAL.md — Demo Walkthrough](./docs/TECHNICAL.md#demo-walkthrough-for-judges) |
-| **Tweet** | — |
+| **Demo Video** | See [TECHNICAL.md â€” Demo Walkthrough](./docs/TECHNICAL.md#demo-walkthrough-for-judges) |
+| **Tweet** | â€” |
 
 ---
 
-## Deployed Contracts (opBNB Testnet — Chain ID 5611)
+## Deployed Contracts (opBNB Testnet â€” Chain ID 5611)
 
 | Contract | Address | opBNBScan |
 |---|---|---|
-| **VaultFactory** | `0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28) |
-| **Vault (Implementation)** | `0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A) |
-| **ZKVerifier** | `0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8) |
-| **AgentRegistry** | `0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF) |
-| **LTVOracle** | `0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4) |
+| **VaultFactory** | `0xEd871ed2D9281B175B42597b50748B9Ee8e951F7` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0xEd871ed2D9281B175B42597b50748B9Ee8e951F7) |
+| **Vault (Implementation)** | `0x671419bb5a8CeF7547f661212030F998B7992ACE` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x671419bb5a8CeF7547f661212030F998B7992ACE) |
+| **ZKVerifier** | `0x05bcAB91C51104853f796F5D7bd57EF8077E904D` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x05bcAB91C51104853f796F5D7bd57EF8077E904D) |
+| **AgentRegistry** | `0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0) |
+| **LTVOracle** | `0x16165ad7A069Ada84F97a6311c9A62c700AC43d8` | [View & Verify](https://opbnb-testnet.bscscan.com/address/0x16165ad7A069Ada84F97a6311c9A62c700AC43d8) |
 
 **Deployer:** [`0x97950A98980a2Fc61ea7eb043bb7666845f77071`](https://opbnb-testnet.bscscan.com/address/0x97950A98980a2Fc61ea7eb043bb7666845f77071)
 **On-chain activity:** 7+ transactions, 3 vault clones deployed, `totalVaults() == 3`
@@ -41,7 +41,7 @@
 
 ## Project Description
 
-VaultForge is a **non-custodial vault system** where users deposit collateral into per-user smart contracts on opBNB, generate **Groth16 zero-knowledge proofs** to borrow without revealing balances or positions publicly, and rely on **BNB AI agents** to dynamically optimize their Loan-to-Value ratio from the typical 150% down to **110–130%** — freeing locked capital. The result: cheaper borrowing, full privacy, algorithmic risk management, and an intent-based BNPL layer — all settled on BNB Chain's fastest L2.
+VaultForge is a **non-custodial vault system** where users deposit collateral into per-user smart contracts on opBNB, generate **Groth16 zero-knowledge proofs** to borrow without revealing balances or positions publicly, and rely on **BNB AI agents** to dynamically optimize their Loan-to-Value ratio from the typical 150% down to **110â€“130%** â€” freeing locked capital. The result: cheaper borrowing, full privacy, algorithmic risk management, and an intent-based BNPL layer â€” all settled on BNB Chain's fastest L2.
 
 ---
 
@@ -53,9 +53,9 @@ VaultForge is a **non-custodial vault system** where users deposit collateral in
 - **Next.js 16 frontend** with Privy wallet auth + wagmi
 - **Supabase Postgres** with RLS on every table
 - **Docker Compose** one-command full stack
-- **53 Foundry tests** (unit + integration + ZK verifier) — all passing
-- **34 pytest tests** (98% code coverage) — all passing
-- **Clean `npm run build`** — zero TypeScript errors
+- **53 Foundry tests** (unit + integration + ZK verifier) â€” all passing
+- **34 pytest tests** (98% code coverage) â€” all passing
+- **Clean `npm run build`** â€” zero TypeScript errors
 
 ---
 

@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 from app.core.database import get_supabase
 from app.core.security import limiter, require_api_key
+from app.services.agent_runner import RunResult, run_agent_cycle
 
 router = APIRouter(prefix="/agent", tags=["agent"])
 
@@ -124,4 +125,40 @@ async def list_agent_actions(wallet_address: str, request: Request):
 
     return AgentActionsListResponse(
         wallet_address=wallet_address.lower(), actions=actions
+    )
+
+
+# ── Agent runner trigger ─────────────────────────────────────────────
+
+
+class AgentRunResponse(BaseModel):
+    vaults_scanned: int
+    actions_created: int
+    errors: list[str]
+
+
+@router.post("/run", response_model=AgentRunResponse, status_code=status.HTTP_200_OK)
+@limiter.limit("5/minute")
+async def trigger_agent_run(
+    request: Request,
+    _key: Annotated[str, Depends(require_api_key)] = ...,
+):
+    """Trigger one agent analysis cycle across all active vaults (API key required)."""
+    result: RunResult = await run_agent_cycle()
+    return AgentRunResponse(
+        vaults_scanned=result.vaults_scanned,
+        actions_created=result.actions_created,
+        errors=result.errors,
+    )
+
+
+@router.post("/run-public", response_model=AgentRunResponse, status_code=status.HTTP_200_OK)
+@limiter.limit("2/minute")
+async def trigger_agent_run_public(request: Request):
+    """Trigger one agent analysis cycle (public — rate-limited to 2/min)."""
+    result: RunResult = await run_agent_cycle()
+    return AgentRunResponse(
+        vaults_scanned=result.vaults_scanned,
+        actions_created=result.actions_created,
+        errors=result.errors,
     )

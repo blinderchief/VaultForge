@@ -1,4 +1,4 @@
-# VaultForge — Backend
+# VaultForge â€” Backend
 
 FastAPI + Python 3.12 backend for ZK-private collateral vaults on opBNB. Provides LTV optimization (CVaR-based via SciPy), vault management, portfolio positions proxy (Zerion), and AI agent action recording. Uses Supabase Postgres with Row-Level Security and slowapi rate limiting.
 
@@ -14,7 +14,7 @@ cd backend
 uv sync
 cp .env.example .env   # Fill in your values
 uv run uvicorn app.main:app --reload --port 8000
-# API docs → http://localhost:8000/docs
+# API docs â†’ http://localhost:8000/docs
 ```
 
 ## Environment Variables
@@ -22,11 +22,11 @@ uv run uvicorn app.main:app --reload --port 8000
 Create `backend/.env` with:
 
 ```env
-SUPABASE_URL=             # Get from supabase.com → Settings → API
-SUPABASE_SERVICE_KEY=     # Service role key (NOT anon key) — bypasses RLS
+SUPABASE_URL=             # Get from supabase.com â†’ Settings â†’ API
+SUPABASE_SERVICE_KEY=     # Service role key (NOT anon key) â€” bypasses RLS
 OPBNB_RPC_URL=https://opbnb-testnet-rpc.bnbchain.org
-VAULT_FACTORY_ADDRESS=0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28
-ZK_VERIFIER_ADDRESS=0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8
+VAULT_FACTORY_ADDRESS=0xEd871ed2D9281B175B42597b50748B9Ee8e951F7
+ZK_VERIFIER_ADDRESS=0x05bcAB91C51104853f796F5D7bd57EF8077E904D
 AGENT_PRIVATE_KEY=        # Generate: cast wallet new
 ZERION_API_KEY=           # Get from developers.zerion.io
 INTERNAL_API_KEY=         # Generate: openssl rand -hex 32
@@ -47,7 +47,7 @@ ENVIRONMENT=production
 | `ZERION_API_KEY` | API key for Zerion portfolio positions proxy (`/positions/{wallet}`). |
 | `INTERNAL_API_KEY` | Shared secret for authenticating agent action requests (`X-API-Key` header). |
 | `CORS_ORIGINS` | Comma-separated list of allowed frontend origins for CORS. |
-| `ENVIRONMENT` | `development` or `production` — controls logging verbosity. |
+| `ENVIRONMENT` | `development` or `production` â€” controls logging verbosity. |
 
 ## API Endpoints
 
@@ -171,7 +171,7 @@ uv run pytest --cov       # With coverage report
 
 1. Connect your GitHub repo to [Railway](https://railway.app).
 2. Set all environment variables from the table above in Railway's dashboard.
-3. Push to `main` — Railway auto-builds and deploys using the `Dockerfile`.
+3. Push to `main` â€” Railway auto-builds and deploys using the `Dockerfile`.
 
 The Dockerfile uses UV for dependency installation and runs uvicorn on port 8000.
 

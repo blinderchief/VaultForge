@@ -2,24 +2,16 @@
 # Network: opBNB Testnet (Chain ID 5611)
 # Explorer: https://opbnb-testnet.bscscan.com
 # Deployer: 0x97950A98980a2Fc61ea7eb043bb7666845f77071
-# Date: 2026-02-27
+# Date: 2026-02-28
 
 # ── Core Contracts ────────────────────────────────────────────────────
 
-VaultFactory          0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28  https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28
-Vault (Implementation) 0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A  https://opbnb-testnet.bscscan.com/address/0x1777f993b35fe74EcA9178DA576a71aaf9F06f8A
-ZKVerifier            0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8  https://opbnb-testnet.bscscan.com/address/0x528eeF03cE66493FAC386Bd7DAC6E4a89C4786f8
-AgentRegistry         0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF  https://opbnb-testnet.bscscan.com/address/0xD5932aF5c315C0A1fD9D486E0f58b7C210866ADF
-LTVOracle             0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4  https://opbnb-testnet.bscscan.com/address/0x4B6171fA771fdA1F86445a5C06b0d5dA11875BC4
+VaultFactory          0xEd871ed2D9281B175B42597b50748B9Ee8e951F7  https://opbnb-testnet.bscscan.com/address/0xEd871ed2D9281B175B42597b50748B9Ee8e951F7
+Vault (Implementation) 0x671419bb5a8CeF7547f661212030F998B7992ACE  https://opbnb-testnet.bscscan.com/address/0x671419bb5a8CeF7547f661212030F998B7992ACE
+ZKVerifier            0x05bcAB91C51104853f796F5D7bd57EF8077E904D  https://opbnb-testnet.bscscan.com/address/0x05bcAB91C51104853f796F5D7bd57EF8077E904D
+AgentRegistry         0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0  https://opbnb-testnet.bscscan.com/address/0xD233dEbF4C760f93AA61C6fA7f668c19CA93aaC0
+LTVOracle             0x16165ad7A069Ada84F97a6311c9A62c700AC43d8  https://opbnb-testnet.bscscan.com/address/0x16165ad7A069Ada84F97a6311c9A62c700AC43d8
 
-# ── Vault Clones (deployed via VaultFactory) ─────────────────────────
-
-Clone #1              0x5085a28e0FBe47336E72b9285ed0B0c29d790c    Owner: 0x97950A98980a2Fc61ea7eb043bb7666845f77071
-Clone #2              0xdcb417b2a27a8fa9                          Owner: 0x0000000000000000000000000000000000000001
-Clone #3              0xd6830c549bd0                              Owner: 0x0000000000000000000000000000000000000002
-
-# ── Deployment Stats ─────────────────────────────────────────────────
-# Total gas: 3,688,663
-# Total cost: ~$0.000004 USD (opBNB L2 pricing)
-# Vault clone gas: 207,659 per clone (~$0.0000002 USD)
-# Transactions: 7+ on-chain, totalVaults() == 3
+# ── Note ─────────────────────────────────────────────────────────────
+# v2 redeployment: VaultFactory now auto-authorizes vault clones on ZKVerifier
+# Old vault clones from v1 are no longer valid — users must create new vaults

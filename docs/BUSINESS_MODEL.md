@@ -1,6 +1,6 @@
-# VaultForge — Business Model & Token Economics
+# VaultForge â€” Business Model & Token Economics
 
-> Sustainability & Market Potential for the BNB Chain × YZi Labs Hackathon
+> Sustainability & Market Potential for the BNB Chain Ã— YZi Labs Hackathon
 
 ---
 
@@ -13,7 +13,7 @@
 | **Total crypto market cap** | **$2.3 trillion** | CoinMarketCap, Feb 2026 |
 | **Crypto assets idle as collateral / wallets** | **~$1.2 trillion** (est. 50%+ of market cap sits without yield) | Industry estimates based on on-chain dormancy data |
 | **DeFi lending TVL (overcollateralized)** | **$53 billion** across all lending protocols | DefiLlama, Feb 2026 |
-| **Venus Protocol TVL (BNB Chain leader)** | **$1.32 billion** borrowed: $530M, revenue: $15.6M/yr | DefiLlama — Venus Core Pool |
+| **Venus Protocol TVL (BNB Chain leader)** | **$1.32 billion** borrowed: $530M, revenue: $15.6M/yr | DefiLlama â€” Venus Core Pool |
 | **Global BNPL market size (2025)** | **$11.87 billion**, projected $80.15B by 2033 (CAGR 27%) | Grand View Research, 2025 |
 | **BNB Chain (BSC) active addresses** | **2.58 million** daily active, 1,108 protocols | DefiLlama, Feb 2026 |
 | **BSC DeFi TVL** | **$5.66 billion** | DefiLlama, Feb 2026 |
@@ -22,11 +22,11 @@
 
 ### Why This Market, Why Now
 
-1. **$1.2T capital lockup is real pain.** Over half the crypto market earns zero yield. At best, assets are overcollateralized at 150%+ in protocols like Venus/Aave — meaning 50 cents of every $1 deposited is wasted just to satisfy static LTV requirements.
+1. **$1.2T capital lockup is real pain.** Over half the crypto market earns zero yield. At best, assets are overcollateralized at 150%+ in protocols like Venus/Aave â€” meaning 50 cents of every $1 deposited is wasted just to satisfy static LTV requirements.
 
-2. **Privacy is the unlock for institutions.** Venus has $1.3B TVL but only 776 daily active addresses — because any position is doxxed on-chain. Family offices, DAOs, and high-net-worth holders won't use transparent lending. ZK-private vaults solve this.
+2. **Privacy is the unlock for institutions.** Venus has $1.3B TVL but only 776 daily active addresses â€” because any position is doxxed on-chain. Family offices, DAOs, and high-net-worth holders won't use transparent lending. ZK-private vaults solve this.
 
-3. **BNPL is the fastest-growing payment method globally.** At 27% CAGR, the BNPL market will reach $80B by 2033. Crypto-backed BNPL doesn't exist yet — there's no product letting crypto holders pay in installments at real-world merchants without selling their assets.
+3. **BNPL is the fastest-growing payment method globally.** At 27% CAGR, the BNPL market will reach $80B by 2033. Crypto-backed BNPL doesn't exist yet â€” there's no product letting crypto holders pay in installments at real-world merchants without selling their assets.
 
 4. **BNB Chain is the right chain.** 2.58M daily active addresses, $5.66B TVL, sub-cent opBNB fees. Deploying the entire VaultForge contract suite costs $0.000004. There's no cheaper chain with this level of ecosystem support.
 
@@ -36,7 +36,7 @@
 
 ## 2. Revenue Model
 
-VaultForge generates revenue from three streams, all proportional to usage — no rent-seeking.
+VaultForge generates revenue from three streams, all proportional to usage â€” no rent-seeking.
 
 ### Revenue Stream Breakdown
 
@@ -51,22 +51,22 @@ VaultForge generates revenue from three streams, all proportional to usage — n
 **Scenario: $10M TVL, 8% average yield from AI agents**
 
 ```
-Gross yield generated:     $10M × 8%    = $800,000/yr
+Gross yield generated:     $10M Ã— 8%    = $800,000/yr
 VaultForge performance fee: 0.5%         = $4,000/yr ($333/mo)
-BNPL volume (assume 20% of TVL/yr):      $2M × 0.1% = $2,000/yr
-Premium subs (100 users):  100 × $29/mo = $34,800/yr
-                                          ─────────────
+BNPL volume (assume 20% of TVL/yr):      $2M Ã— 0.1% = $2,000/yr
+Premium subs (100 users):  100 Ã— $29/mo = $34,800/yr
+                                          â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 Total Year 1 revenue @ $10M TVL:          ~$40,800/yr
 ```
 
 **Scenario: $100M TVL (Phase 3 target)**
 
 ```
-Gross yield generated:     $100M × 8%   = $8,000,000/yr
+Gross yield generated:     $100M Ã— 8%   = $8,000,000/yr
 VaultForge performance fee: 0.5%         = $40,000/yr ($3,333/mo)
-BNPL volume (assume 30% of TVL/yr):      $30M × 0.1% = $30,000/yr
-Premium subs (1,000 users): 1K × $29/mo = $348,000/yr
-                                          ─────────────
+BNPL volume (assume 30% of TVL/yr):      $30M Ã— 0.1% = $30,000/yr
+Premium subs (1,000 users): 1K Ã— $29/mo = $348,000/yr
+                                          â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 Total Year 2 revenue @ $100M TVL:         ~$418,000/yr
 ```
 
@@ -83,21 +83,21 @@ Before $FORGE token launch, all fees accumulate in a multisig treasury (3-of-5):
 
 ### Token Utility
 
-$FORGE is a **utility token** with three concrete use cases — not a governance-only token.
+$FORGE is a **utility token** with three concrete use cases â€” not a governance-only token.
 
 | Function | How It Works | Economic Incentive |
 |---|---|---|
 | **Agent Staking** | Stake $FORGE to register as AI agent operator in `AgentRegistry.sol`. Min stake: 1,000 $FORGE | Earn 0.5% performance fee on each profitable rebalance. Higher stake = priority execution queue |
 | **Default Insurance Pool** | Stake $FORGE into the insurance pool backing vault defaults. If a borrower defaults, pool covers the gap | Earn insurance premiums (paid by borrowers as 0.05% of loan origination). No default = pure profit |
-| **Governance Voting** | 1 $FORGE = 1 vote on protocol parameters | Vote on: max LTV bounds (currently 10–90%), fee rates, new chain deployments, agent whitelisting |
+| **Governance Voting** | 1 $FORGE = 1 vote on protocol parameters | Vote on: max LTV bounds (currently 10â€“90%), fee rates, new chain deployments, agent whitelisting |
 
 ### Token Supply & Distribution
 
-**Fixed supply: 100,000,000 $FORGE** — no inflation, no minting function.
+**Fixed supply: 100,000,000 $FORGE** â€” no inflation, no minting function.
 
 | Allocation | % | Amount | Vesting Schedule | Rationale |
 |---|---|---|---|---|
-| **Community & Agent Rewards** | 40% | 40,000,000 | Linear unlock over 36 months starting at TGE | Earned through protocol participation: running agents, providing insurance, active governance. Not airdropped — earned |
+| **Community & Agent Rewards** | 40% | 40,000,000 | Linear unlock over 36 months starting at TGE | Earned through protocol participation: running agents, providing insurance, active governance. Not airdropped â€” earned |
 | **Core Team** | 20% | 20,000,000 | 4-year vesting, 12-month cliff | Aligned with long-term protocol success. No tokens until 1 year after launch |
 | **Ecosystem Fund** | 20% | 20,000,000 | DAO-governed disbursement after TGE | Grants for integrations (Venus, PancakeSwap), security bounties, developer tooling, partnerships |
 | **Initial Liquidity** | 10% | 10,000,000 | Unlocked at TGE | PancakeSwap V3 pool seeding. Paired with BNB for immediate tradability |
@@ -108,12 +108,12 @@ $FORGE is a **utility token** with three concrete use cases — not a governance
 - **No VC presale.** Zero private funding rounds.
 - **No IDO/IEO.** Token not sold to anyone.
 - **Earn first:** The first 6 months after mainnet, users earn $FORGE points through protocol usage (vault creation, AI agent uptime, insurance staking, governance participation). Points convert to $FORGE at TGE.
-- **LBP launch:** Token Generation Event via Liquidity Bootstrapping Pool (Fjord Foundry or equivalent on BNB Chain), starting price high and declining — preventing bot sniping and ensuring fair distribution.
+- **LBP launch:** Token Generation Event via Liquidity Bootstrapping Pool (Fjord Foundry or equivalent on BNB Chain), starting price high and declining â€” preventing bot sniping and ensuring fair distribution.
 
 ### Token Value Accrual
 
-1. **Fee buyback:** 50% of protocol revenue used to buy $FORGE from open market → sent to stakers
-2. **Stake requirement:** AI agents must stake $FORGE → creates natural demand from operators
+1. **Fee buyback:** 50% of protocol revenue used to buy $FORGE from open market â†’ sent to stakers
+2. **Stake requirement:** AI agents must stake $FORGE â†’ creates natural demand from operators
 3. **Insurance demand:** More TVL = more insurance needed = more $FORGE staked
 4. **Deflationary pressure:** Slashed agent stakes are 50% burned, 50% to insurance pool
 
@@ -121,31 +121,31 @@ $FORGE is a **utility token** with three concrete use cases — not a governance
 
 ## 4. Go-To-Market Strategy
 
-### Phase 0 — Now (BNB Chain Hackathon, Feb 2026)
+### Phase 0 â€” Now (BNB Chain Hackathon, Feb 2026)
 
 **Goal:** Prove the concept works on opBNB testnet.
 
 | Action | Status | Evidence |
 |---|---|---|
-| Deploy 5 contracts to opBNB testnet | ✅ Complete | [VaultFactory on opBNBScan](https://opbnb-testnet.bscscan.com/address/0xD26ae761DEBE79Ca423A370C0085D75b26Ecaf28) |
-| 3 Groth16 ZK circuits proven | ✅ Complete | CollateralThreshold, LTVComputation, ReputationScore |
-| 53 Foundry tests passing | ✅ Complete | `forge test -vvv` — all green |
-| AI agent demo (LTV optimization) | ✅ Complete | AgentRegistry + LTVOracle with challenge window |
-| 3 vault clones deployed | ✅ Complete | on-chain `totalVaults() == 3` |
+| Deploy 5 contracts to opBNB testnet | âœ… Complete | [VaultFactory on opBNBScan](https://opbnb-testnet.bscscan.com/address/0xEd871ed2D9281B175B42597b50748B9Ee8e951F7) |
+| 3 Groth16 ZK circuits proven | âœ… Complete | CollateralThreshold, LTVComputation, ReputationScore |
+| 53 Foundry tests passing | âœ… Complete | `forge test -vvv` â€” all green |
+| AI agent demo (LTV optimization) | âœ… Complete | AgentRegistry + LTVOracle with challenge window |
+| 3 vault clones deployed | âœ… Complete | on-chain `totalVaults() == 3` |
 
-**Target users:** Venus Protocol active users — 776 daily active addresses generating $15.6M/yr in interest. Even 10% migration = 78 power users and ~$1.5M in redirected TVL.
+**Target users:** Venus Protocol active users â€” 776 daily active addresses generating $15.6M/yr in interest. Even 10% migration = 78 power users and ~$1.5M in redirected TVL.
 
-### Phase 1 — Q2 2026: BNB Ecosystem Growth
+### Phase 1 â€” Q2 2026: BNB Ecosystem Growth
 
 | Action | Target | Metric |
 |---|---|---|
 | Apply to **BNB Chain MVB Accelerator** (Season 8) | Top 20 selection | Accelerator acceptance + grant funding |
-| CertiK / Halborn security audit | Audit score ≥ 90 | Published audit report |
+| CertiK / Halborn security audit | Audit score â‰¥ 90 | Published audit report |
 | Mainnet deployment on opBNB | Production contracts | Mainnet contract addresses live |
 | PancakeSwap integration | Enable vault collateral swaps | Direct swap-and-deposit UX |
-| Testnet incentive program | 1,000 vault creators | On-chain vault count ≥ 1,000 |
+| Testnet incentive program | 1,000 vault creators | On-chain vault count â‰¥ 1,000 |
 
-### Phase 2 — Q3 2026: India BNPL Market Entry
+### Phase 2 â€” Q3 2026: India BNPL Market Entry
 
 | Action | Target | Metric |
 |---|---|---|
@@ -156,13 +156,13 @@ $FORGE is a **utility token** with three concrete use cases — not a governance
 
 ZK Credit Passport with zkTLS**: Import off-chain gig income 
 signals (UPI, crypto payment streams) via zkTLS proofs to boost LTV 
-dynamically — zero doxxing, fully verifiable.
+dynamically â€” zero doxxing, fully verifiable.
 
 
-**Why India:** 93.5M crypto holders, UPI has 12B+ monthly transactions, ZestMoney collapse left a gap, and India's 2025 crypto tax framework provided regulatory clarity. The BNPL × crypto intersection is completely unserved.
+**Why India:** 93.5M crypto holders, UPI has 12B+ monthly transactions, ZestMoney collapse left a gap, and India's 2025 crypto tax framework provided regulatory clarity. The BNPL Ã— crypto intersection is completely unserved.
 
 
-### Phase 3 — Q4 2026: Institutional & Cross-Chain
+### Phase 3 â€” Q4 2026: Institutional & Cross-Chain
 
 | Action | Target | Metric |
 |---|---|---|
@@ -171,7 +171,7 @@ dynamically — zero doxxing, fully verifiable.
 | **$FORGE Token Generation Event** | Fair LBP launch | $FORGE trading on PancakeSwap |
 | **Venus Protocol liquidity partnership** | Shared lending pools | Co-marketed product |
 
-**Why institutions need VaultForge:** A family office with $5M in BNB can't use Venus — their position size is visible, inviting front-running and revealing strategy. ZK-private vaults are the only solution for institutional DeFi credit.
+**Why institutions need VaultForge:** A family office with $5M in BNB can't use Venus â€” their position size is visible, inviting front-running and revealing strategy. ZK-private vaults are the only solution for institutional DeFi credit.
 
 ---
 
@@ -182,20 +182,20 @@ dynamically — zero doxxing, fully verifiable.
 | Moat | Explanation | Defensibility |
 |---|---|---|
 | **ZK Privacy Layer** | Groth16 proofs hide collateral balances from chain observers. Institutions can't use Venus (public positions = front-running risk). VaultForge is the only ZK-private lending protocol on BNB Chain | Circuit-level IP. Trusted setup ceremony. 6+ months to replicate from scratch |
-| **Algorithmic LTV Optimization** | AI agents dynamically adjust LTV from 110–130% (vs. static 150% on Venus/Aave). Less overcollateral = more capital efficiency. LTVOracle uses optimistic challenge window for trustless verification | ML model trained on BNB Chain data. Agent staking + slashing disincentivizes bad LTV submissions |
-| **BNB-Native AI Agent Framework** | `AgentRegistry.sol` is the first AI agent staking/execution framework on opBNB. No other protocol has agent-operated vaults on BNB Chain. Agents stake tBNB, earn fees, get slashed — fully on-chain | First-mover on BNB Chain for agent-operated DeFi. Network effects: more agents = better LTV = more TVL |
-| **Non-Custodial Per-User Vaults** | EIP-1167 minimal proxy vaults — each user has their own contract. No shared pool risk (unlike Venus/Aave). Partial seizure capped at 50% per token | Architectural decision baked into smart contracts. Can't be replicated by adding to existing pool-based lending |
-| **Crypto BNPL (First Mover)** | No existing protocol offers crypto-backed Buy Now Pay Later. VaultForge BNPL lets users pay merchants in installments backed by vault collateral — without selling assets | First product in category. BNPL partnerships (merchant rails, off-ramps) create switching costs |
+| **Algorithmic LTV Optimization** | AI agents dynamically adjust LTV from 110â€“130% (vs. static 150% on Venus/Aave). Less overcollateral = more capital efficiency. LTVOracle uses optimistic challenge window for trustless verification | ML model trained on BNB Chain data. Agent staking + slashing disincentivizes bad LTV submissions |
+| **BNB-Native AI Agent Framework** | `AgentRegistry.sol` is the first AI agent staking/execution framework on opBNB. No other protocol has agent-operated vaults on BNB Chain. Agents stake tBNB, earn fees, get slashed â€” fully on-chain | First-mover on BNB Chain for agent-operated DeFi. Network effects: more agents = better LTV = more TVL |
+| **Non-Custodial Per-User Vaults** | EIP-1167 minimal proxy vaults â€” each user has their own contract. No shared pool risk (unlike Venus/Aave). Partial seizure capped at 50% per token | Architectural decision baked into smart contracts. Can't be replicated by adding to existing pool-based lending |
+| **Crypto BNPL (First Mover)** | No existing protocol offers crypto-backed Buy Now Pay Later. VaultForge BNPL lets users pay merchants in installments backed by vault collateral â€” without selling assets | First product in category. BNPL partnerships (merchant rails, off-ramps) create switching costs |
 
 ### Competitive Landscape
 
 | Protocol | TVL | Privacy | Dynamic LTV | AI Agents | BNPL | Chain |
 |---|---|---|---|---|---|---|
-| **Venus** | $1.32B | ❌ Public | ❌ Static 150%+ | ❌ | ❌ | BSC |
-| **Aave V3** | $26.5B | ❌ Public | ❌ Static 130-150% | ❌ | ❌ | Multi-chain |
-| **Morpho** | $5.8B | ❌ Public | Semi (rate optimization) | ❌ | ❌ | Multi-chain |
-| **Compound V3** | $1.32B | ❌ Public | ❌ Static | ❌ | ❌ | Multi-chain |
-| **VaultForge** | Testnet | ✅ ZK-Private | ✅ AI 110-130% | ✅ Staked agents | ✅ | opBNB |
+| **Venus** | $1.32B | âŒ Public | âŒ Static 150%+ | âŒ | âŒ | BSC |
+| **Aave V3** | $26.5B | âŒ Public | âŒ Static 130-150% | âŒ | âŒ | Multi-chain |
+| **Morpho** | $5.8B | âŒ Public | Semi (rate optimization) | âŒ | âŒ | Multi-chain |
+| **Compound V3** | $1.32B | âŒ Public | âŒ Static | âŒ | âŒ | Multi-chain |
+| **VaultForge** | Testnet | âœ… ZK-Private | âœ… AI 110-130% | âœ… Staked agents | âœ… | opBNB |
 
 ---
 
@@ -205,10 +205,10 @@ dynamically — zero doxxing, fully verifiable.
 
 | Partner | Type | Status | Value Proposition |
 |---|---|---|---|
-| **Chainlink** | Oracle provider | ✅ Integrated | BNB/USD price feeds for collateral valuation. `CHAINLINK_BNB_USD_FEED` configured in `.env`. Industry-standard oracle security |
-| **opBNB / BNB Chain** | L2 infrastructure | ✅ Deployed | 5 contracts live on opBNB testnet. Sub-cent fees. Native BNB staking in AgentRegistry |
-| **Privy** | Wallet auth | ✅ Integrated | Embedded wallets, social login, account abstraction. Reduces onboarding friction to <30 seconds |
-| **Supabase** | Data layer | ✅ Integrated | Postgres with RLS for vault metadata, user profiles, health monitoring. Service key never exposed to frontend |
+| **Chainlink** | Oracle provider | âœ… Integrated | BNB/USD price feeds for collateral valuation. `CHAINLINK_BNB_USD_FEED` configured in `.env`. Industry-standard oracle security |
+| **opBNB / BNB Chain** | L2 infrastructure | âœ… Deployed | 5 contracts live on opBNB testnet. Sub-cent fees. Native BNB staking in AgentRegistry |
+| **Privy** | Wallet auth | âœ… Integrated | Embedded wallets, social login, account abstraction. Reduces onboarding friction to <30 seconds |
+| **Supabase** | Data layer | âœ… Integrated | Postgres with RLS for vault metadata, user profiles, health monitoring. Service key never exposed to frontend |
 
 ### Target Partnerships (Post-Hackathon)
 
@@ -228,7 +228,7 @@ dynamically — zero doxxing, fully verifiable.
 
 | Assumption | Risk if Wrong | Mitigation |
 |---|---|---|
-| Institutions want private lending | Low demand → low TVL | Validated by interviews: 3 family offices confirmed they avoid Venus due to position visibility |
+| Institutions want private lending | Low demand â†’ low TVL | Validated by interviews: 3 family offices confirmed they avoid Venus due to position visibility |
 | India BNPL gap is fillable with crypto | Regulatory change blocks crypto BNPL | Modular design: BNPL layer is separate from core vault system. Remove BNPL, core still works |
 | BNB Chain grows in 2026 | Ecosystem shrinks, users migrate | Multi-chain in Phase 3. Core contracts are chain-agnostic Solidity |
 | AI agents produce positive alpha | Agents lose money on rebalancing | Challenge window (LTVOracle) + slashing (AgentRegistry). Bad agents are slashed, not rewarded |

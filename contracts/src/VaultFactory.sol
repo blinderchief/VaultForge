@@ -5,6 +5,7 @@ import {Clones} from "@openzeppelin/contracts/proxy/Clones.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import {Vault} from "./Vault.sol";
+import {IZKVerifier} from "./interfaces/IVault.sol";
 
 /// @title VaultFactory — Deploys per-user Vault clones via EIP-1167 minimal proxy
 contract VaultFactory is Ownable, ReentrancyGuard {
@@ -43,6 +44,9 @@ contract VaultFactory is Ownable, ReentrancyGuard {
         // Deploy EIP-1167 minimal proxy
         vault = vaultImplementation.clone();
         Vault(vault).initialize(vaultOwner, zkVerifier);
+
+        // Authorize vault on ZKVerifier so it can mark proofs as used
+        IZKVerifier(zkVerifier).authorizeCaller(vault);
 
         userVaults[vaultOwner] = vault;
         allVaults.push(vault);

@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+import asyncio
+import logging
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import _rate_limit_exceeded_handler
@@ -11,10 +15,48 @@ from app.core.config import settings
 from app.core.security import limiter
 from app.routers import agent, optimize, positions, vault
 
+logger = logging.getLogger(__name__)
+
+AGENT_INTERVAL_SECONDS = 300  # Run agent every 5 minutes
+
+
+async def _agent_loop() -> None:
+    """Background loop that runs the agent cycle periodically."""
+    from app.services.agent_runner import run_agent_cycle
+
+    # Wait a bit for the app to fully start
+    await asyncio.sleep(10)
+    while True:
+        try:
+            result = await run_agent_cycle()
+            logger.info(
+                "Agent cycle: %d vaults, %d actions, %d errors",
+                result.vaults_scanned,
+                result.actions_created,
+                len(result.errors),
+            )
+        except Exception:
+            logger.exception("Agent cycle failed")
+        await asyncio.sleep(AGENT_INTERVAL_SECONDS)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Start the background agent loop on startup, cancel on shutdown."""
+    task = asyncio.create_task(_agent_loop())
+    yield
+    task.cancel()
+    try:
+        await task
+    except asyncio.CancelledError:
+        pass
+
+
 app = FastAPI(
     title="VaultForge API",
     version="0.1.0",
     description="ZK-private intelligent collateral vault system on opBNB/BSC",
+    lifespan=lifespan,
 )
 
 # ── Rate limiting ────────────────────────────────────────────────────

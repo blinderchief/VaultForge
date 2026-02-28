@@ -51,6 +51,9 @@ contract ZKVerifier is Ownable, ReentrancyGuard {
     /// @dev Addresses authorized to mark proofs as used (Vault clones)
     mapping(address => bool) public authorizedCallers;
 
+    /// @dev Addresses authorized to register new callers (VaultFactory)
+    mapping(address => bool) public authorizedFactories;
+
     /// @dev Per-vault nonce for ZK proof binding (prevents cross-borrow replay)
     mapping(address => uint256) public vaultNonce;
 
@@ -59,6 +62,8 @@ contract ZKVerifier is Ownable, ReentrancyGuard {
     event ProofMarkedUsed(bytes32 indexed proofHash);
     event CallerAuthorized(address indexed caller);
     event CallerRevoked(address indexed caller);
+    event FactoryAuthorized(address indexed factory);
+    event FactoryRevoked(address indexed factory);
     event NonceIncremented(address indexed vault, uint256 newNonce);
 
     // ── Errors ──────────────────────────────────────────────────────
@@ -70,8 +75,24 @@ contract ZKVerifier is Ownable, ReentrancyGuard {
     constructor() Ownable(msg.sender) {}
 
     // ── Authorization ───────────────────────────────────────────────
+    /// @notice Authorize a factory to register vault callers.
+    function authorizeFactory(address factory) external onlyOwner {
+        authorizedFactories[factory] = true;
+        emit FactoryAuthorized(factory);
+    }
+
+    /// @notice Revoke a factory's authorization.
+    function revokeFactory(address factory) external onlyOwner {
+        authorizedFactories[factory] = false;
+        emit FactoryRevoked(factory);
+    }
+
     /// @notice Authorize a Vault clone to mark proofs as used.
-    function authorizeCaller(address caller) external onlyOwner {
+    ///         Callable by owner or authorized factories.
+    function authorizeCaller(address caller) external {
+        if (msg.sender != owner() && !authorizedFactories[msg.sender]) {
+            revert NotAuthorized();
+        }
         authorizedCallers[caller] = true;
         emit CallerAuthorized(caller);
     }

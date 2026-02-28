@@ -61,12 +61,12 @@ contract VaultTest is Test {
         verifier = new ZKVerifier();
         factory = new VaultFactory(address(verifier));
 
+        // Authorize factory to register vault callers
+        verifier.authorizeFactory(address(factory));
+
         // Deploy Alice's vault via factory
         address vaultAddr = factory.deployVault(alice);
         vault = Vault(vaultAddr);
-
-        // Authorize the vault to mark proofs as used
-        verifier.authorizeCaller(vaultAddr);
 
         vm.stopPrank();
 

@@ -53,6 +53,8 @@ contract IntegrationTest is Test {
         vm.startPrank(deployer);
         verifier = new ZKVerifier();
         factory = new VaultFactory(address(verifier));
+        // Authorize factory to register vault callers
+        verifier.authorizeFactory(address(factory));
         registry = new AgentRegistry();
         oracle = new LTVOracle();
         vm.stopPrank();
@@ -72,10 +74,6 @@ contract IntegrationTest is Test {
         assertEq(vault.owner(), user);
         assertEq(factory.getVault(user), vaultAddr);
         assertEq(factory.totalVaults(), 1);
-
-        // Authorize vault in verifier
-        vm.prank(deployer);
-        verifier.authorizeCaller(vaultAddr);
 
         // ─── Step 2: Deposit collateral ─────────────────────────────
         vm.startPrank(user);
@@ -116,9 +114,6 @@ contract IntegrationTest is Test {
         address vaultAddr = factory.deployVault(user);
         Vault vault = Vault(vaultAddr);
 
-        vm.prank(deployer);
-        verifier.authorizeCaller(vaultAddr);
-
         // User deposits
         vm.startPrank(user);
         usdc.approve(vaultAddr, 500e18);
@@ -155,8 +150,6 @@ contract IntegrationTest is Test {
         vm.prank(deployer);
         address vaultAddr = factory.deployVault(user);
         Vault vault = Vault(vaultAddr);
-        vm.prank(deployer);
-        verifier.authorizeCaller(vaultAddr);
 
         // User deposits and borrows
         vm.startPrank(user);
@@ -190,8 +183,6 @@ contract IntegrationTest is Test {
         vm.prank(deployer);
         address vaultAddr = factory.deployVault(user);
         Vault vault = Vault(vaultAddr);
-        vm.prank(deployer);
-        verifier.authorizeCaller(vaultAddr);
 
         vm.startPrank(user);
         usdc.approve(vaultAddr, 2000e18);
