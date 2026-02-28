@@ -1,4 +1,4 @@
-# VaultForge â€” Backend
+# VaultForge — Backend
 
 FastAPI + Python 3.12 backend for ZK-private collateral vaults on opBNB. Provides LTV optimization (CVaR-based via SciPy), vault management, portfolio positions proxy (Zerion), and AI agent action recording. Uses Supabase Postgres with Row-Level Security and slowapi rate limiting.
 
@@ -14,7 +14,7 @@ cd backend
 uv sync
 cp .env.example .env   # Fill in your values
 uv run uvicorn app.main:app --reload --port 8000
-# API docs â†’ http://localhost:8000/docs
+# API docs → http://localhost:8000/docs
 ```
 
 ## Environment Variables
@@ -22,8 +22,8 @@ uv run uvicorn app.main:app --reload --port 8000
 Create `backend/.env` with:
 
 ```env
-SUPABASE_URL=             # Get from supabase.com â†’ Settings â†’ API
-SUPABASE_SERVICE_KEY=     # Service role key (NOT anon key) â€” bypasses RLS
+SUPABASE_URL=             # Get from supabase.com → Settings → API
+SUPABASE_SERVICE_KEY=     # Service role key (NOT anon key) — bypasses RLS
 OPBNB_RPC_URL=https://opbnb-testnet-rpc.bnbchain.org
 VAULT_FACTORY_ADDRESS=0xb881fAf4e552780f65Ae8FC1053AD46134b71173
 ZK_VERIFIER_ADDRESS=0x2925896cABAd4c6B7c505495948F79b3e9308C54
@@ -47,7 +47,7 @@ ENVIRONMENT=production
 | `ZERION_API_KEY` | API key for Zerion portfolio positions proxy (`/positions/{wallet}`). |
 | `INTERNAL_API_KEY` | Shared secret for authenticating agent action requests (`X-API-Key` header). |
 | `CORS_ORIGINS` | Comma-separated list of allowed frontend origins for CORS. |
-| `ENVIRONMENT` | `development` or `production` â€” controls logging verbosity. |
+| `ENVIRONMENT` | `development` or `production` — controls logging verbosity. |
 
 ## API Endpoints
 
@@ -171,7 +171,7 @@ uv run pytest --cov       # With coverage report
 
 1. Connect your GitHub repo to [Railway](https://railway.app).
 2. Set all environment variables from the table above in Railway's dashboard.
-3. Push to `main` â€” Railway auto-builds and deploys using the `Dockerfile`.
+3. Push to `main` — Railway auto-builds and deploys using the `Dockerfile`.
 
 The Dockerfile uses UV for dependency installation and runs uvicorn on port 8000.
 

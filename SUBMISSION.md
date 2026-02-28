@@ -1,6 +1,6 @@
-# VaultForge â€” Hackathon Submission
+# VaultForge — Hackathon Submission
 
-> **BNB Chain Ã— YZi Labs Hack Bengaluru 2026**
+> **BNB Chain × YZi Labs Hack Bengaluru 2026**
 > **Track:** Smart Collateral
 
 ---
@@ -11,12 +11,12 @@
 |---|---|
 | **GitHub Repository** | https://github.com/blinderchief/VaultForge |
 | **Live Demo** | https://vaultforge-nu.vercel.app |
-| **Demo Video** | See [TECHNICAL.md â€” Demo Walkthrough](./docs/TECHNICAL.md#demo-walkthrough-for-judges) |
-| **Tweet** | â€” |
+| **Demo Video** | See [TECHNICAL.md — Demo Walkthrough](./docs/TECHNICAL.md#demo-walkthrough-for-judges) |
+| **Tweet** | — |
 
 ---
 
-## Deployed Contracts (opBNB Testnet â€” Chain ID 5611)
+## Deployed Contracts (opBNB Testnet — Chain ID 5611)
 
 | Contract | Address | opBNBScan |
 |---|---|---|
@@ -41,7 +41,7 @@
 
 ## Project Description
 
-VaultForge is a **non-custodial vault system** where users deposit collateral into per-user smart contracts on opBNB, generate **Groth16 zero-knowledge proofs** to borrow without revealing balances or positions publicly, and rely on **BNB AI agents** to dynamically optimize their Loan-to-Value ratio from the typical 150% down to **110â€“130%** â€” freeing locked capital. The result: cheaper borrowing, full privacy, algorithmic risk management, and an intent-based BNPL layer â€” all settled on BNB Chain's fastest L2.
+VaultForge is a **non-custodial vault system** where users deposit collateral into per-user smart contracts on opBNB, generate **Groth16 zero-knowledge proofs** to borrow without revealing balances or positions publicly, and rely on **BNB AI agents** to dynamically optimize their Loan-to-Value ratio from the typical 150% down to **110–130%** — freeing locked capital. The result: cheaper borrowing, full privacy, algorithmic risk management, and an intent-based BNPL layer — all settled on BNB Chain's fastest L2.
 
 ---
 
@@ -53,9 +53,9 @@ VaultForge is a **non-custodial vault system** where users deposit collateral in
 - **Next.js 16 frontend** with Privy wallet auth + wagmi
 - **Supabase Postgres** with RLS on every table
 - **Docker Compose** one-command full stack
-- **53 Foundry tests** (unit + integration + ZK verifier) â€” all passing
-- **41 pytest tests** (98% code coverage) â€” all passing
-- **Clean `npm run build`** â€” zero TypeScript errors
+- **53 Foundry tests** (unit + integration + ZK verifier) — all passing
+- **41 pytest tests** (98% code coverage) — all passing
+- **Clean `npm run build`** — zero TypeScript errors
 
 ---
 

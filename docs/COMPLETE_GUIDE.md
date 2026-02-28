@@ -1,4 +1,4 @@
-# VaultForge â€” Complete Application Guide
+# VaultForge — Complete Application Guide
 
 > Non-custodial ZK-private intelligent collateral vault system on opBNB/BSC
 
@@ -14,37 +14,37 @@ This guide covers **everything**: architecture, user flows, every component, eve
 4. [Backend (FastAPI)](#4-backend-fastapi)
 5. [Frontend (Next.js)](#5-frontend-nextjs)
 6. [Database (Supabase Postgres)](#6-database-supabase-postgres)
-7. [User Journey â€” Step by Step](#7-user-journey--step-by-step)
+7. [User Journey — Step by Step](#7-user-journey--step-by-step)
 8. [Data Flow Diagrams](#8-data-flow-diagrams)
 9. [Testing Guide](#9-testing-guide)
-10. [FAQ â€” Questions You'll Be Asked](#10-faq--questions-youll-be-asked)
+10. [FAQ — Questions You'll Be Asked](#10-faq--questions-youll-be-asked)
 
 ---
 
 ## 1. Architecture Overview
 
 ```
-â”Œâ”€â”€ Frontend (Next.js 16) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚  Privy wallet connect â†’ wagmi contract calls â†’ snarkjs ZK proofs â”‚
-â”‚  React Query â†’ Backend API â†’ Dashboard, Vault Create, Borrow     â”‚
-â””â”€â”€â”€ calls â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-             â”‚ HTTP REST                     â”‚ wagmi/viem
-             â–¼                               â–¼
-â”Œâ”€â”€ Backend (FastAPI) â”€â”€â”        â”Œâ”€â”€ Smart Contracts (opBNB) â”€â”€â”€â”€â”€â”
-â”‚  /vault/create        â”‚        â”‚  VaultFactory (EIP-1167 clones) â”‚
-â”‚  /vault/by-wallet/:w  â”‚        â”‚  Vault (deposit/borrow/repay)   â”‚
-â”‚  /optimize-ltv        â”‚        â”‚  ZKVerifier (Groth16 on-chain)  â”‚
-â”‚  /agent/actions/:w    â”‚        â”‚  AgentRegistry                  â”‚
-â”‚  /positions/:w        â”‚        â”‚  LTVOracle                      â”‚
-â”‚  /metrics, /health    â”‚        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-        â”‚ Supabase service_role_key
-        â–¼
-â”Œâ”€â”€ Database (Supabase Postgres) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚  users Â· vaults Â· vault_assets Â· loans Â· zk_proofs Â· agents       â”‚
-â”‚  agent_actions Â· oracle_feeds Â· ltv_optimizations Â· notifications  â”‚
-â”‚  audit_log    â€” All with Row Level Security (RLS)                 â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌── Frontend (Next.js 16) ────────────────────────────────────────┐
+│  Privy wallet connect → wagmi contract calls → snarkjs ZK proofs │
+│  React Query → Backend API → Dashboard, Vault Create, Borrow     │
+└─── calls ──┬──────────────────────────────┬─────────────────────┘
+             │ HTTP REST                     │ wagmi/viem
+             ▼                               ▼
+┌── Backend (FastAPI) ──┐        ┌── Smart Contracts (opBNB) ─────┐
+│  /vault/create        │        │  VaultFactory (EIP-1167 clones) │
+│  /vault/by-wallet/:w  │        │  Vault (deposit/borrow/repay)   │
+│  /optimize-ltv        │        │  ZKVerifier (Groth16 on-chain)  │
+│  /agent/actions/:w    │        │  AgentRegistry                  │
+│  /positions/:w        │        │  LTVOracle                      │
+│  /metrics, /health    │        └─────────────────────────────────┘
+└───────┬───────────────┘
+        │ Supabase service_role_key
+        ▼
+┌── Database (Supabase Postgres) ───────────────────────────────────┐
+│  users · vaults · vault_assets · loans · zk_proofs · agents       │
+│  agent_actions · oracle_feeds · ltv_optimizations · notifications  │
+│  audit_log    — All with Row Level Security (RLS)                 │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ### Why This Architecture?
@@ -57,7 +57,7 @@ This guide covers **everything**: architecture, user flows, every component, eve
 | **Backend** | FastAPI + SciPy | AI-powered LTV optimization using CVaR portfolio mathematics. Also serves as a secure proxy to Supabase (RLS). |
 | **Database** | Supabase Postgres | Off-chain metadata: vault records, loan tracking, agent actions, oracle prices. All tables have RLS. |
 
-### Deployed Addresses (opBNB Testnet â€” Chain ID 5611)
+### Deployed Addresses (opBNB Testnet — Chain ID 5611)
 
 | Contract | Address |
 |----------|---------|
@@ -78,7 +78,7 @@ This guide covers **everything**: architecture, user flows, every component, eve
 
 **Key mechanics**:
 - One vault per user (enforced: `userVaults[owner] != address(0)` check)
-- `deployVault(address vaultOwner)` â†’ clones the Vault implementation â†’ calls `vault.initialize(owner, zkVerifier)` â†’ emits `VaultDeployed(owner, vault)`
+- `deployVault(address vaultOwner)` → clones the Vault implementation → calls `vault.initialize(owner, zkVerifier)` → emits `VaultDeployed(owner, vault)`
 - Admin can update ZK verifier via `setZKVerifier()` (only affects future vaults)
 - Inherits `Ownable` + `ReentrancyGuard`
 
@@ -86,7 +86,7 @@ This guide covers **everything**: architecture, user flows, every component, eve
 
 ### 2.2 Vault.sol
 
-**Purpose**: The core vault â€” holds collateral, manages debt, enforces partial seizure.
+**Purpose**: The core vault — holds collateral, manages debt, enforces partial seizure.
 
 **Functions**:
 | Function | Access | What It Does |
@@ -97,12 +97,12 @@ This guide covers **everything**: architecture, user flows, every component, eve
 | `borrow(token, amount, pA, pB, pC, pubSignals)` | Owner only | **ZK-gated**. Verifies Groth16 proof on-chain, checks replay protection, then transfers tokens |
 | `repay(token, amount)` | Anyone | Repays debt (anyone can repay on behalf) |
 | `triggerDefault(token)` | Anyone (if debt > 0) | Marks vault as defaulted |
-| `seize(token)` | Anyone (if defaulted) | Partial seizure: `min(debt Ã— 1.05, collateral Ã— 0.5)` |
+| `seize(token)` | Anyone (if defaulted) | Partial seizure: `min(debt × 1.05, collateral × 0.5)` |
 
 **Critical invariants**:
-- **ZK proof required before any borrow** â€” the `borrow()` function calls `zkVerifier.verifyProof(pA, pB, pC, pubSignals)` and reverts with `InvalidProof()` if it fails
-- **Replay prevention** â€” each proof's hash is recorded via `zkVerifier.markProofUsed(proofHash, nonce)`. Reusing a proof reverts with `ProofAlreadyUsed()`
-- **Partial seizure only** â€” max 50% of any single collateral token can be seized, even if debt exceeds that. This is the `MAX_SEIZURE_RATIO = 0.5e18` constant
+- **ZK proof required before any borrow** — the `borrow()` function calls `zkVerifier.verifyProof(pA, pB, pC, pubSignals)` and reverts with `InvalidProof()` if it fails
+- **Replay prevention** — each proof's hash is recorded via `zkVerifier.markProofUsed(proofHash, nonce)`. Reusing a proof reverts with `ProofAlreadyUsed()`
+- **Partial seizure only** — max 50% of any single collateral token can be seized, even if debt exceeds that. This is the `MAX_SEIZURE_RATIO = 0.5e18` constant
 
 ### 2.3 ZKVerifier.sol
 
@@ -110,10 +110,10 @@ This guide covers **everything**: architecture, user flows, every component, eve
 
 **How it works**:
 1. Contains hardcoded verification key parameters (alpha, beta, gamma, delta, IC points) from the trusted setup
-2. `verifyProof(pA, pB, pC, pubSignals)` â†’ Performs elliptic curve pairing checks â†’ Returns `true` if valid
-3. `markProofUsed(proofHash, nonce)` â†’ Records the proof hash to prevent replay
-4. `isProofUsed(proofHash)` â†’ Check if a proof has been used
-5. `vaultNonce(vault)` â†’ Returns current nonce for a vault (auto-incremented)
+2. `verifyProof(pA, pB, pC, pubSignals)` → Performs elliptic curve pairing checks → Returns `true` if valid
+3. `markProofUsed(proofHash, nonce)` → Records the proof hash to prevent replay
+4. `isProofUsed(proofHash)` → Check if a proof has been used
+5. `vaultNonce(vault)` → Returns current nonce for a vault (auto-incremented)
 
 ### 2.4 AgentRegistry.sol
 
@@ -146,8 +146,8 @@ Traditional DeFi requires revealing exact collateral amounts on-chain. VaultForg
 #### CollateralThreshold.circom
 - **Inputs** (private): Array of asset USD values
 - **Inputs** (public): Minimum threshold
-- **Proves**: "My total collateral â‰¥ threshold" without revealing individual amounts
-- **Used by**: `borrow()` function â€” proves you have enough collateral to borrow
+- **Proves**: "My total collateral ≥ threshold" without revealing individual amounts
+- **Used by**: `borrow()` function — proves you have enough collateral to borrow
 
 #### LTVComputation.circom
 - **Inputs** (private): Collateral value, debt value
@@ -162,8 +162,8 @@ Traditional DeFi requires revealing exact collateral amounts on-chain. VaultForg
 ### 3.3 How Proof Generation Works (Browser-Side)
 
 ```
-User clicks "Borrow" â†’
-  Frontend calls generateCollateralProof(assets, threshold) â†’
+User clicks "Borrow" →
+  Frontend calls generateCollateralProof(assets, threshold) →
     1. Dynamically imports snarkjs
     2. Loads WASM file from /public/zk/CollateralThreshold.wasm
     3. Loads proving key from /public/zk/CollateralThreshold_final.zkey
@@ -195,15 +195,15 @@ All config in `backend/app/core/config.py` via pydantic-settings. Reads from `.e
 
 | Method | Path | Rate Limit | Auth | Purpose |
 |--------|------|------------|------|---------|
-| `GET` | `/health` | â€” | â€” | Health check with timestamp |
-| `GET` | `/metrics` | â€” | â€” | TVL, active vaults, average LTV |
-| `POST` | `/vault/create` | 10/min | â€” | Register vault in DB (with optional contract address) |
-| `GET` | `/vault/by-wallet/{wallet}` | 30/min | â€” | List all vaults for a wallet |
-| `GET` | `/vault/{id}/health` | 30/min | â€” | Vault health metrics |
-| `POST` | `/optimize-ltv` | 20/min | â€” | AI-powered LTV optimization |
+| `GET` | `/health` | — | — | Health check with timestamp |
+| `GET` | `/metrics` | — | — | TVL, active vaults, average LTV |
+| `POST` | `/vault/create` | 10/min | — | Register vault in DB (with optional contract address) |
+| `GET` | `/vault/by-wallet/{wallet}` | 30/min | — | List all vaults for a wallet |
+| `GET` | `/vault/{id}/health` | 30/min | — | Vault health metrics |
+| `POST` | `/optimize-ltv` | 20/min | — | AI-powered LTV optimization |
 | `POST` | `/agent/action` | 50/min | X-API-Key | Record agent action (internal) |
-| `GET` | `/agent/actions/{wallet}` | 30/min | â€” | List recent agent actions |
-| `GET` | `/positions/{wallet}` | 20/min | â€” | Portfolio positions (Zerion proxy) |
+| `GET` | `/agent/actions/{wallet}` | 30/min | — | List recent agent actions |
+| `GET` | `/positions/{wallet}` | 20/min | — | Portfolio positions (Zerion proxy) |
 
 ### 4.3 LTV Optimization Engine
 
@@ -215,16 +215,16 @@ The core AI feature. Located in `backend/app/services/ltv_optimizer.py`.
 1. Receives a list of assets with USD values and volatilities
 2. Builds a covariance matrix (intra-bucket correlation = 0.6, cross-bucket = 0.2)
 3. Minimizes portfolio CVaR at 95% confidence level
-4. Maps CVaR â†’ LTV: lower risk â†’ higher allowed LTV
-   - CVaR = 0 â†’ 90% LTV (max)
-   - CVaR â‰¥ 0.5 â†’ 10% LTV (min)
+4. Maps CVaR → LTV: lower risk → higher allowed LTV
+   - CVaR = 0 → 90% LTV (max)
+   - CVaR ≥ 0.5 → 10% LTV (min)
 5. Returns suggested LTV in basis points + optimal asset weights
 
-**Why this matters**: Traditional DeFi uses static LTV (e.g., Venus = 150%). VaultForge dynamically adjusts LTV based on the portfolio's actual risk profile. Lower-volatility portfolios get higher LTV â†’ more capital efficiency.
+**Why this matters**: Traditional DeFi uses static LTV (e.g., Venus = 150%). VaultForge dynamically adjusts LTV based on the portfolio's actual risk profile. Lower-volatility portfolios get higher LTV → more capital efficiency.
 
 ### 4.4 Oracle Service
 
-`backend/app/services/oracle_service.py` â€” Multi-source price aggregator.
+`backend/app/services/oracle_service.py` — Multi-source price aggregator.
 
 - Fetches from **Binance** and **CoinGecko** simultaneously
 - Returns median price (more robust than single source)
@@ -238,11 +238,11 @@ The core AI feature. Located in `backend/app/services/ltv_optimizer.py`.
 
 ```
 Root Layout
-â””â”€â”€ Providers.tsx
-    â””â”€â”€ PrivyProvider (wallet/auth)
-        â””â”€â”€ QueryClientProvider (react-query)
-            â””â”€â”€ WagmiProvider (chain interactions)
-                â””â”€â”€ App Pages
+└── Providers.tsx
+    └── PrivyProvider (wallet/auth)
+        └── QueryClientProvider (react-query)
+            └── WagmiProvider (chain interactions)
+                └── App Pages
 ```
 
 **Privy** handles wallet connection. Supports MetaMask, WalletConnect, email, Google. Chains locked to opBNB Testnet (5611).
@@ -264,19 +264,19 @@ Root Layout
 
 #### Create Vault Page (`/vault/create`)
 - 4-step wizard:
-  1. **Connect** â€” Connect wallet via Privy
-  2. **Configure** â€” Confirm opBNB Testnet
-  3. **Deposit** â€” Enter ERC-20 token address + amount. Shows AI LTV optimization preview (calls `/optimize-ltv` in preview mode)
-  4. **Confirm** â€” Executes 3 on-chain transactions:
-     - TX1: `VaultFactory.deployVault(owner)` â†’ deploys personal vault clone
-     - TX2: `ERC20.approve(vaultAddress, amount)` â†’ approves vault to spend tokens
-     - TX3: `Vault.deposit(token, amount)` â†’ deposits collateral
-  5. After deposit: registers vault in backend â†’ generates ZK proof â†’ redirects to dashboard
+  1. **Connect** — Connect wallet via Privy
+  2. **Configure** — Confirm opBNB Testnet
+  3. **Deposit** — Enter ERC-20 token address + amount. Shows AI LTV optimization preview (calls `/optimize-ltv` in preview mode)
+  4. **Confirm** — Executes 3 on-chain transactions:
+     - TX1: `VaultFactory.deployVault(owner)` → deploys personal vault clone
+     - TX2: `ERC20.approve(vaultAddress, amount)` → approves vault to spend tokens
+     - TX3: `Vault.deposit(token, amount)` → deposits collateral
+  5. After deposit: registers vault in backend → generates ZK proof → redirects to dashboard
 
 ### 5.3 Key Components
 
 #### BorrowModal
-6-step state machine: `input â†’ warning â†’ proving â†’ signing â†’ confirming â†’ done`
+6-step state machine: `input → warning → proving → signing → confirming → done`
 1. User enters token address + amount
 2. Warning screen explains ZK proof generation
 3. Generates Groth16 proof in browser (5-15 seconds)
@@ -285,7 +285,7 @@ Root Layout
 6. Success screen with explorer link
 
 #### RepayModal
-7-step state machine: `input â†’ warning â†’ approving â†’ signing â†’ confirming â†’ done`
+7-step state machine: `input → warning → approving → signing → confirming → done`
 1. User enters token address + amount
 2. TX1: `ERC20.approve(vaultAddress, amount)`
 3. TX2: `Vault.repay(token, amount)`
@@ -334,8 +334,8 @@ Root Layout
 |---|-------|---------|-------------|
 | 1 | `users` | Wallet accounts | `wallet_address` (unique), `reputation_score` |
 | 2 | `vaults` | Vault records | `vault_contract_address`, `status` (pending/active/defaulted/liquidating/closed), `total_deposited`, `total_borrowed`, `current_ltv_bps` |
-| 3 | `vault_assets` | Per-vault collateral | `token_address`, `amount`, `collateral_commitment` (Poseidon hash â€” never plaintext) |
-| 4 | `loans` | Loan records | `principal`, `outstanding_balance`, `interest_rate_bps`, `proof_id` (FK â†’ zk_proofs) |
+| 3 | `vault_assets` | Per-vault collateral | `token_address`, `amount`, `collateral_commitment` (Poseidon hash — never plaintext) |
+| 4 | `loans` | Loan records | `principal`, `outstanding_balance`, `interest_rate_bps`, `proof_id` (FK → zk_proofs) |
 | 5 | `zk_proofs` | Proof records | `circuit_name` enum, `proof_data` (JSONB), `public_signals` (JSONB), `proof_hash` (unique) |
 | 6 | `agents` | Registered AI agents | `operator_address`, `stake_amount`, `total_fees_earned` |
 | 7 | `agent_actions` | Agent activity log | `action_type`, `status` (6 states), `parameters` (JSONB), `result` (JSONB) |
@@ -346,16 +346,16 @@ Root Layout
 
 ### 6.2 Security Measures
 
-- **RLS on every table** â€” enforced at the Postgres level
-- **Service role key** used only by backend â€” bypasses RLS for authorized operations
-- **Anon key** on frontend â€” limited access (reads only where RLS permits)
-- **Immutable audit log** â€” database triggers prevent any modification or deletion of audit records
+- **RLS on every table** — enforced at the Postgres level
+- **Service role key** used only by backend — bypasses RLS for authorized operations
+- **Anon key** on frontend — limited access (reads only where RLS permits)
+- **Immutable audit log** — database triggers prevent any modification or deletion of audit records
 - **Collateral commitments** stored as Poseidon hashes, never plaintext amounts
-- **Proof hashes** are unique â€” prevents duplicate proof submission
+- **Proof hashes** are unique — prevents duplicate proof submission
 
 ---
 
-## 7. User Journey â€” Step by Step
+## 7. User Journey — Step by Step
 
 ### 7.1 First Visit
 
@@ -366,16 +366,16 @@ Root Layout
 
 ### 7.2 Wallet Connection
 
-1. Privy modal opens â€” user can connect with MetaMask, WalletConnect, email, or Google
-2. If user's wallet is on wrong network â†’ "Switch to opBNB Testnet" button appears
-3. wagmi detects chain ID 5611 â†’ connection complete
+1. Privy modal opens — user can connect with MetaMask, WalletConnect, email, or Google
+2. If user's wallet is on wrong network → "Switch to opBNB Testnet" button appears
+3. wagmi detects chain ID 5611 → connection complete
 4. WalletButton shows truncated address + "opBNB" badge
 
 ### 7.3 Creating a Vault
 
 1. User navigates to `/vault/create`
-2. **Step 1** (Connect): Already connected â†’ Continue
-3. **Step 2** (Configure): Confirms opBNB Testnet â†’ Next
+2. **Step 1** (Connect): Already connected → Continue
+3. **Step 2** (Configure): Confirms opBNB Testnet → Next
 4. **Step 3** (Deposit):
    - Enters ERC-20 token contract address
    - Enters amount (in token units, 18 decimals)
@@ -383,16 +383,16 @@ Root Layout
    - Shows AI optimization result: suggested LTV %, CVaR %, comparison with Venus/Aave
 5. **Step 4** (Confirm):
    - Summary shown: network, token, amount, "3 transactions needed"
-   - User clicks "Create Vault â€” 3 Transactions"
-   - **TX1**: `VaultFactory.deployVault(userAddress)` â†’ wallet prompt â†’ deploy vault clone
-   - Wait for confirmation â†’ decode `VaultDeployed` event â†’ extract vault address
-   - **TX2**: `ERC20.approve(vaultAddress, amount)` â†’ wallet prompt
+   - User clicks "Create Vault — 3 Transactions"
+   - **TX1**: `VaultFactory.deployVault(userAddress)` → wallet prompt → deploy vault clone
+   - Wait for confirmation → decode `VaultDeployed` event → extract vault address
+   - **TX2**: `ERC20.approve(vaultAddress, amount)` → wallet prompt
    - Wait for confirmation
-   - **TX3**: `Vault.deposit(token, amount)` â†’ wallet prompt
+   - **TX3**: `Vault.deposit(token, amount)` → wallet prompt
    - Wait for confirmation
    - Backend call: `POST /vault/create` with wallet, vault address, deposited amount
    - ZK proof generated (CollateralThreshold circuit, 5-15 seconds)
-   - Success screen â†’ auto-redirect to dashboard
+   - Success screen → auto-redirect to dashboard
 
 ### 7.4 Dashboard
 
@@ -403,20 +403,20 @@ Root Layout
 ### 7.5 Borrowing
 
 1. User clicks "Borrow" on a VaultCard
-2. BorrowModal opens â†’ enters token address + amount
-3. Warning screen â†’ user confirms
+2. BorrowModal opens → enters token address + amount
+3. Warning screen → user confirms
 4. ZK proof generated in browser (Groth16, CollateralThreshold circuit)
 5. `Vault.borrow(token, amount, pA, pB, pC, pubSignals)` sent to chain
-6. ZKVerifier verifies proof on-chain â†’ if valid, tokens transferred
-7. Success â†’ explorer link shown
+6. ZKVerifier verifies proof on-chain → if valid, tokens transferred
+7. Success → explorer link shown
 
 ### 7.6 Repaying
 
 1. User clicks "Repay" on a VaultCard
-2. RepayModal opens â†’ enters token address + amount
-3. TX1: `ERC20.approve(vaultAddress, amount)` â€” approve vault to pull tokens
-4. TX2: `Vault.repay(token, amount)` â€” transfers tokens back, reduces debt
-5. Success â†’ explorer link shown
+2. RepayModal opens → enters token address + amount
+3. TX1: `ERC20.approve(vaultAddress, amount)` — approve vault to pull tokens
+4. TX2: `Vault.repay(token, amount)` — transfers tokens back, reduces debt
+5. Success → explorer link shown
 
 ---
 
@@ -468,7 +468,7 @@ User                    Frontend              snarkjs (browser)   Blockchain
 ### 9.1 Prerequisites
 
 You need:
-- **tBNB** (testnet BNB) for gas â€” get from [opBNB Testnet Faucet](https://www.bnbchain.org/en/testnet-faucet)
+- **tBNB** (testnet BNB) for gas — get from [opBNB Testnet Faucet](https://www.bnbchain.org/en/testnet-faucet)
 - A **test ERC-20 token** on opBNB Testnet (deploy one or use an existing testnet token)
 - **MetaMask** or another wallet connected to opBNB Testnet
 
@@ -519,7 +519,7 @@ curl https://your-backend-url/health
 ```
 
 #### Test 2: Create a Vault
-1. Open the app â†’ Connect wallet
+1. Open the app → Connect wallet
 2. Go to `/vault/create`
 3. Enter a testnet ERC-20 token address
 4. Enter amount (needs actual token balance!)
@@ -551,8 +551,8 @@ After any transaction:
 1. Click the explorer link (opBNB Testnet BSCScan)
 2. Verify the transaction was successful
 3. Check the vault contract's state:
-   - `getCollateral(tokenAddress)` â†’ deposited amount
-   - `getDebt(tokenAddress)` â†’ borrowed amount
+   - `getCollateral(tokenAddress)` → deposited amount
+   - `getDebt(tokenAddress)` → borrowed amount
 
 ### 9.4 Testing Backend Endpoints
 
@@ -592,11 +592,11 @@ docker compose up --build
 
 ---
 
-## 10. FAQ â€” Questions You'll Be Asked
+## 10. FAQ — Questions You'll Be Asked
 
 ### "How does ZK privacy work here?"
 
-When a user borrows, they need to prove their collateral is sufficient. Instead of revealing "I have $10,000 in ETH and $5,000 in BNB," they generate a zero-knowledge proof that says "my total collateral exceeds $X threshold" without revealing the breakdown. This proof is verified on-chain by the ZKVerifier contract before the borrow is allowed. The proof uses Groth16 (a SNARK scheme) with a trusted setup â€” the circuit is compiled from Circom, and proof generation happens entirely in the user's browser using snarkjs.
+When a user borrows, they need to prove their collateral is sufficient. Instead of revealing "I have $10,000 in ETH and $5,000 in BNB," they generate a zero-knowledge proof that says "my total collateral exceeds $X threshold" without revealing the breakdown. This proof is verified on-chain by the ZKVerifier contract before the borrow is allowed. The proof uses Groth16 (a SNARK scheme) with a trusted setup — the circuit is compiled from Circom, and proof generation happens entirely in the user's browser using snarkjs.
 
 ### "What makes this non-custodial?"
 
@@ -606,19 +606,19 @@ Each user gets their own Vault contract clone (EIP-1167 minimal proxy). The user
 
 The backend uses SciPy's SLSQP optimizer to minimize Conditional Value-at-Risk (CVaR) of the collateral portfolio. It considers:
 - Each asset's volatility
-- Correlations between assets (same-bucket: Ï=0.6, cross-bucket: Ï=0.2)
+- Correlations between assets (same-bucket: ρ=0.6, cross-bucket: ρ=0.2)
 - Portfolio weights
 - 95% confidence level
 
-Lower portfolio risk â†’ higher allowed LTV â†’ more capital efficiency. Traditional DeFi uses static 150% collateral ratio; VaultForge dynamically adjusts to the actual risk.
+Lower portfolio risk → higher allowed LTV → more capital efficiency. Traditional DeFi uses static 150% collateral ratio; VaultForge dynamically adjusts to the actual risk.
 
 ### "What happens if a vault defaults?"
 
 1. Anyone can call `triggerDefault(token)` if there's outstanding debt
 2. The vault is marked as defaulted
-3. Seizure: `seize(token)` can be called â€” takes `min(debt Ã— 1.05, collateral Ã— 0.5)`
+3. Seizure: `seize(token)` can be called — takes `min(debt × 1.05, collateral × 0.5)`
 4. **Partial seizure invariant**: at most 50% of any single collateral token is seized
-5. This protects vault owners from losing everything â€” even in default
+5. This protects vault owners from losing everything — even in default
 
 ### "Why opBNB?"
 
@@ -659,6 +659,6 @@ For a ZK-proof-intensive application, low gas is critical because proof verifica
 
 Yes. Every borrow transaction includes the ZK proof parameters. You can verify on [opBNB BSCScan](https://opbnb-testnet.bscscan.com):
 1. Find a borrow transaction
-2. Decode the input data â€” you'll see `pA`, `pB`, `pC`, `pubSignals`
+2. Decode the input data — you'll see `pA`, `pB`, `pC`, `pubSignals`
 3. The ZKVerifier contract verified this proof before the borrow was executed
 4. The proof hash was recorded to prevent replay

@@ -1,4 +1,4 @@
-# VaultForge ðŸ”
+# VaultForge 🔐
 
 > **Non-Custodial ZK-Private Programmable Intelligent Collateral Vaults**
 > for Trust-Minimized Web3 Credit & BNPL on BNB Chain
@@ -7,19 +7,19 @@
 **[opBNBScan Contracts](https://opbnb-testnet.bscscan.com)** |
 **[Documentation](./docs/PROJECT.md)**
 
-> Built for **BNB Chain Ã— YZi Labs Hackathon** â€” Smart Collateral Track
+> Built for **BNB Chain × YZi Labs Hackathon** — Smart Collateral Track
 
 ---
 
 ## The Problem (Data-Backed)
 
-Over **$1.2 trillion** in crypto assets sit idle in wallets, earning nothing â€” their owners unable to access credit without liquidation risk or identity exposure. Leading DeFi protocols like Venus and Aave demand **150%+ overcollateralization**, locking up 50% more capital than the loan is worth, while every position is visible on-chain â€” doxxing balances, strategies, and liquidation levels to MEV bots and competitors. Meanwhile, **Buy Now Pay Later** in TradFi sees **40%+ default rates** among underbanked users because credit scoring relies on centralized identity, not on-chain behavior. Crypto holders deserve private, capital-efficient borrowing powered by their real blockchain reputation.
+Over **$1.2 trillion** in crypto assets sit idle in wallets, earning nothing — their owners unable to access credit without liquidation risk or identity exposure. Leading DeFi protocols like Venus and Aave demand **150%+ overcollateralization**, locking up 50% more capital than the loan is worth, while every position is visible on-chain — doxxing balances, strategies, and liquidation levels to MEV bots and competitors. Meanwhile, **Buy Now Pay Later** in TradFi sees **40%+ default rates** among underbanked users because credit scoring relies on centralized identity, not on-chain behavior. Crypto holders deserve private, capital-efficient borrowing powered by their real blockchain reputation.
 
 ---
 
 ## Our Solution
 
-VaultForge is a **non-custodial vault system** where users deposit collateral into per-user smart contracts on opBNB, generate **Groth16 zero-knowledge proofs** to borrow without revealing balances or positions publicly, and rely on **BNB AI agents** to dynamically optimize their Loan-to-Value ratio from the typical 150% down to **110â€“130%** â€” freeing locked capital. The result: cheaper borrowing, full privacy, algorithmic risk management, and an intent-based BNPL layer â€” all settled on BNB Chain's fastest L2.
+VaultForge is a **non-custodial vault system** where users deposit collateral into per-user smart contracts on opBNB, generate **Groth16 zero-knowledge proofs** to borrow without revealing balances or positions publicly, and rely on **BNB AI agents** to dynamically optimize their Loan-to-Value ratio from the typical 150% down to **110–130%** — freeing locked capital. The result: cheaper borrowing, full privacy, algorithmic risk management, and an intent-based BNPL layer — all settled on BNB Chain's fastest L2.
 
 ---
 
@@ -27,13 +27,13 @@ VaultForge is a **non-custodial vault system** where users deposit collateral in
 
 | Feature | Venus / Aave | VaultForge |
 |---|---|---|
-| **Collateral Privacy** | âŒ Public on-chain | âœ… ZK-Private (Groth16) |
-| **LTV Ratio** | Static 150%+ | Dynamic 110â€“130% (AI-optimized) |
-| **Active Management** | âŒ None | âœ… BNB AI Agents (auto-rebalance) |
-| **Custody** | âŒ Pool-based (custodial risk) | âœ… Per-user non-custodial vaults |
-| **Credit Scoring** | âŒ None | âœ… ZK reputation proofs |
-| **BNPL** | âŒ Not supported | âœ… Intent-based installments |
-| **Seizure Protection** | âŒ Full liquidation | âœ… Partial seizure only (max 50%) |
+| **Collateral Privacy** | ❌ Public on-chain | ✅ ZK-Private (Groth16) |
+| **LTV Ratio** | Static 150%+ | Dynamic 110–130% (AI-optimized) |
+| **Active Management** | ❌ None | ✅ BNB AI Agents (auto-rebalance) |
+| **Custody** | ❌ Pool-based (custodial risk) | ✅ Per-user non-custodial vaults |
+| **Credit Scoring** | ❌ None | ✅ ZK reputation proofs |
+| **BNPL** | ❌ Not supported | ✅ Intent-based installments |
+| **Seizure Protection** | ❌ Full liquidation | ✅ Partial seizure only (max 50%) |
 
 ---
 
@@ -41,20 +41,20 @@ VaultForge is a **non-custodial vault system** where users deposit collateral in
 
 ```mermaid
 journey
-    title VaultForge â€” End-to-End User Journey
-    section Phase 1 â€” Connect
+    title VaultForge — End-to-End User Journey
+    section Phase 1 — Connect
       Visit app & connect wallet via Privy     : 5: User
       App deploys per-user Vault (EIP-1167)    : 4: System
       Deposit BNB / BEP-20 collateral          : 5: User
       Supabase stores vault metadata (RLS)     : 3: System
-    section Phase 2 â€” Optimize & Borrow
+    section Phase 2 — Optimize & Borrow
       AI Agent analyzes collateral portfolio    : 4: Agent
       LTVOracle submits optimized LTV (110-130%): 4: Agent
       Challenge window (1 hr testnet)           : 3: System
       User generates ZK proof (Groth16)         : 5: User
       Vault.borrow() verifies proof on-chain    : 5: System
       Funds released to user wallet             : 5: User
-    section Phase 3 â€” Monitor & Repay
+    section Phase 3 — Monitor & Repay
       AI Agent monitors health factor           : 4: Agent
       Agent auto-rebalances if LTV drifts       : 4: Agent
       User repays debt (partial or full)        : 5: User
@@ -68,35 +68,35 @@ journey
 
 ```mermaid
 flowchart TB
-    subgraph Frontend["Frontend â€” Next.js 16 (Vercel)"]
+    subgraph Frontend["Frontend — Next.js 16 (Vercel)"]
         UI[App Router + shadcn/ui]
         Privy[Privy Auth + Embedded Wallet]
         Wagmi[wagmi + viem]
-        ZKBrowser[snarkjs â€” Browser-side Groth16]
+        ZKBrowser[snarkjs — Browser-side Groth16]
     end
 
-    subgraph Backend["Backend â€” FastAPI (Docker / Railway)"]
+    subgraph Backend["Backend — FastAPI (Docker / Railway)"]
         API[REST Endpoints]
-        Optimizer[LTV Optimizer â€” SciPy SLSQP + CVaR]
+        Optimizer[LTV Optimizer — SciPy SLSQP + CVaR]
         RateLimiter[slowapi Rate Limiter]
     end
 
-    subgraph ZK["ZK Layer â€” Circom 2.x"]
+    subgraph ZK["ZK Layer — Circom 2.x"]
         CT[CollateralThreshold Circuit]
         LTV[LTVComputation Circuit]
         RS[ReputationScore Circuit]
     end
 
-    subgraph Contracts["Smart Contracts â€” opBNB (Solidity 0.8.28)"]
-        VF[VaultFactory â€” EIP-1167 Clones]
-        V[Vault â€” Deposit / Borrow / Repay]
-        ZKV[ZKVerifier â€” Groth16 + Nonce Replay Prevention]
-        AR[AgentRegistry â€” Stake / Execute / Slash]
-        LO[LTVOracle â€” Optimistic Challenge-Based]
+    subgraph Contracts["Smart Contracts — opBNB (Solidity 0.8.28)"]
+        VF[VaultFactory — EIP-1167 Clones]
+        V[Vault — Deposit / Borrow / Repay]
+        ZKV[ZKVerifier — Groth16 + Nonce Replay Prevention]
+        AR[AgentRegistry — Stake / Execute / Slash]
+        LO[LTVOracle — Optimistic Challenge-Based]
     end
 
     subgraph Data["Data Layer"]
-        SB[(Supabase Postgres â€” RLS)]
+        SB[(Supabase Postgres — RLS)]
     end
 
     UI --> Privy --> Wagmi
@@ -144,11 +144,11 @@ cp .env.example .env   # Fill in your keys (see Environment Variables below)
 docker compose up --build
 
 # 3. Open the app
-# Frontend â†’ http://localhost:3000
-# Backend  â†’ http://localhost:8000/docs (Swagger UI)
+# Frontend → http://localhost:3000
+# Backend  → http://localhost:8000/docs (Swagger UI)
 ```
 
-All 4 services start automatically: **Postgres** (`:5432`) â†’ **Redis** (`:6379`) â†’ **Backend** (`:8000`) â†’ **Frontend** (`:3000`), with health checks and dependency ordering.
+All 4 services start automatically: **Postgres** (`:5432`) → **Redis** (`:6379`) → **Backend** (`:8000`) → **Frontend** (`:3000`), with health checks and dependency ordering.
 
 ### Run Without Docker
 
@@ -171,7 +171,7 @@ cd zk-circuits && npm install && bash scripts/compile.sh
 
 ## Environment Variables
 
-Copy `.env.example` â†’ `.env` and fill in your values. **Never commit `.env`.**
+Copy `.env.example` → `.env` and fill in your values. **Never commit `.env`.**
 
 | Variable | Description | Example |
 |---|---|---|
@@ -195,21 +195,21 @@ Copy `.env.example` â†’ `.env` and fill in your values. **Never commit `.en
 
 ---
 
-## Verified Contracts (opBNB Testnet â€” Chain ID 5611)
+## Verified Contracts (opBNB Testnet — Chain ID 5611)
 
 All contracts deployed and verified on opBNB testnet. Source code viewable on opBNBScan.
 
 | Contract | Address | opBNBScan | Verified |
 |---|---|---|---|
-| **VaultFactory** | `0xb881fAf4e552780f65Ae8FC1053AD46134b71173` | [View](https://opbnb-testnet.bscscan.com/address/0xb881fAf4e552780f65Ae8FC1053AD46134b71173) | âœ… |
-| **Vault (Implementation)** | `0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0` | [View](https://opbnb-testnet.bscscan.com/address/0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0) | âœ… |
-| **ZKVerifier** | `0x2925896cABAd4c6B7c505495948F79b3e9308C54` | [View](https://opbnb-testnet.bscscan.com/address/0x2925896cABAd4c6B7c505495948F79b3e9308C54) | â³ Pending |
-| **AgentRegistry** | `0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b` | [View](https://opbnb-testnet.bscscan.com/address/0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b) | âœ… |
-| **LTVOracle** | `0x953386f1309b2BdA061d895aBddB17b9Db706744` | [View](https://opbnb-testnet.bscscan.com/address/0x953386f1309b2BdA061d895aBddB17b9Db706744) | âœ… |
-| **TestUSDC (tUSDC)** | `0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE` | [View](https://opbnb-testnet.bscscan.com/address/0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE) | â€” |
+| **VaultFactory** | `0xb881fAf4e552780f65Ae8FC1053AD46134b71173` | [View](https://opbnb-testnet.bscscan.com/address/0xb881fAf4e552780f65Ae8FC1053AD46134b71173) | ✅ |
+| **Vault (Implementation)** | `0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0` | [View](https://opbnb-testnet.bscscan.com/address/0x45095a5b07Cd7231c4f1B12837b427a9a94AF1C0) | ✅ |
+| **ZKVerifier** | `0x2925896cABAd4c6B7c505495948F79b3e9308C54` | [View](https://opbnb-testnet.bscscan.com/address/0x2925896cABAd4c6B7c505495948F79b3e9308C54) | ⏳ Pending |
+| **AgentRegistry** | `0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b` | [View](https://opbnb-testnet.bscscan.com/address/0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b) | ✅ |
+| **LTVOracle** | `0x953386f1309b2BdA061d895aBddB17b9Db706744` | [View](https://opbnb-testnet.bscscan.com/address/0x953386f1309b2BdA061d895aBddB17b9Db706744) | ✅ |
+| **TestUSDC (tUSDC)** | `0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE` | [View](https://opbnb-testnet.bscscan.com/address/0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE) | — |
 
-> **Deployer:** [`0x97950A98980a2Fc61ea7eb043bb7666845f77071`](https://opbnb-testnet.bscscan.com/address/0x97950A98980a2Fc61ea7eb043bb7666845f77071) â€” 7+ on-chain transactions
-> **Deployment cost:** 3,688,663 gas total â‰ˆ **$0.000004 USD** (opBNB L2 pricing)
+> **Deployer:** [`0x97950A98980a2Fc61ea7eb043bb7666845f77071`](https://opbnb-testnet.bscscan.com/address/0x97950A98980a2Fc61ea7eb043bb7666845f77071) — 7+ on-chain transactions
+> **Deployment cost:** 3,688,663 gas total ≈ **$0.000004 USD** (opBNB L2 pricing)
 > **Full deployment data:** [`contracts/deployments/testnet.json`](./contracts/deployments/testnet.json)
 
 ### On-Chain Activity (3 Vault Clones Deployed)
@@ -236,21 +236,21 @@ cast send 0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE \
 | **Address** | `0x51795Ef0e9d2B37A89F077a2E2832ae4fd9764bE` |
 | **Symbol** | tUSDC |
 | **Decimals** | 18 |
-| **Mint** | Open â€” `mint(address to, uint256 amount)` |
+| **Mint** | Open — `mint(address to, uint256 amount)` |
 
 ---
 
 ## BNB Ecosystem Integration
 
-VaultForge is built natively for the BNB ecosystem â€” not ported from Ethereum.
+VaultForge is built natively for the BNB ecosystem — not ported from Ethereum.
 
 | Integration | How We Use It | Evidence |
 |---|---|---|
 | **opBNB L2** | All contracts deployed on opBNB testnet (chain 5611) | [Deployment tx](https://opbnb-testnet.bscscan.com/tx/0xe62c29acea683b5b015fe2529d5e58112d22c67e6c43c537c1cfd6706824e7b3) |
-| **EIP-1167 Minimal Proxies** | VaultFactory deploys gas-efficient vault clones | Clone cost: 207,659 gas â‰ˆ **$0.0000002 USD** |
-| **BNB AI Agent Framework** | AgentRegistry.sol â€” agents stake tBNB, execute vault actions, earn fees, get slashed | [Contract](https://opbnb-testnet.bscscan.com/address/0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b) |
-| **ZK Privacy (Groth16)** | ZKVerifier.sol â€” real on-chain proof verification with nonce replay prevention | [Contract](https://opbnb-testnet.bscscan.com/address/0x2925896cABAd4c6B7c505495948F79b3e9308C54) |
-| **Optimistic Oracle** | LTVOracle.sol â€” off-chain optimizer submits LTV with 1h challenge window | [Contract](https://opbnb-testnet.bscscan.com/address/0x953386f1309b2BdA061d895aBddB17b9Db706744) |
+| **EIP-1167 Minimal Proxies** | VaultFactory deploys gas-efficient vault clones | Clone cost: 207,659 gas ≈ **$0.0000002 USD** |
+| **BNB AI Agent Framework** | AgentRegistry.sol — agents stake tBNB, execute vault actions, earn fees, get slashed | [Contract](https://opbnb-testnet.bscscan.com/address/0xFB9D6eFE47a4b6175025C9Cd97b776B7e8d9916b) |
+| **ZK Privacy (Groth16)** | ZKVerifier.sol — real on-chain proof verification with nonce replay prevention | [Contract](https://opbnb-testnet.bscscan.com/address/0x2925896cABAd4c6B7c505495948F79b3e9308C54) |
+| **Optimistic Oracle** | LTVOracle.sol — off-chain optimizer submits LTV with 1h challenge window | [Contract](https://opbnb-testnet.bscscan.com/address/0x953386f1309b2BdA061d895aBddB17b9Db706744) |
 | **opBNB Gas Efficiency** | Sub-cent operations: deploy vault $0.0000002, full contract suite $0.000004 | Gas price: 0.000000001 gwei |
 | **Supabase (off-chain)** | Real-time vault health monitoring, RLS-enforced user data | [Backend API](./backend/) |
 
@@ -259,7 +259,7 @@ VaultForge is built natively for the BNB ecosystem â€” not ported from Ethe
 - **Cost:** Full contract deployment costs < $0.00001. Individual vault operations < $0.001.
 - **Speed:** ~1s block times for responsive UX.
 - **BSC Bridge:** Vault collateral can accept BSC-bridged tokens (BTCB, ETH, USDT).
-- **Native tBNB staking:** AgentRegistry uses native BNB for agent staking â€” no wrapped tokens.
+- **Native tBNB staking:** AgentRegistry uses native BNB for agent staking — no wrapped tokens.
 
 ---
 
@@ -273,15 +273,15 @@ VaultForge is built natively for the BNB ecosystem â€” not ported from Ethe
 | **Vault.sol** | Collateral custody + borrowing | ZK-gated borrow, partial seizure (max 50%), ReentrancyGuard |
 | **ZKVerifier.sol** | Groth16 proof verification | Real Groth16 verifier, proof replay prevention (hash + per-vault nonce) |
 | **AgentRegistry.sol** | AI agent staking + execution | 0.01 BNB min stake, fee distribution, admin slashing |
-| **LTVOracle.sol** | Dynamic LTV optimization | Optimistic 1-hour challenge window, 10â€“90% LTV bounds |
+| **LTVOracle.sol** | Dynamic LTV optimization | Optimistic 1-hour challenge window, 10–90% LTV bounds |
 
 ### Security Invariants
 
-- **Partial seizure only** â€” max 50% of any single token can be seized on default
-- **ZK proof required** â€” every `borrow()` call verified on-chain via Groth16
-- **Replay prevention** â€” proof hash + per-vault incrementing nonce
-- **ReentrancyGuard** â€” on all state-changing functions across all contracts
-- **Non-custodial** â€” each user has their own vault; no shared pool risk
+- **Partial seizure only** — max 50% of any single token can be seized on default
+- **ZK proof required** — every `borrow()` call verified on-chain via Groth16
+- **Replay prevention** — proof hash + per-vault incrementing nonce
+- **ReentrancyGuard** — on all state-changing functions across all contracts
+- **Non-custodial** — each user has their own vault; no shared pool risk
 
 ---
 
@@ -291,7 +291,7 @@ VaultForge is built natively for the BNB ecosystem â€” not ported from Ethe
 
 | Circuit | Proves | Public Signals |
 |---|---|---|
-| **CollateralThreshold** | Vault collateral â‰¥ minimum threshold | threshold, result |
+| **CollateralThreshold** | Vault collateral ≥ minimum threshold | threshold, result |
 | **LTVComputation** | LTV ratio is correctly computed | collateral value, debt, LTV |
 | **ReputationScore** | On-chain reputation meets minimum | score, threshold |
 
@@ -309,7 +309,7 @@ Proofs are generated **client-side in the browser** via snarkjs (WASM + zkey art
 |---|---|---|
 | **AI Agent Performance Fee** | 0.5% of yield | Charged on AI agent rebalancing profits |
 | **BNPL Volume Fee** | 0.1% of loan volume | Taken on each BNPL installment transaction |
-| **Premium Agent Subscriptions** | $9.99â€“49.99/mo | Advanced strategies, cross-chain vaults, priority execution |
+| **Premium Agent Subscriptions** | $9.99–49.99/mo | Advanced strategies, cross-chain vaults, priority execution |
 
 ### Year 1 Revenue Projection
 
@@ -338,13 +338,13 @@ With **$10M TVL** at **0.5% yield fee**: ~**$50,000/month** in performance fees 
 
 ## Target Users
 
-### Primary: "Alex" â€” Crypto-Native DeFi Power User
+### Primary: "Alex" — Crypto-Native DeFi Power User
 
-- Holds $50kâ€“$500k in BNB, ETH, stablecoins across wallets
+- Holds $50k–$500k in BNB, ETH, stablecoins across wallets
 - Wants to borrow against holdings without selling or revealing positions
 - Currently uses Venus/Aave but frustrated by 150% collateralization and public liquidation levels
 - Values privacy, capital efficiency, and automated portfolio management
-- Age 25â€“40, trades actively, understands ZK proofs conceptually
+- Age 25–40, trades actively, understands ZK proofs conceptually
 
 ### Secondary Users
 
@@ -362,10 +362,10 @@ With **$10M TVL** at **0.5% yield fee**: ~**$50,000/month** in performance fees 
 
 | Phase | Milestone | Timeline | Success Metrics |
 |---|---|---|---|
-| **Phase 1** â€” Hack MVP | opBNB testnet live | Feb 2026 | âœ… 5 contracts deployed, 3 ZK circuits proven, AI agent demo, 53 tests pass |
-| **Phase 2** â€” Mainnet | Production launch | Q2 2026 | Audit complete (CertiK/Halborn), Venus integration, fiat on-ramps, 1,000 active users |
-| **Phase 3** â€” Scale | Cross-chain expansion | Q4 2026 | Ethereum + Arbitrum + Polygon support, institutional vault templates, $100M TVL target |
-| **Phase 4** â€” DAO | Decentralized governance | Q2 2027 | $FORGE fair launch, community governance live, 10+ chains supported, break-even on fees |
+| **Phase 1** — Hack MVP | opBNB testnet live | Feb 2026 | ✅ 5 contracts deployed, 3 ZK circuits proven, AI agent demo, 53 tests pass |
+| **Phase 2** — Mainnet | Production launch | Q2 2026 | Audit complete (CertiK/Halborn), Venus integration, fiat on-ramps, 1,000 active users |
+| **Phase 3** — Scale | Cross-chain expansion | Q4 2026 | Ethereum + Arbitrum + Polygon support, institutional vault templates, $100M TVL target |
+| **Phase 4** — DAO | Decentralized governance | Q2 2027 | $FORGE fair launch, community governance live, 10+ chains supported, break-even on fees |
 
 ---
 
@@ -373,31 +373,31 @@ With **$10M TVL** at **0.5% yield fee**: ~**$50,000/month** in performance fees 
 
 ```
 VaultForge/
-â”œâ”€â”€ contracts/            Solidity 0.8.28 â€” Foundry (forge build, forge test)
-â”‚   â”œâ”€â”€ src/              5 production contracts (VaultFactory, Vault, ZKVerifier, AgentRegistry, LTVOracle)
-â”‚   â”œâ”€â”€ test/             53 tests (unit + integration + ZK verifier)
-â”‚   â”œâ”€â”€ script/           Deployment & verification scripts
-â”‚   â””â”€â”€ deployments/      Deployed addresses and metadata (testnet.json)
-â”œâ”€â”€ zk-circuits/          Circom 2.x â€” 3 Groth16 circuits
-â”‚   â”œâ”€â”€ circuits/         .circom source files
-â”‚   â”œâ”€â”€ build/            Compiled circuit artifacts (R1CS, WASM, zkey)
-â”‚   â””â”€â”€ ptau/             Powers of Tau ceremony file
-â”œâ”€â”€ backend/              FastAPI + Python 3.12 â€” UV package manager
-â”‚   â”œâ”€â”€ app/              API routes, SciPy optimizer, Supabase models
-â”‚   â””â”€â”€ tests/            41 pytest tests
-â”œâ”€â”€ frontend/             Next.js 16 + React 19 â€” App Router
-â”‚   â”œâ”€â”€ src/app/          Pages: landing, dashboard, vault creation wizard
-â”‚   â”œâ”€â”€ src/components/   DepositModal, BorrowModal, RepayModal, VaultCard, Navbar
-â”‚   â”œâ”€â”€ src/hooks/        useVault, useVaultFactory, useUserVaults
-â”‚   â”œâ”€â”€ src/lib/          api.ts, contracts.ts, zk.ts, wagmi.ts, supabase.ts
-â”‚   â””â”€â”€ public/zk/        WASM + zkey artifacts for browser-side Groth16 proving
-â”œâ”€â”€ db/                   Supabase Postgres migrations (12 files, RLS on all tables)
-â”œâ”€â”€ docs/                 Architecture, user journey, business model
-â”œâ”€â”€ agents/               AI agent documentation
-â”œâ”€â”€ scripts/              deploy-testnet.sh, seed-db.sh, run-local.sh
-â”œâ”€â”€ .github/workflows/    5 CI/CD pipelines
-â”œâ”€â”€ docker-compose.yml    One-command full stack
-â””â”€â”€ .env.example          All environment variables documented
+├── contracts/            Solidity 0.8.28 — Foundry (forge build, forge test)
+│   ├── src/              5 production contracts (VaultFactory, Vault, ZKVerifier, AgentRegistry, LTVOracle)
+│   ├── test/             53 tests (unit + integration + ZK verifier)
+│   ├── script/           Deployment & verification scripts
+│   └── deployments/      Deployed addresses and metadata (testnet.json)
+├── zk-circuits/          Circom 2.x — 3 Groth16 circuits
+│   ├── circuits/         .circom source files
+│   ├── build/            Compiled circuit artifacts (R1CS, WASM, zkey)
+│   └── ptau/             Powers of Tau ceremony file
+├── backend/              FastAPI + Python 3.12 — UV package manager
+│   ├── app/              API routes, SciPy optimizer, Supabase models
+│   └── tests/            41 pytest tests
+├── frontend/             Next.js 16 + React 19 — App Router
+│   ├── src/app/          Pages: landing, dashboard, vault creation wizard
+│   ├── src/components/   DepositModal, BorrowModal, RepayModal, VaultCard, Navbar
+│   ├── src/hooks/        useVault, useVaultFactory, useUserVaults
+│   ├── src/lib/          api.ts, contracts.ts, zk.ts, wagmi.ts, supabase.ts
+│   └── public/zk/        WASM + zkey artifacts for browser-side Groth16 proving
+├── db/                   Supabase Postgres migrations (12 files, RLS on all tables)
+├── docs/                 Architecture, user journey, business model
+├── agents/               AI agent documentation
+├── scripts/              deploy-testnet.sh, seed-db.sh, run-local.sh
+├── .github/workflows/    5 CI/CD pipelines
+├── docker-compose.yml    One-command full stack
+└── .env.example          All environment variables documented
 ```
 
 ---
@@ -410,14 +410,14 @@ VaultForge/
 | **Backend API** | pytest + pytest-cov | 41 passing | `cd backend && uv run pytest --cov` |
 | **Frontend Build** | TypeScript + Next.js | 0 errors | `cd frontend && npm run build` |
 | **ZK Circuits** | Circom + snarkjs | 3 circuits proven | `cd zk-circuits && bash scripts/compile.sh` |
-| **Integration (Solidity)** | Foundry e2e | Full lifecycle tests | Deployâ†’depositâ†’borrowâ†’repayâ†’withdraw |
-| **Integration (Python)** | pytest e2e | API flow tests | Vault createâ†’health checkâ†’optimize |
+| **Integration (Solidity)** | Foundry e2e | Full lifecycle tests | Deploy→deposit→borrow→repay→withdraw |
+| **Integration (Python)** | pytest e2e | API flow tests | Vault create→health check→optimize |
 
 ---
 
 ## Dependencies
 
-See the [full dependency list](./docs/DEPENDENCIES.md) â€” all open source, with versions, purpose, and license for every package across contracts, backend, frontend, and ZK circuits.
+See the [full dependency list](./docs/DEPENDENCIES.md) — all open source, with versions, purpose, and license for every package across contracts, backend, frontend, and ZK circuits.
 
 ---
 
@@ -435,4 +435,4 @@ We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
 
 ## License
 
-[MIT](./LICENSE) â€” Copyright Â© 2026 VaultForge Contributors
+[MIT](./LICENSE) — Copyright © 2026 VaultForge Contributors

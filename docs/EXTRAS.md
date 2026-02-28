@@ -1,4 +1,4 @@
-# VaultForge â€” Extras
+# VaultForge — Extras
 
 > Demo video, presentation, and supplementary links.
 
@@ -8,7 +8,7 @@
 
 | Item | Link |
 |---|---|
-| **Full Demo Walkthrough** | See [TECHNICAL.md â€” Demo Walkthrough](./TECHNICAL.md#demo-walkthrough-for-judges) for step-by-step usage guide |
+| **Full Demo Walkthrough** | See [TECHNICAL.md — Demo Walkthrough](./TECHNICAL.md#demo-walkthrough-for-judges) for step-by-step usage guide |
 
 ---
 

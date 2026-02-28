@@ -1,4 +1,4 @@
-# VaultForge â€” Frontend
+# VaultForge — Frontend
 
 Next.js 16 + React 19 + TypeScript 5 with wagmi/viem for contract interactions, Privy for wallet auth, snarkjs for browser-side Groth16 ZK proofs, and Tailwind CSS v4.
 
@@ -22,8 +22,8 @@ Create `frontend/.env.local` with:
 
 ```env
 NEXT_PUBLIC_PRIVY_APP_ID=         # Get from dashboard.privy.io
-NEXT_PUBLIC_SUPABASE_URL=         # Get from supabase.com â†’ Settings â†’ API
-NEXT_PUBLIC_SUPABASE_ANON_KEY=    # Get from supabase.com â†’ Settings â†’ API
+NEXT_PUBLIC_SUPABASE_URL=         # Get from supabase.com → Settings → API
+NEXT_PUBLIC_SUPABASE_ANON_KEY=    # Get from supabase.com → Settings → API
 NEXT_PUBLIC_OPBNB_RPC=https://opbnb-testnet-rpc.bnbchain.org
 NEXT_PUBLIC_CHAIN_ID=5611
 NEXT_PUBLIC_VAULT_FACTORY_ADDRESS=0xb881fAf4e552780f65Ae8FC1053AD46134b71173
@@ -54,53 +54,53 @@ NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
 
 ```
 frontend/
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ app/
-â”‚   â”‚   â”œâ”€â”€ page.tsx              Landing page with live protocol stats
-â”‚   â”‚   â”œâ”€â”€ layout.tsx            Root layout with Providers wrapper
-â”‚   â”‚   â”œâ”€â”€ globals.css           Tailwind v4 global styles
-â”‚   â”‚   â”œâ”€â”€ dashboard/
-â”‚   â”‚   â”‚   â””â”€â”€ page.tsx          User vault dashboard with real-time data
-â”‚   â”‚   â””â”€â”€ vault/
-â”‚   â”‚       â””â”€â”€ create/
-â”‚   â”‚           â””â”€â”€ page.tsx      4-step vault creation wizard
-â”‚   â”œâ”€â”€ components/
-â”‚   â”‚   â”œâ”€â”€ ConnectButton.tsx     Privy wallet connect button
-â”‚   â”‚   â”œâ”€â”€ Navbar.tsx            Top navigation bar
-â”‚   â”‚   â”œâ”€â”€ Providers.tsx         Privy + wagmi + React Query providers
-â”‚   â”‚   â”œâ”€â”€ ui/
-â”‚   â”‚   â”‚   â”œâ”€â”€ IrreversibleWarning.tsx
-â”‚   â”‚   â”‚   â””â”€â”€ ZKProofBadge.tsx
-â”‚   â”‚   â”œâ”€â”€ vault/
-â”‚   â”‚   â”‚   â”œâ”€â”€ BorrowModal.tsx   6-step borrow flow with ZK proof generation
-â”‚   â”‚   â”‚   â”œâ”€â”€ RepayModal.tsx    6-step repay flow with ERC-20 approve
-â”‚   â”‚   â”‚   â”œâ”€â”€ VaultCard.tsx     Vault display card for dashboard
-â”‚   â”‚   â”‚   â”œâ”€â”€ VaultHealthGauge.tsx
-â”‚   â”‚   â”‚   â””â”€â”€ ZKProofStatus.tsx
-â”‚   â”‚   â””â”€â”€ wallet/
-â”‚   â”‚       â””â”€â”€ WalletButton.tsx
-â”‚   â”œâ”€â”€ hooks/
-â”‚   â”‚   â”œâ”€â”€ useUserVaults.ts      Fetches user vaults from Supabase + real-time
-â”‚   â”‚   â”œâ”€â”€ useVault.ts           Borrow, repay, deposit, withdraw hooks
-â”‚   â”‚   â”œâ”€â”€ useVaultFactory.ts    Deploy new vault clone via factory
-â”‚   â”‚   â””â”€â”€ useVaultHealth.ts     Real-time vault health subscription
-â”‚   â””â”€â”€ lib/
-â”‚       â”œâ”€â”€ api.ts                Typed API client for backend endpoints
-â”‚       â”œâ”€â”€ contracts.ts          Contract ABIs and addresses
-â”‚       â”œâ”€â”€ privy.ts              Privy configuration
-â”‚       â”œâ”€â”€ supabase.ts           Supabase client instance
-â”‚       â”œâ”€â”€ viem.ts               Viem public client for opBNB
-â”‚       â”œâ”€â”€ wagmi.ts              Wagmi config with opBNB chain
-â”‚       â””â”€â”€ zk.ts                 Browser-side snarkjs Groth16 proof generation
-â”œâ”€â”€ public/
-â”‚   â””â”€â”€ zk/                       WASM + zkey artifacts for ZK proving
-â”‚       â”œâ”€â”€ CollateralThreshold.wasm
-â”‚       â”œâ”€â”€ CollateralThreshold_final.zkey
-â”‚       â””â”€â”€ CollateralThreshold_verification_key.json
-â”œâ”€â”€ package.json
-â”œâ”€â”€ next.config.ts
-â”œâ”€â”€ tsconfig.json
-â””â”€â”€ tailwind.config.ts
+├── src/
+│   ├── app/
+│   │   ├── page.tsx              Landing page with live protocol stats
+│   │   ├── layout.tsx            Root layout with Providers wrapper
+│   │   ├── globals.css           Tailwind v4 global styles
+│   │   ├── dashboard/
+│   │   │   └── page.tsx          User vault dashboard with real-time data
+│   │   └── vault/
+│   │       └── create/
+│   │           └── page.tsx      4-step vault creation wizard
+│   ├── components/
+│   │   ├── ConnectButton.tsx     Privy wallet connect button
+│   │   ├── Navbar.tsx            Top navigation bar
+│   │   ├── Providers.tsx         Privy + wagmi + React Query providers
+│   │   ├── ui/
+│   │   │   ├── IrreversibleWarning.tsx
+│   │   │   └── ZKProofBadge.tsx
+│   │   ├── vault/
+│   │   │   ├── BorrowModal.tsx   6-step borrow flow with ZK proof generation
+│   │   │   ├── RepayModal.tsx    6-step repay flow with ERC-20 approve
+│   │   │   ├── VaultCard.tsx     Vault display card for dashboard
+│   │   │   ├── VaultHealthGauge.tsx
+│   │   │   └── ZKProofStatus.tsx
+│   │   └── wallet/
+│   │       └── WalletButton.tsx
+│   ├── hooks/
+│   │   ├── useUserVaults.ts      Fetches user vaults from Supabase + real-time
+│   │   ├── useVault.ts           Borrow, repay, deposit, withdraw hooks
+│   │   ├── useVaultFactory.ts    Deploy new vault clone via factory
+│   │   └── useVaultHealth.ts     Real-time vault health subscription
+│   └── lib/
+│       ├── api.ts                Typed API client for backend endpoints
+│       ├── contracts.ts          Contract ABIs and addresses
+│       ├── privy.ts              Privy configuration
+│       ├── supabase.ts           Supabase client instance
+│       ├── viem.ts               Viem public client for opBNB
+│       ├── wagmi.ts              Wagmi config with opBNB chain
+│       └── zk.ts                 Browser-side snarkjs Groth16 proof generation
+├── public/
+│   └── zk/                       WASM + zkey artifacts for ZK proving
+│       ├── CollateralThreshold.wasm
+│       ├── CollateralThreshold_final.zkey
+│       └── CollateralThreshold_verification_key.json
+├── package.json
+├── next.config.ts
+├── tsconfig.json
+└── tailwind.config.ts
 ```
 
 ## Key Pages
@@ -109,18 +109,18 @@ frontend/
 |---|---|
 | `/` | Landing page with live TVL, active vaults count, and average LTV stats from the backend. |
 | `/dashboard` | Shows all vaults owned by the connected wallet. Each vault card has Borrow and Repay buttons. |
-| `/vault/create` | 4-step wizard: Connect Wallet â†’ Configure Vault â†’ Deposit Collateral (with LTV optimization preview) â†’ Confirm (3 real transactions: deploy clone â†’ approve ERC-20 â†’ deposit). || `/presentation-deck` | Hackathon pitch deck — real market data, architecture overview, competitive analysis, deployed contracts, and business model. |
+| `/vault/create` | 4-step wizard: Connect Wallet → Configure Vault → Deposit Collateral (with LTV optimization preview) → Confirm (3 real transactions: deploy clone → approve ERC-20 → deposit). || `/presentation-deck` | Hackathon pitch deck — real market data, architecture overview, competitive analysis, deployed contracts, and business model. |
 ## How ZK Proofs Work in the Browser
 
 The frontend generates Groth16 zero-knowledge proofs entirely client-side using snarkjs:
 
-1. **WASM circuit** (`public/zk/CollateralThreshold.wasm`) â€” the compiled Circom circuit that computes the proof witness.
-2. **Proving key** (`public/zk/CollateralThreshold_final.zkey`) â€” the trusted setup output needed to create proofs.
-3. **Verification key** (`public/zk/CollateralThreshold_verification_key.json`) â€” used on-chain by ZKVerifier.sol.
+1. **WASM circuit** (`public/zk/CollateralThreshold.wasm`) — the compiled Circom circuit that computes the proof witness.
+2. **Proving key** (`public/zk/CollateralThreshold_final.zkey`) — the trusted setup output needed to create proofs.
+3. **Verification key** (`public/zk/CollateralThreshold_verification_key.json`) — used on-chain by ZKVerifier.sol.
 
 When a user borrows, `lib/zk.ts` calls `snarkjs.groth16.fullProve()` with the user's collateral data as private inputs. The proof (`pA`, `pB`, `pC`) and public signals are passed to `Vault.borrow()`, which forwards them to `ZKVerifier.verifyProof()` on-chain. The proof proves the user has sufficient collateral without revealing the exact amounts.
 
-Proof generation takes 1â€“3 seconds in the browser depending on hardware.
+Proof generation takes 1–3 seconds in the browser depending on hardware.
 
 ## Common Issues + Fixes
 
@@ -128,6 +128,6 @@ Proof generation takes 1â€“3 seconds in the browser depending on hardware.
 |---|---|
 | **Turbopack crash with snarkjs** | `serverExternalPackages: ["snarkjs"]` is already set in `next.config.ts`. If you see `NftJsonAsset` errors, make sure this config is present. |
 | **BigInt literal errors** | The project targets ES2017. Use `BigInt(0)` instead of `0n`. |
-| **"Module not found: snarkjs"** | Run `npm install` â€” snarkjs is a runtime dependency. |
+| **"Module not found: snarkjs"** | Run `npm install` — snarkjs is a runtime dependency. |
 | **Wallet not connecting** | Check that `NEXT_PUBLIC_PRIVY_APP_ID` is set and your Privy app has opBNB testnet (chain 5611) enabled. |
 | **Backend API returning errors** | Verify `NEXT_PUBLIC_BACKEND_URL` points to a running backend instance. For local dev: `http://localhost:8000`. |
